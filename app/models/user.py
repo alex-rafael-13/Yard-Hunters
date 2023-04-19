@@ -17,6 +17,10 @@ class User(db.Model, UserMixin):
     bio = db.Column(db.String(150))
     hashed_password = db.Column(db.String(255), nullable=False)
 
+    #Relationships
+    events = db.relationship('Event', back_populates='host')
+
+
     @property
     def password(self):
         return self.hashed_password
