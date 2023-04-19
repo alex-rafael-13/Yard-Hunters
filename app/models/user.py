@@ -17,6 +17,10 @@ class User(db.Model, UserMixin):
     bio = db.Column(db.String(150))
     hashed_password = db.Column(db.String(255), nullable=False)
 
+    #Relationships
+    events = db.relationship('Event', back_populates='host')
+
+
     @property
     def password(self):
         return self.hashed_password
@@ -36,4 +40,12 @@ class User(db.Model, UserMixin):
             'last_name': self.last_name,
             'username': self.username,
             'bio': self.bio
+        }
+    
+    #Method to show necessary properties for events
+    def dict_for_event(self):
+        return{
+            'id': self.id,
+            'email': self.email,
+            'username': self.username
         }
