@@ -32,9 +32,9 @@ class Event(db.Model):
             'id': self.id,
             'name': self.name,
             'description': self.description,
-            'host_id': self.host_id,
-            'event_type_id': self.event_type_id,
-            'date': self.date,
-            'start_time': self.start_time,
-            'end_time': self.end_time
+            'host': self.host.dict_for_event(),
+            'event_type': self.type.type,
+            'date': str(self.date),
+            'start_time': str(self.start_time),
+            'end_time': str(self.end_time)
         }

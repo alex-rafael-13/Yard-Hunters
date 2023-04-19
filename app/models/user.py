@@ -41,3 +41,11 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'bio': self.bio
         }
+    
+    #Method to show necessary properties for events
+    def dict_for_event(self):
+        return{
+            'id': self.id,
+            'email': self.email,
+            'username': self.username
+        }
