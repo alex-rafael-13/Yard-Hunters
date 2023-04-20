@@ -7,7 +7,9 @@ from datetime import date, time
 #Validator that checks if date inputed is past today
 def validateDate(form, field):
     today = date.today()
-    date_entered = field.data
+    form_date = field.data.split('-')
+    date_entered = date(int(form_date[0]), int(form_date[1]), int(form_date[2]))
+    print(date_entered)
     if today > date_entered:
         raise ValidationError('Event Date Must Be After Today\'s Date')   
 
@@ -19,7 +21,7 @@ class EventForm(FlaskForm):
     city = StringField('city', validators=[DataRequired()])
     state = StringField('state', validators=[DataRequired()])
     country = StringField('country', validators=[DataRequired()])
-    date = DateField('date', validators=[DataRequired()])
+    date = StringField('date', validators=[DataRequired(), validateDate])
     start_time = StringField('start_time', validators=[DataRequired()])
     end_time = StringField('end_time', validators=[DataRequired()])
 

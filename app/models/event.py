@@ -35,6 +35,6 @@ class Event(db.Model):
             'host': self.host.dict_for_event(),
             'event_type': self.type.type,
             'date': str(self.date),
-            'start_time': str(self.start_time),
-            'end_time': str(self.end_time)
+            'start_time': self.start_time.strftime('%I:%M %p'),
+            'end_time': self.end_time.strftime('%I:%M %p')
         }

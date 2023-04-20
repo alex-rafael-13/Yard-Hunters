@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from app.models import db, Event, Event_Type, User
 from app.forms import EventForm
 from flask_login import login_required, current_user
-from datetime import time
+from datetime import time, date
 
 event_routes = Blueprint('events', __name__)
 
@@ -71,13 +71,16 @@ def new_event():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
 
-        #Making start input into time
+        #Turning time inputs into actual time values
         split_start = form.data['start_time'].split(':')
         s_time = time(int(split_start[0]), int(split_start[1]))
 
-        #Making end input into time
         split_end = form.data['end_time'].split(':')
         e_time = time(int(split_end[0]), int(split_end[1]))
+
+        #Turning date input from string to date
+        form_date = form.data['date'].split('-')
+        date_entered = date(int(form_date[0]), int(form_date[1]), int(form_date[2]))
         
         event = Event(
             name = form.data['name'],
@@ -88,7 +91,7 @@ def new_event():
             city = form.data['city'],
             state = form.data['state'],
             country = form.data['country'],
-            date = form.data['date'],
+            date = date_entered,
             start_time = s_time,
             end_time = e_time
         )
