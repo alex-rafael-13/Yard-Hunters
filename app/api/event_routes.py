@@ -100,5 +100,72 @@ def new_event():
         single_event(event.id)
         return event.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-    
 
+#Edit or Delete event if user signed in user is the host
+@event_routes.route('/<int:event_id>/manage', methods=['PUT', 'DELETE'])
+@login_required
+def edit_event(event_id):
+
+    event = Event.query.filter(Event.id==event_id).first()
+
+    #Check if event is exists
+    if not event:
+       return {
+           'err': 'Event not Found'
+       }, 404
+    
+    event_dict = event.to_dict()
+    #Check if user is authorized to edit/delete event
+    if event_dict['host']['id'] != current_user.id:
+        return {
+           'err': 'Unautharized'
+       }, 401
+
+    '''
+    EDITING AN EVENT IF SIGNED IN USER IS THE HOST
+    '''
+    if request.method == 'PUT':
+        form = EventForm()
+    # Get the csrf_token from the request cookie and put it into the
+    # form manually to validate_on_submit can be used
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+
+                #Turning time inputs into actual time values
+            split_start = form.data['start_time'].split(':')
+            s_time = time(int(split_start[0]), int(split_start[1]))
+
+            split_end = form.data['end_time'].split(':')
+            e_time = time(int(split_end[0]), int(split_end[1]))
+
+            #Turning date input from string to date
+            form_date = form.data['date'].split('-')
+            date_entered = date(int(form_date[0]), int(form_date[1]), int(form_date[2]))
+            
+            event.name = form.data['name']
+            event.description = form.data['description']
+            event.host_id = current_user.id
+            event.event_type_id = form.data['event_type_id']
+            event.address = form.data['address']
+            event.city = form.data['city']
+            event.state = form.data['state']
+            event.country = form.data['country']
+            event.date = date_entered
+            event.start_time = s_time
+            event.end_time = e_time
+
+            db.session.commit()
+
+            single_event(event.id)
+            return event.to_dict()
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+    '''
+    DELETING AN EVENT IF SIGNED IN USER IS THE HOST
+    '''
+    if request.method == 'DELETE':
+        db.session.delete(event)
+        db.session.commit()
+        return {
+            'message': 'Event Successfully Deleted'
+        }, 200
