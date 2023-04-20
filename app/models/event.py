@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy import Column, ForeignKey
 from sqlalchemy.types import String, Integer, Date, Time 
+from datetime import date, timedelta 
 
 class Event(db.Model):
     __tablename__ = 'events'
@@ -26,6 +27,17 @@ class Event(db.Model):
     host = db.relationship('User', back_populates='events')
     type = db.relationship('Event_Type', back_populates='events')
 
+    def check_date(self):
+        today = date.today()
+        event_date = self.date
+
+        if event_date == today+timedelta(1):
+            return 'Tomorrow!'
+        elif today == event_date:
+            return 'Today!'
+        else:
+            return str(event_date)
+
     #Making it jsonable
     def to_dict(self):
         return {
@@ -34,7 +46,7 @@ class Event(db.Model):
             'description': self.description,
             'host': self.host.dict_for_event(),
             'event_type': self.type.type,
-            'date': str(self.date),
+            'date': self.check_date(),
             'start_time': self.start_time.strftime('%I:%M %p'),
             'end_time': self.end_time.strftime('%I:%M %p')
         }
