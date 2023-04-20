@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { retrieveEvents } from "../../store/event"
+import { resetSingle, retrieveEvents } from "../../store/event"
 import EventPost from "./eventPost"
 import './EventList.css'
 
@@ -11,6 +11,7 @@ export default function EventList(){
 
     useEffect(() => {
         dispatch(retrieveEvents())
+        dispatch(resetSingle())
     }, [dispatch])
 
 
