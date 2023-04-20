@@ -18,7 +18,7 @@ def validation_errors_to_error_messages(validation_errors):
 
 #Get all events 
 @event_routes.route('/')
-@login_required
+# @login_required
 def event_list():
 
     events = Event.query.all()

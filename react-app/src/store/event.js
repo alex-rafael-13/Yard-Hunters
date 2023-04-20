@@ -1,0 +1,90 @@
+/*****                      CONSTANTS                           */
+const SET_ALL = "events/SET_ALL"
+const SET_ONE = "events/SET_ONE"
+const RESET_SINGLE = "events/RESET"
+
+
+/*****                      ACTION CREATORS                        */
+const setEvents = (events) => {
+    return{
+        events,
+        type: SET_ALL
+    }
+} 
+
+const setEvent = (event) => {
+    return{
+        event,
+        type: SET_ONE
+    }
+}
+
+export const resetSingle = () => {
+    return{
+        type: RESET_SINGLE
+    }
+}
+
+
+/*****                       THUNK ACTIONS                       */
+//GET all events
+export const retrieveEvents = () => async dispatch => {
+    const response = await fetch('/api/events', {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    if(response.ok){
+        const events = await response.json()
+        if(events.errors) {
+            return
+        }
+
+        dispatch(setEvents(events))
+    }
+}
+
+//GET event by id
+export const retrieveEventById = (id) => async dispatch => {
+    const response = await fetch(`/api/events/${id}`, {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    if(response.ok){
+        const event = await response.json()
+        if(event.errors) {
+            return
+        }
+
+        dispatch(setEvent(event))
+    }
+
+
+}
+
+
+/*****                      REDUCER                             */
+const initialState = {events:[], event:{}}
+export default function reducer(state=initialState, action){
+    let newState = initialState
+    switch (action.type){
+        case SET_ALL:
+            newState = {...state}
+            newState['events'] = action.events
+            return newState
+        case SET_ONE:
+            newState = {...state}
+            newState['event'] = action.event
+            return newState
+        case RESET_SINGLE:
+            newState = {...state}
+            newState['event'] = initialState.event
+            return newState
+        default:
+            return state
+    }
+}
+

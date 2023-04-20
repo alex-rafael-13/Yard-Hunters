@@ -36,7 +36,7 @@ class Event(db.Model):
         elif today == event_date:
             return 'Today!'
         else:
-            return str(event_date)
+            return event_date.strftime('%b %d, %Y')
 
     #Making it jsonable
     def to_dict(self):

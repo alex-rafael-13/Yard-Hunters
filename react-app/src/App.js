@@ -5,6 +5,8 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
+import EventList from "./components/EventsList";
+import EventPage from "./components/SingleEvent";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,6 +20,12 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route exact path='/'>
+            <EventList />
+          </Route>
+          <Route exact path='/events/:event_id'>
+            <EventPage />
+          </Route>
           <Route path="/login" >
             <LoginFormPage />
           </Route>
