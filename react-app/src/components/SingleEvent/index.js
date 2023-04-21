@@ -1,14 +1,17 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
-import { retrieveEventById } from "../../store/event"
+import { useHistory, useParams } from "react-router-dom"
+import { deleteEvent, retrieveEventById } from "../../store/event"
 import { authenticate } from "../../store/session"
+import OpenModalButton from "../OpenModalButton"
+import DeleteEvent from "./deleteEvent"
 
 export default function EventPage(){
     const dispatch = useDispatch()
     const event = useSelector(state => state.event.event)
     const user = useSelector(state => state.session.user)
     const {event_id} = useParams()
+    const history = useHistory()
 
     useEffect(() => {
         dispatch(retrieveEventById(event_id))
@@ -20,8 +23,14 @@ export default function EventPage(){
         <div className="event-page">
             {user?.id === event?.host?.id && 
                 <di className='buttons'>
-                    <button>Update</button>
-                    <button>Delete</button>
+                    <button className="update-event">Update</button>
+                    <OpenModalButton
+                        buttonText='Cancel Event'
+                        modalComponent={<DeleteEvent />}
+                        event={event}
+                    />
+
+
                 </di>
             }
             <div className="event-image">

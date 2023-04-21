@@ -65,6 +65,19 @@ export const retrieveEventById = (id) => async dispatch => {
 
 }
 
+export const deleteEvent = (id) => async dispatch => {
+    const response = await fetch(`/api/events/${id}/manage`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type':'application/json'
+        }
+    });
+
+    const data = await response.json()
+
+    return data
+}
+
 
 /*****                      REDUCER                             */
 const initialState = {events:[], event:{}}
