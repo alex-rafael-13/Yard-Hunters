@@ -11,11 +11,12 @@ export default function UpdateEvent() {
     useEffect(() => {
         dispatch(retrieveTypes())
         dispatch(retrieveEventById(event_id)).then(() => setLoaded(true))
+
     }, [dispatch])
 
+    const [type, setType] = useState('')
     const [name, setName] = useState(event.name)
     const [description, setDescription] = useState(event.description)
-    const [type, setType] = useState('')
     const [address, setAddress] = useState(event.address)
     const [city, setCity] = useState(event.city)
     const [state, setState] = useState(event.state)
