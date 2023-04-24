@@ -13,6 +13,8 @@ export default function CreateEvent(){
     const [sTime, setSTime] = useState('')
     const [eTime, setETime] = useState('')
 
+    
+
 
     const onSubmit = e => {
         e.preventDefault()
@@ -29,9 +31,7 @@ export default function CreateEvent(){
             eTime
         }
 
-
         console.log(event)
-
     }
 
     return(

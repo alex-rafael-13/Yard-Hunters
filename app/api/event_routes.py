@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from app.models import db, Event, Event_Type, User
+from app.models import db, Event
 from app.forms import EventForm
 from flask_login import login_required, current_user
 from datetime import time, date
