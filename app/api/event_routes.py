@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from app.models import db, Event, Event_Type, User
+from app.models import db, Event
 from app.forms import EventForm
 from flask_login import login_required, current_user
 from datetime import time, date
@@ -70,6 +70,7 @@ def new_event():
     # form manually to validate_on_submit can be used
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        print('in here')
 
         #Turning time inputs into actual time values
         split_start = form.data['start_time'].split(':')
@@ -97,9 +98,8 @@ def new_event():
         )
         db.session.add(event)
         db.session.commit()
-        single_event(event.id)
         return event.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 #Edit or Delete event if user signed in user is the host
 @event_routes.route('/<int:event_id>/manage', methods=['PUT', 'DELETE'])
