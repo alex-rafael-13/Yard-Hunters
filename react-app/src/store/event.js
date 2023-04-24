@@ -61,10 +61,23 @@ export const retrieveEventById = (id) => async dispatch => {
 
         dispatch(setEvent(event))
     }
-
-
 }
 
+export const createEvent = event => async dispatch => {
+    const response = await fetch('/api/events/new',{
+        method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(event)
+    })
+    if(response.ok){
+        const newEvent = await response.json()
+        return newEvent
+    }
+} 
+
+//Delete Event
 export const deleteEvent = (id) => async dispatch => {
     const response = await fetch(`/api/events/${id}/manage`, {
         method: 'DELETE',

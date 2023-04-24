@@ -1,5 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './CreateEvent.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { retrieveTypes } from '../../store/eventType'
+import { createEvent } from '../../store/event'
+import { useHistory } from 'react-router-dom'
 
 export default function CreateEvent(){
     const [name, setName] = useState('')
@@ -13,25 +17,41 @@ export default function CreateEvent(){
     const [sTime, setSTime] = useState('')
     const [eTime, setETime] = useState('')
 
-    
+    const typesList = useSelector(state => state.types.types)
+    const dispatch = useDispatch()
+    const history = useHistory()
 
+    useEffect(() => {
+        dispatch(retrieveTypes())
+    }, [dispatch])
 
-    const onSubmit = e => {
+    const onSubmit = async e => {
         e.preventDefault()
+
+        //Get type ID for chosen type
+        let chosenType
+        typesList?.forEach(t => {
+            if(t.type === type){
+                chosenType = t
+            }   
+        })
+
         const event = {
             name,
             description,
-            type,
+            event_type_id: chosenType.id,
             address,
             city,
             state,
             country,
             date,
-            sTime,
-            eTime
+            start_time: sTime,
+            end_time: eTime
         }
 
-        console.log(event)
+        const createdEvent = await dispatch(createEvent(event))
+
+        history.push(`/events/${createdEvent.id}`)
     }
 
     return(
@@ -59,8 +79,10 @@ export default function CreateEvent(){
                         value={type}
                         onChange={e => setType(e.target.value)}
                     >
-                        <option>Test</option>
-                        <option>Test 2</option>
+                        <option>-----------------</option>
+                        {typesList?.map(type => (
+                            <option key={type.id}>{type.type}</option>
+                        ))}
                     </select>
                 </label>
                 <label>
