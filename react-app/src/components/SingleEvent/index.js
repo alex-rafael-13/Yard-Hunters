@@ -17,21 +17,23 @@ export default function EventPage(){
         dispatch(retrieveEventById(event_id))
     }, [dispatch])
 
+    const updateButton = () => {
+        history.push(`/events/${event_id}/edit`)
+    }
+
     if(!event) return
 
     return(
         <div className="event-page">
             {user?.id === event?.host?.id && 
-                <di className='buttons'>
-                    <button className="update-event">Update</button>
+                <div className='buttons'>
+                    <button className="update-event" onClick={updateButton}>Update</button>
                     <OpenModalButton
                         buttonText='Cancel Event'
                         modalComponent={<DeleteEvent />}
                         event={event}
                     />
-
-
-                </di>
+                </div>
             }
             <div className="event-image">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTqcztNP3vT5LmB5cYoi3SbUBcadk7vtkqPw&usqp=CAU"/>
