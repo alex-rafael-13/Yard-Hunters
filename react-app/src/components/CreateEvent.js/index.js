@@ -54,6 +54,8 @@ export default function CreateEvent(){
         history.push(`/events/${createdEvent.id}`)
     }
 
+    console.log(date)
+
     return(
         <div>
             <h1>Create Event</h1>
