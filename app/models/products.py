@@ -10,7 +10,7 @@ class Product(db.Model):
     
     id = Column(Integer, primary_key=True)
     owner_id = Column(Integer, ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    event_id = Column(Integer, ForeignKey('events.id'))
+    event_id = Column(Integer, ForeignKey(add_prefix_for_prod('events.id')))
     name = Column(String(255), nullable=False)
     price = Column(Float, nullable=False)
     condition_id = Column(Integer, ForeignKey(add_prefix_for_prod('product_conditions.id')), nullable=False)
