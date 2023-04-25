@@ -13,6 +13,7 @@ class Event(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String(255), nullable=False)
     description = Column(String(1000))
+    image_url = db.Column(db.String)
     host_id = Column(Integer, ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     event_type_id = Column(Integer, ForeignKey(add_prefix_for_prod('event_types.id')), nullable=False)
     address = Column(String, nullable=False)
@@ -26,6 +27,7 @@ class Event(db.Model):
     #Relationships:
     host = db.relationship('User', back_populates='events')
     type = db.relationship('Event_Type', back_populates='events')
+    products = db.relationship('Product', back_populates='event')
 
     def check_date(self):
         today = date.today()
