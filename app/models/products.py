@@ -56,6 +56,13 @@ class Product(db.Model):
             'event': self.check_event()
         }
     
+    def dict_for_event(self):
+        return {
+            'name': self.name,
+            'preview_image': self.preview_image()["image_url"],
+            'price': self.price
+        }
+    
     def single_to_dict(self):
         return{
             'name': self.name,
