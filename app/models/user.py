@@ -10,6 +10,7 @@ class User(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
+    image_url = db.Column(db.String, default='https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA0L3BmLWljb240LWppcjIwNjItcG9yLWwtam9iNzg4LnBuZw.png')
     email = db.Column(db.String(255), nullable=False, unique=True)
     first_name = db.Column(db.String(40), nullable=False)
     last_name = db.Column(db.String(40), nullable=False)
@@ -19,7 +20,7 @@ class User(db.Model, UserMixin):
 
     #Relationships
     events = db.relationship('Event', back_populates='host')
-
+    products = db.relationship('Product', back_populates='owner')
 
     @property
     def password(self):
