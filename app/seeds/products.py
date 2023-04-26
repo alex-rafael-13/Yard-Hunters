@@ -37,6 +37,7 @@ def seed_products():
         category_id = 5,
         description = 'Well kept and PSA graded 9.5 card, looking to sell at set price or trade for something else'
     )
+    
     lst = [drill, ps, lego, pokemon_card]
     for product in lst:
         db.session.add(product)
