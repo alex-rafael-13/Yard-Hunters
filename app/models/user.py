@@ -20,7 +20,7 @@ class User(db.Model, UserMixin):
 
     #Relationships
     events = db.relationship('Event', back_populates='host')
-    products = db.relationship('Product', back_populates='owner')
+    products = db.relationship('Product', back_populates='seller')
 
     @property
     def password(self):
@@ -47,6 +47,5 @@ class User(db.Model, UserMixin):
     def dict_for_event(self):
         return{
             'id': self.id,
-            'email': self.email,
             'username': self.username
         }

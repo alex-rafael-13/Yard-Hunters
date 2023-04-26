@@ -12,4 +12,10 @@ class Product_Condition(db.Model):
     id = Column(Integer, primary_key=True)
     condition = Column(String, nullable=False)
 
-    products = db.relationship('Product', back_populates='condition')    
+    products = db.relationship('Product', back_populates='condition')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'condition': self.condition
+        }    

@@ -19,7 +19,7 @@ class Product(db.Model):
     description = Column(String(1000))
 
     event = db.relationship('Event', back_populates='products')
-    owner = db.relationship('User', back_populates='products')
+    seller = db.relationship('User', back_populates='products')
     condition = db.relationship('Product_Condition', back_populates='products')
     category = db.relationship('Category', back_populates='products')
     images = db.relationship('Product_Image', backref='product')
@@ -32,20 +32,40 @@ class Product(db.Model):
             .first()
         
         return image.to_dict()
+
+    '''Get all images'''
+    def all_images(self):
+        images = self.images
+
+        return [image.to_dict() for image in images]
+
     
+    '''Checks if tied to an event'''
     def check_event(self):
         if self.event == None:
             return None
         else:
             return self.event.dict_for_products()
 
+    '''Make it json stringable'''
     def list_to_dict(self):
         return {
             'name': self.name,
-            'preview_image': self.preview_image(),
+            'preview_image': self.preview_image()["image_url"],
             'price': self.price,
             'event': self.check_event()
         }
-
+    
+    def single_to_dict(self):
+        return{
+            'name': self.name,
+            'seller': self.seller.dict_for_event(),
+            'images': self.all_images(),
+            'price': self.price,
+            'event': self.check_event(),
+            'description': self.description,
+            'category': self.category.to_dict(),
+            'condition': self.condition.to_dict()
+        }
 
     

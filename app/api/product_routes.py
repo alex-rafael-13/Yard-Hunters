@@ -22,11 +22,23 @@ def products_list():
     #err handling
     if not products:
        return {
-           'err': 'Events Cannot Be Reached at This Moment'
+           'err': 'Marketplace Cannot Be Reached at This Moment'
        }, 404
     
     return [product.list_to_dict() for product in products]
 
+@product_routes.route('/<int:product_id>')
+def single_product(product_id):
+    product = Product\
+        .query\
+        .filter(Product.id == product_id).first()
+    
+    if not product:
+       return {
+           'err': 'Product Not Found'
+       }, 404
+    
+    return product.single_to_dict()
 
 
 

@@ -12,3 +12,9 @@ class Category(db.Model):
     category = Column(String, nullable=False)
 
     products = db.relationship('Product', back_populates='category')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'category': self.category
+        }
