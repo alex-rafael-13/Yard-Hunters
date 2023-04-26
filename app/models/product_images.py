@@ -12,3 +12,11 @@ class Product_Image(db.Model):
     product_id = Column(Integer, ForeignKey(add_prefix_for_prod('products.id')),nullable=False)
     image_url = Column(String, nullable=False)
     preview = Column(Boolean, default=False)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'product_id': self.product_id,
+            'image_url': self.image_url,
+            'preview': self.preview
+        }

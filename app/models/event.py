@@ -40,6 +40,14 @@ class Event(db.Model):
         else:
             return event_date.strftime('%b %d, %Y')
 
+    def check_products(self):
+        if self.products == None:
+            return None
+        else:
+            products = self.products
+
+            return [product.dict_for_event() for product in products]
+
     #Making it jsonable
     def to_dict(self):
         return {
@@ -54,5 +62,12 @@ class Event(db.Model):
             'event_type': self.type.type,
             'date': self.check_date(),
             'start_time': self.start_time.strftime('%I:%M %p'),
-            'end_time': self.end_time.strftime('%I:%M %p')
+            'end_time': self.end_time.strftime('%I:%M %p'),
+            'product_list': self.check_products()
+        }
+    
+    def dict_for_products(self):
+        return {
+            'id': self.id,
+            'name': self.name
         }
