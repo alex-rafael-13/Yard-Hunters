@@ -26,18 +26,25 @@ class Product(db.Model):
 
     '''Get preview image'''
     def preview_image(self):
-        image = Product_Image.\
-            filter(Product_Image.product_id == self.id, Product_Image.preview == True).\
-            first()
+        image = Product_Image\
+            .query\
+            .filter(Product_Image.product_id == self.id, Product_Image.preview == True)\
+            .first()
         
         return image.to_dict()
+    
+    def check_event(self):
+        if self.event == None:
+            return None
+        else:
+            return self.event.dict_for_products()
 
     def list_to_dict(self):
         return {
             'name': self.name,
             'preview_image': self.preview_image(),
             'price': self.price,
-            'event': self.event.to_dict()
+            'event': self.check_event()
         }
 
 

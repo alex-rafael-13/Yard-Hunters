@@ -56,3 +56,9 @@ class Event(db.Model):
             'start_time': self.start_time.strftime('%I:%M %p'),
             'end_time': self.end_time.strftime('%I:%M %p')
         }
+    
+    def dict_for_products(self):
+        return {
+            'id': self.id,
+            'name': self.name
+        }
