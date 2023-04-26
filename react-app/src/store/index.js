@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import session from './session'
 import event from './event'
 import types from './eventType'
+import products from './product'
 
 const rootReducer = combineReducers({
   session,
   event,
-  types
+  types,
+  products
 });
 
 
