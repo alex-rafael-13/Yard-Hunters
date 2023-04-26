@@ -31,7 +31,9 @@ class Product(db.Model):
             .filter(Product_Image.product_id == self.id, Product_Image.preview == True)\
             .first()
         
-        return image.to_dict()
+        if image:
+            return image.to_dict()['image_url']
+        return None
 
     '''Get all images'''
     def all_images(self):
@@ -50,8 +52,9 @@ class Product(db.Model):
     '''Make it json stringable'''
     def list_to_dict(self):
         return {
+            'id': self.id,
             'name': self.name,
-            'preview_image': self.preview_image()["image_url"],
+            'preview_image': self.preview_image(),
             'price': self.price,
             'event': self.check_event()
         }
@@ -65,6 +68,7 @@ class Product(db.Model):
     
     def single_to_dict(self):
         return{
+            'id': self.id,
             'name': self.name,
             'seller': self.seller.dict_for_event(),
             'images': self.all_images(),
