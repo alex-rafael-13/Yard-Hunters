@@ -1,6 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy import Column, ForeignKey
-from sqlalchemy.types import String, Integer, Float
+from sqlalchemy.types import String, Integer, Numeric
 
 class Product(db.Model):
     __tablename__ = 'products'
@@ -12,7 +12,7 @@ class Product(db.Model):
     owner_id = Column(Integer, ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     event_id = Column(Integer, ForeignKey(add_prefix_for_prod('events.id')))
     name = Column(String(255), nullable=False)
-    price = Column(Float(precision=2), nullable=False)
+    price = Column(Numeric(precision=10, scale=2), nullable=False)
     condition_id = Column(Integer, ForeignKey(add_prefix_for_prod('product_conditions.id')), nullable=False)
     category_id = Column(Integer, ForeignKey(add_prefix_for_prod('categories.id')),nullable=False)
     description = Column(String(1000))
