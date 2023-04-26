@@ -61,8 +61,9 @@ class Product(db.Model):
     
     def dict_for_event(self):
         return {
+            'id': self.id,
             'name': self.name,
-            'preview_image': self.preview_image()["image_url"],
+            'preview_image': self.preview_image(),
             'price': self.price
         }
     

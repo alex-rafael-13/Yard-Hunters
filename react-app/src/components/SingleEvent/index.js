@@ -15,6 +15,7 @@ export default function EventPage(){
 
     useEffect(() => {
         dispatch(retrieveEventById(event_id))
+        console.log(event)
     }, [dispatch])
 
     const updateButton = () => {
@@ -51,6 +52,17 @@ export default function EventPage(){
             </div>
             <div className="description-cont">
                 {event.description}
+            </div>
+            <hr/>
+            <div>
+                <h2>Products Being Sold:</h2>
+                {event.product_list?.map(product => (
+                    <div key={product.id}>
+                        <div>{product.name}</div>
+                        <img src={product.preview_image}/>
+                        <div>$ {product.price}</div>
+                    </div>
+                ))}    
             </div>       
         </div>
     )
