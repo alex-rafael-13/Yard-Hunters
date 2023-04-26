@@ -27,6 +27,7 @@ def products_list():
     
     return [product.list_to_dict() for product in products]
 
+
 @product_routes.route('/<int:product_id>')
 def single_product(product_id):
     product = Product\

@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory, useParams } from "react-router-dom"
+import { NavLink, useHistory, useParams } from "react-router-dom"
 import { deleteEvent, retrieveEventById } from "../../store/event"
 import { authenticate } from "../../store/session"
 import OpenModalButton from "../OpenModalButton"
@@ -57,11 +57,13 @@ export default function EventPage(){
             <div>
                 <h2>Products Being Sold:</h2>
                 {event.product_list?.map(product => (
-                    <div key={product.id}>
-                        <div>{product.name}</div>
-                        <img src={product.preview_image}/>
-                        <div>$ {product.price}</div>
-                    </div>
+                    <NavLink key={product.id} to={`/products/${product.id}`}>
+                        <div>
+                            <div>{product.name}</div>
+                            <img src={product.preview_image}/>
+                            <div>$ {product.price}</div>
+                        </div>
+                    </NavLink>
                 ))}    
             </div>       
         </div>
