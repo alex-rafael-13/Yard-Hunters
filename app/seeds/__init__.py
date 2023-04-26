@@ -3,6 +3,8 @@ from .users import seed_users, undo_users
 from .event_types import seed_event_types, undo_event_types
 from .events import seed_events, undo_events
 from .categories import seed_categories, undo_categories
+from .conditions import seed_conditions, undo_conditions
+from .products import seed_products, undo_products
 
 from app.models.db import db, environment, SCHEMA
 
@@ -22,11 +24,15 @@ def seed():
         undo_users()
         undo_events()
         undo_event_types()
+        undo_products()
         undo_categories()
+        undo_conditions()
     seed_users()
     seed_event_types()
     seed_events()
     seed_categories()
+    seed_conditions()
+    seed_products()
     # Add other seed functions here
 
 
@@ -36,5 +42,7 @@ def undo():
     undo_users()
     undo_events()
     undo_event_types()
+    undo_products()
     undo_categories()
+    undo_conditions()
     # Add other undo functions here
