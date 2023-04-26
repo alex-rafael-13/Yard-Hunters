@@ -17,8 +17,8 @@ class Product(db.Model):
     category_id = Column(Integer, ForeignKey(add_prefix_for_prod('categories.id')),nullable=False)
     description = Column(String(1000))
 
-    owner = db.relationship('User', back_populates='products')
     event = db.relationship('Event', back_populates='products')
+    owner = db.relationship('User', back_populates='products')
     condition = db.relationship('Product_Condition', back_populates='products')
     category = db.relationship('Category', back_populates='products')
     images = db.relationship('Product_Image', backref='product')

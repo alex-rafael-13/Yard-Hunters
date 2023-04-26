@@ -11,4 +11,4 @@ class Category(db.Model):
     id = Column(Integer, primary_key=True)
     category = Column(String, nullable=False)
 
-    products = db.relationship('Product', back_populates='categories')
+    products = db.relationship('Product', back_populates='category')

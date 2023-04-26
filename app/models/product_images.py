@@ -9,6 +9,6 @@ class Product_Image(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = Column(Integer, primary_key=True)
-    product_id = Column(Integer, nullable=False)
+    product_id = Column(Integer, ForeignKey(add_prefix_for_prod('products.id')),nullable=False)
     image_url = Column(String, nullable=False)
     preview = Column(Boolean, default=False)
