@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy import Column, ForeignKey
 from sqlalchemy.types import String, Integer, Numeric
+from .product_images import Product_Image
 
 class Product(db.Model):
     __tablename__ = 'products'
@@ -22,6 +23,22 @@ class Product(db.Model):
     condition = db.relationship('Product_Condition', back_populates='products')
     category = db.relationship('Category', back_populates='products')
     images = db.relationship('Product_Image', backref='product')
+
+    '''Get preview image'''
+    def preview_image(self):
+        image = Product_Image.\
+            filter(Product_Image.product_id == self.id, Product_Image.preview == True).\
+            first()
+        
+        return image.to_dict()
+
+    def list_to_dict(self):
+        return {
+            'name': self.name,
+            'preview_image': self.preview_image(),
+            'price': self.price,
+            'event': self.event.to_dict()
+        }
 
 
     
