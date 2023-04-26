@@ -73,15 +73,15 @@ def new_event():
         print('in here')
 
         #Turning time inputs into actual time values
-        split_start = form.data['start_time'].split(':')
-        s_time = time(int(split_start[0]), int(split_start[1]))
+        split_start = form.data['start_time'].split(':') # 18:30 -> [18, 30]
+        s_time = time(int(split_start[0]), int(split_start[1])) #time(18, 30)
 
         split_end = form.data['end_time'].split(':')
         e_time = time(int(split_end[0]), int(split_end[1]))
 
         #Turning date input from string to date
-        form_date = form.data['date'].split('-')
-        date_entered = date(int(form_date[0]), int(form_date[1]), int(form_date[2]))
+        form_date = form.data['date'].split('-') # 2023-04-30 -> [2023, 04, 30]
+        date_entered = date(int(form_date[0]), int(form_date[1]), int(form_date[2])) 
         
         event = Event(
             name = form.data['name'],
