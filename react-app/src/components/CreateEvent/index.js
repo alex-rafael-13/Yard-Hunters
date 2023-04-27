@@ -31,16 +31,6 @@ export default function CreateEvent() {
     const onSubmit = e => {
         e.preventDefault()
 
-        //Get type ID for chosen type
-        let chosenType
-        if (type.length > 0) {
-            typesList?.forEach(t => {
-                if (t.type === type) {
-                    chosenType = t.id
-                }
-            })
-        }
-
         console.log(typeof type)
         const event = {
             name,
@@ -62,7 +52,7 @@ export default function CreateEvent() {
                 if (story.id) {
                     history.push(`/events/${story.id}`)
                 }
-                else if (story.errors) {
+                if (story.errors) {
                     setErrors(story.errors)
                 }
             })

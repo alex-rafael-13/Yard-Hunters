@@ -84,10 +84,10 @@ export const updateEvent = (id, event) => async dispatch => {
 		},
 		body: JSON.stringify(event)
     })
-    if(response.ok){
-        const newEvent = await response.json()
-        return newEvent
-    }
+    console.log(response)
+    const newEvent = await response.json()
+    console.log(newEvent)
+    return newEvent
 } 
 
 //Delete Event
