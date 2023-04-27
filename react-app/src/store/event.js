@@ -71,10 +71,9 @@ export const createEvent = event => async dispatch => {
 		},
 		body: JSON.stringify(event)
     })
-    if(response.ok){
-        const newEvent = await response.json()
-        return newEvent
-    }
+
+    const newEvent = await response.json()
+    return newEvent
 } 
 
 export const updateEvent = (id, event) => async dispatch => {

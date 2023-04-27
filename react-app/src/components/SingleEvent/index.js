@@ -15,7 +15,6 @@ export default function EventPage(){
 
     useEffect(() => {
         dispatch(retrieveEventById(event_id))
-        console.log(event)
     }, [dispatch])
 
     const updateButton = () => {

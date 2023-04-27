@@ -99,6 +99,8 @@ def new_event():
         db.session.add(event)
         db.session.commit()
         return event.to_dict()
+    print(form.errors)
+    
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 #Edit or Delete event if user signed in user is the host

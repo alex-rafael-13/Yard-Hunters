@@ -16,6 +16,7 @@ export default function CreateEvent(){
     const [date, setDate] = useState('')
     const [sTime, setSTime] = useState('')
     const [eTime, setETime] = useState('')
+    const [errors, setErrors] = useState([])
 
     const typesList = useSelector(state => state.types.types)
     const dispatch = useDispatch()
@@ -25,21 +26,23 @@ export default function CreateEvent(){
         dispatch(retrieveTypes())
     }, [dispatch])
 
-    const onSubmit = async e => {
+    const onSubmit = e => {
         e.preventDefault()
 
         //Get type ID for chosen type
         let chosenType
-        typesList?.forEach(t => {
-            if(t.type === type){
-                chosenType = t
-            }   
-        })
+        if(type.length > 0){
+            typesList?.forEach(t => {
+                if(t.type === type){
+                    chosenType = t.id
+                }   
+            })
+        }
 
         const event = {
             name,
             description,
-            event_type_id: chosenType.id,
+            event_type_id: type,
             address,
             city,
             state,
@@ -49,15 +52,24 @@ export default function CreateEvent(){
             end_time: eTime
         }
 
-        const createdEvent = await dispatch(createEvent(event))
-
-        history.push(`/events/${createdEvent.id}`)
+        return dispatch(createEvent(event))
+        .then(async story => {
+            console.log(story)
+            if(story.id){
+                    history.push(`/events/${story.id}`)
+            }
+            else if(story.errors){
+                setErrors(story.errors)
+                console.log(errors)
+            }
+        })
     }
-
-    console.log(date)
 
     return(
         <div>
+            {errors.map(error => (
+                <div>{error}</div>
+            ))}
             <h1>Create Event</h1>
             <form className='event-form'>
                 <label>
@@ -66,6 +78,7 @@ export default function CreateEvent(){
                         type="text"
                         value={name}
                         onChange={e => setName(e.target.value)}
+                        required
                     />
                 </label>
                 <label>
@@ -73,6 +86,7 @@ export default function CreateEvent(){
                     <textarea
                         value={description}
                         onChange={e => setDescription(e.target.value)}
+                        required
                     />
                 </label>
                 <label>
@@ -80,10 +94,11 @@ export default function CreateEvent(){
                     <select
                         value={type}
                         onChange={e => setType(e.target.value)}
+                        required
                     >
-                        <option>-----------------</option>
+                        <option>--- Please Select an Event Type ---</option>
                         {typesList?.map(type => (
-                            <option key={type.id}>{type.type}</option>
+                            <option key={type.id} value={type.id}>{type.type}</option>
                         ))}
                     </select>
                 </label>
@@ -93,6 +108,7 @@ export default function CreateEvent(){
                         type='text' 
                         value={address}
                         onChange={e => setAddress(e.target.value)}
+                        required
                     />
                 </label>
                 <label>
@@ -101,6 +117,7 @@ export default function CreateEvent(){
                         type='text'
                         value={city}
                         onChange={e => setCity(e.target.value)}
+                        required
                     />
                 </label>
                 <label>
@@ -109,6 +126,7 @@ export default function CreateEvent(){
                         type='text'
                         value={state}
                         onChange={e => setState(e.target.value)}
+                        required
                     />
                 </label>
                 <label>
@@ -117,6 +135,7 @@ export default function CreateEvent(){
                         type='text'
                         value={country}
                         onChange={e => setCountry(e.target.value)}
+                        required
                     />
                 </label>
                 <div>
@@ -126,6 +145,7 @@ export default function CreateEvent(){
                             type='date'
                             value={date}
                             onChange={e => setDate(e.target.value)}
+                            required
                         />
                     </label>
                     <label>
@@ -134,6 +154,7 @@ export default function CreateEvent(){
                             type='time'
                             value={sTime}
                             onChange={e => setSTime(e.target.value)}
+                            required
                         />
                     </label>
                     <label>
@@ -141,7 +162,8 @@ export default function CreateEvent(){
                         <input 
                             type='time'
                             value={eTime}
-                            onChange={e => setETime(e.target.value)}    
+                            onChange={e => setETime(e.target.value)}
+                            required    
                         />
                     </label>
 

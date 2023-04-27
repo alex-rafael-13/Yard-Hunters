@@ -7,7 +7,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import EventList from "./components/EventsList";
 import EventPage from "./components/SingleEvent";
-import CreateEvent from "./components/CreateEvent.js";
+import CreateEvent from "./components/CreateEvent";
 import UpdateEvent from "./components/UpdateEvent";
 import SingleProduct from "./components/SingleProduct";
 
