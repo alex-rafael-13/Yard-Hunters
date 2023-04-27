@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TimeField, IntegerField, DateField 
-from wtforms.validators import DataRequired, ValidationError
+from wtforms.validators import DataRequired, ValidationError, Length
 from datetime import date, time, timedelta, datetime
 
 
@@ -26,8 +26,9 @@ def validateEndTime(form, field):
             raise ValidationError('Event must last at least 30 minutes')
 
 class EventForm(FlaskForm):
-    name = StringField('name', validators=[DataRequired()])
-    description = StringField('description', validators=[DataRequired()])
+    name = StringField('name', validators=[DataRequired(), Length(min=3, max=25)])
+    description = StringField('description', validators=[DataRequired(), Length(min=10, max=100)])
+    image_url = StringField('image_url')
     event_type_id = IntegerField('event_type_id', validators=[DataRequired()])
     address = StringField('address', validators=[DataRequired()])
     city = StringField('city', validators=[DataRequired()])

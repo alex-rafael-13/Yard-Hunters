@@ -5,7 +5,7 @@ import { retrieveTypes } from '../../store/eventType'
 import { createEvent } from '../../store/event'
 import { useHistory } from 'react-router-dom'
 
-export default function CreateEvent(){
+export default function CreateEvent() {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [type, setType] = useState('')
@@ -16,7 +16,9 @@ export default function CreateEvent(){
     const [date, setDate] = useState('')
     const [sTime, setSTime] = useState('')
     const [eTime, setETime] = useState('')
-    const [errors, setErrors] = useState([])
+    const [image, setImage] = useState(null)
+    const [errors, setErrors] = useState({})
+    
 
     const typesList = useSelector(state => state.types.types)
     const dispatch = useDispatch()
@@ -31,14 +33,15 @@ export default function CreateEvent(){
 
         //Get type ID for chosen type
         let chosenType
-        if(type.length > 0){
+        if (type.length > 0) {
             typesList?.forEach(t => {
-                if(t.type === type){
+                if (t.type === type) {
                     chosenType = t.id
-                }   
+                }
             })
         }
 
+        console.log(typeof type)
         const event = {
             name,
             description,
@@ -49,52 +52,64 @@ export default function CreateEvent(){
             country,
             date,
             start_time: sTime,
-            end_time: eTime
+            end_time: eTime,
+            image_url: image
         }
 
         return dispatch(createEvent(event))
-        .then(async story => {
-            console.log(story)
-            if(story.id){
+            .then(async story => {
+                console.log(story)
+                if (story.id) {
                     history.push(`/events/${story.id}`)
-            }
-            else if(story.errors){
-                setErrors(story.errors)
-                console.log(errors)
-            }
-        })
+                }
+                else if (story.errors) {
+                    setErrors(story.errors)
+                }
+            })
     }
 
-    return(
+    const labelTitle = 'label-title'
+    const errMessage = 'error-message'
+
+    return (
         <div>
-            {errors.map(error => (
-                <div>{error}</div>
-            ))}
+            {/* {errors.map(error => (
+                <div>{Object.values(error)}</div>
+            ))} */}
             <h1>Create Event</h1>
-            <form className='event-form'>
+            <form className='event-form' onSubmit={onSubmit}>
                 <label>
-                    Event Name:
+                    <div className={labelTitle}>
+                        <div>Event Name:</div>
+                        {errors.name && <div className={errMessage}>{errors.name}</div>}
+                    </div>
                     <input
                         type="text"
                         value={name}
                         onChange={e => setName(e.target.value)}
-                        required
+                    // required
                     />
                 </label>
                 <label>
-                    Description:
+                    <div className={labelTitle}>
+                        <div>Description</div>
+                        {errors.description && <div className={errMessage}>{errors.description}</div>}
+                    </div>
                     <textarea
                         value={description}
                         onChange={e => setDescription(e.target.value)}
-                        required
+                    // required
                     />
                 </label>
                 <label>
-                    Event Type:
+                    <div className={labelTitle}>
+                        <div>Event Type:</div>
+                        {errors.event_type_id && <div className={errMessage}>{errors.event_type_id}</div>}
+                    </div>
                     <select
                         value={type}
                         onChange={e => setType(e.target.value)}
-                        required
+                    // required
                     >
                         <option>--- Please Select an Event Type ---</option>
                         {typesList?.map(type => (
@@ -103,72 +118,105 @@ export default function CreateEvent(){
                     </select>
                 </label>
                 <label>
-                    Address:
+                    <div className={labelTitle}>
+                        <div>Address:</div>
+                        {errors.address && <div className={errMessage}>{errors.address}</div>}
+                    </div>
                     <input
-                        type='text' 
+                        type='text'
                         value={address}
                         onChange={e => setAddress(e.target.value)}
-                        required
+                    // required
                     />
                 </label>
                 <label>
-                    City:
-                    <input 
+                    <div className={labelTitle}>
+                        <div>City:</div>
+                        {errors.city && <div className={errMessage}>{errors.city}</div>}
+                    </div>
+                    <input
                         type='text'
                         value={city}
                         onChange={e => setCity(e.target.value)}
-                        required
+                    // required
                     />
                 </label>
                 <label>
-                    State:
-                    <input 
+                    <div className={labelTitle}>
+                        <div>State</div>
+                        {errors.state && <div className={errMessage}>{errors.state}</div>}
+                    </div>
+                    <input
                         type='text'
                         value={state}
                         onChange={e => setState(e.target.value)}
-                        required
+                    // required
                     />
                 </label>
                 <label>
-                    Country:
-                    <input 
+                    <div className={labelTitle}>
+                        <div>Country:</div>
+                        {errors.country && <div className={errMessage}>{errors.country}</div>}
+                    </div>
+                    <input
                         type='text'
                         value={country}
                         onChange={e => setCountry(e.target.value)}
-                        required
+                    // required
                     />
                 </label>
-                <div>
+                <div className='date-time-cont'>
                     <label>
-                        Date:
-                        <input 
+                        <div className={labelTitle}>
+                            <div>Event Date:</div>
+                            {errors.date && <div className={errMessage}>{errors.date}</div>}
+                        </div>
+                        <input
                             type='date'
                             value={date}
                             onChange={e => setDate(e.target.value)}
-                            required
+                        // required
                         />
                     </label>
                     <label>
-                        Start Time:
-                        <input 
+                        <div className={labelTitle}>
+                            <div>Start Time:</div>
+                            {errors.start_time && <div className={errMessage}>{errors.start_time}</div>}
+                        </div>
+                        <input
                             type='time'
                             value={sTime}
                             onChange={e => setSTime(e.target.value)}
-                            required
+                        // required
                         />
                     </label>
                     <label>
-                        End Time:
-                        <input 
+                        <div className={labelTitle}>
+                            <div>End Time:</div>
+                            {errors.end_time && <div className={errMessage}>{errors.end_time}</div>}
+                        </div>
+                        <input
                             type='time'
                             value={eTime}
                             onChange={e => setETime(e.target.value)}
-                            required    
+                        // required    
+                        />
+                    </label>
+                    <label>
+                        <div className={labelTitle}>
+                            <div>Event Image (Optional):</div>
+                            {errors.image_url && <div className={errMessage}>{errors.image_url}</div>}
+                        </div>
+                        <input
+                            type='text'
+                            value={image}
+                            onChange={e => setImage(e.target.value)}
+                        // required    
                         />
                     </label>
 
                 </div>
-                <button onClick={onSubmit}>Submit</button>
+                <button type='submit'>Submit</button>
             </form>
         </div>
     )
