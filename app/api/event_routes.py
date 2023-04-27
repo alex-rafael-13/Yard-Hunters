@@ -94,7 +94,8 @@ def new_event():
             country = form.data['country'],
             date = date_entered,
             start_time = s_time,
-            end_time = e_time
+            end_time = e_time,
+            image_url = form.data['image_url']
         )
         db.session.add(event)
         db.session.commit()
@@ -155,6 +156,7 @@ def edit_event(event_id):
             event.date = date_entered
             event.start_time = s_time
             event.end_time = e_time
+            event.image_url = form.data['image_url']
 
             db.session.commit()
 

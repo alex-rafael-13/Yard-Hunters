@@ -1,6 +1,15 @@
 import { NavLink } from "react-router-dom";
 
 export default function EventPost({ event }) {
+
+    let imgUrl
+    if(event.image_url){
+        console.log('in here')
+        imgUrl = event.image_url
+    } else{
+        imgUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTqcztNP3vT5LmB5cYoi3SbUBcadk7vtkqPw&usqp=CAU'
+    }
+
     return (
         <NavLink to={`/events/${event.id}`}>
             <div className="event-post">
@@ -12,7 +21,7 @@ export default function EventPost({ event }) {
                     <div> {event.name}</div>
                 </div>
                 <div className="img-cont">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTqcztNP3vT5LmB5cYoi3SbUBcadk7vtkqPw&usqp=CAU" alt="event image" />
+                    <img src={imgUrl} alt="event image" />
                 </div>
                 <div className="host-event-type-cont">
                     <div className="date-time-cont">
