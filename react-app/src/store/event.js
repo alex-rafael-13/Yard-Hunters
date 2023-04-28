@@ -2,6 +2,7 @@
 const SET_ALL = "events/SET_ALL"
 const SET_ONE = "events/SET_ONE"
 const RESET_SINGLE = "events/RESET"
+const SET_CURRENT = "events/CURRENT"
 
 
 /*****                      ACTION CREATORS                        */
@@ -16,6 +17,13 @@ const setEvent = (event) => {
     return{
         event,
         type: SET_ONE
+    }
+}
+
+const setUserEvents = (events) => {
+    return{
+        events,
+        type: SET_CURRENT
     }
 }
 
@@ -63,6 +71,24 @@ export const retrieveEventById = (id) => async dispatch => {
     }
 }
 
+//GET events of current user
+export const retrieveUserEvents = () => async dispatch => {
+    const response = await fetch(`/api/events/current`, {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    
+    if(response.ok){
+        const events = await response.json()
+        if(events.errors) {
+            return
+        }
+
+        dispatch(setUserEvents(events))
+    }
+}
+
 export const createEvent = event => async dispatch => {
     const response = await fetch('/api/events/new',{
         method: "POST",
@@ -106,7 +132,7 @@ export const deleteEvent = (id) => async dispatch => {
 
 
 /*****                      REDUCER                             */
-const initialState = {events:[], event:{}}
+const initialState = {events:[], event:{}, userEvents: []}
 export default function reducer(state=initialState, action){
     let newState = initialState
     switch (action.type){
@@ -117,6 +143,10 @@ export default function reducer(state=initialState, action){
         case SET_ONE:
             newState = {...state}
             newState['event'] = action.event
+            return newState
+        case SET_CURRENT:
+            newState = {...state}
+            newState['userEvents'] = action.events
             return newState
         case RESET_SINGLE:
             newState = {...state}

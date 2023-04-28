@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from app.models import db, Product
+from app.models import db, Product, Category, Product_Condition, Product_Image
 from flask_login import login_required, current_user
 from app.forms import ProductForm
 
@@ -9,10 +9,10 @@ def validation_errors_to_error_messages(validation_errors):
     """
     Simple function that turns the WTForms validation errors into a simple list
     """
-    errorMessages = []
+    errorMessages = {}
     for field in validation_errors:
         for error in validation_errors[field]:
-            errorMessages.append(f'{field} : {error}')
+            errorMessages[field] = error
     return errorMessages
 
 @product_routes.route('/')
@@ -59,6 +59,9 @@ def user_products():
 @login_required
 def new_product():
     form = ProductForm()
+    data = request.get_json()
+    preview_image = data['preview_image']
+    print(preview_image)
 
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -74,6 +77,14 @@ def new_product():
 
         db.session.add(product)
         db.session.commit()
+        image = Product_Image(
+            product_id = product.id,
+            image_url = preview_image,
+            preview = True
+        )
+        db.session.add(image)
+        db.session.commit()
+
         return product.single_to_dict()
     
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
@@ -81,12 +92,10 @@ def new_product():
 @product_routes.route('/<int:product_id>/manage', methods=['PUT', 'DELETE'])
 @login_required
 def manage_product(product_id):
-    form = ProductForm()
+    print(current_user.id)
 
-    product = Product\
-        .query\
-        .filter(Product.id == product_id, Product.owner_id == current_user.id)\
-        .first()
+    product = Product.query.filter(Product.id == product_id, Product.owner_id == current_user.id).first()
+    print('past here')
     
     if not product:
        return {
@@ -97,7 +106,9 @@ def manage_product(product_id):
     EDITING PRODUCT
     '''
     if request.method == 'PUT':
+        form = ProductForm()
         form['csrf_token'].data = request.cookies['csrf_token']
+        print('\n\n\n','in here')
         if form.validate_on_submit():
             product.name = form.data['name']
             product.price = form.data['price']
@@ -108,25 +119,43 @@ def manage_product(product_id):
 
             db.session.commit()
             return product.single_to_dict()
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
     
     '''
     DELETING A PRODUCT
     '''
     if request.method == 'DELETE':
+        print('\n\n\n\n', product)
         db.session.delete(product)
         db.session.commit()
         return {
             'message': 'Product Successfully Deleted'
         }, 200
     
+@product_routes.route('/categories')
+def get_categories():
+    categories = Category.query.all()
 
+        #err handling
+    if not categories:
+        return {
+            'err': 'Marketplace Cannot Be Reached at This Moment'
+        }, 404
+        
+    return [category.to_dict() for category in categories]
+
+@product_routes.route('/conditions')
+def get_conditions():
+    conditions = Product_Condition.query.all()
+
+        #err handling
+    if not conditions:
+        return {
+            'err': 'Marketplace Cannot Be Reached at This Moment'
+        }, 404
+        
+    return [condition.to_dict() for condition in conditions]
     
-
-    
-
-
-
-
 
 @product_routes.route('/test')
 def test():

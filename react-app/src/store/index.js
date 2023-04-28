@@ -4,12 +4,16 @@ import session from './session'
 import event from './event'
 import types from './eventType'
 import products from './product'
+import categories from './category'
+import conditions from './condition'
 
 const rootReducer = combineReducers({
   session,
   event,
   types,
-  products
+  products,
+  categories,
+  conditions
 });
 
 

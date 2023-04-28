@@ -18,7 +18,6 @@ def validation_errors_to_error_messages(validation_errors):
 
 #Get all events 
 @event_routes.route('/')
-# @login_required
 def event_list():
 
     events = Event.query.all()
@@ -33,7 +32,6 @@ def event_list():
 
 #Get an event by event_id
 @event_routes.route('/<int:event_id>')
-@login_required
 def single_event(event_id):
 
     event = Event.query.filter(Event.id==event_id).first()
@@ -168,6 +166,7 @@ def edit_event(event_id):
     DELETING AN EVENT IF SIGNED IN USER IS THE HOST
     '''
     if request.method == 'DELETE':
+        print('\n\n\n\n',event)
         db.session.delete(event)
         db.session.commit()
         return {

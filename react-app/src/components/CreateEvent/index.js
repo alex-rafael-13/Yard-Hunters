@@ -133,7 +133,7 @@ export default function CreateEvent() {
                 </label>
                 <label>
                     <div className={labelTitle}>
-                        <div>State</div>
+                        <div>State:</div>
                         {errors.state && <div className={errMessage}>{errors.state}</div>}
                     </div>
                     <input
