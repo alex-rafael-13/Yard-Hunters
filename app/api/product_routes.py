@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from app.models import db, Product
+from app.models import db, Product, Category, Product_Condition
 from flask_login import login_required, current_user
 from app.forms import ProductForm
 
@@ -119,14 +119,30 @@ def manage_product(product_id):
             'message': 'Product Successfully Deleted'
         }, 200
     
+@product_routes.route('/categories')
+def get_categories():
+    categories = Category.query.all()
 
+        #err handling
+    if not categories:
+        return {
+            'err': 'Marketplace Cannot Be Reached at This Moment'
+        }, 404
+        
+    return [category.to_dict() for category in categories]
+
+@product_routes.route('/conditions')
+def get_conditions():
+    conditions = Product_Condition.query.all()
+
+        #err handling
+    if not conditions:
+        return {
+            'err': 'Marketplace Cannot Be Reached at This Moment'
+        }, 404
+        
+    return [condition.to_dict() for condition in conditions]
     
-
-    
-
-
-
-
 
 @product_routes.route('/test')
 def test():

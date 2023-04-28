@@ -14,7 +14,7 @@ export default function CreateProduct() {
     const userEvents = useSelector(state => state.event.userEvents)
     const dispatch = useDispatch()
 
-    useEffect(() => {
+    useEffect(async () => {
         dispatch(retrieveUserEvents())
     }, [dispatch])
 
@@ -57,7 +57,7 @@ export default function CreateProduct() {
                         onChange={e => setEvent(e.target.value)}
                     // required
                     >
-                        <option>--- Please Select an Event If Applicable---</option>
+                        <option value="">--- Please Select an Event If Applicable---</option>
                         {userEvents?.map(event => (
                             <option key={event.id} value={event.id}>{event.name}</option>
                         ))}
