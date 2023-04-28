@@ -9,3 +9,4 @@ class ProductForm(FlaskForm):
     event_id = IntegerField('event_id')
     condition_id = IntegerField('condition_id', validators=[DataRequired()])
     category_id = IntegerField('category_id', validators=[DataRequired()])
+    preview_image = StringField('preview_image', validators=[DataRequired()])
