@@ -13,6 +13,7 @@ import SingleProduct from "./components/SingleProduct";
 import Marketplace from "./components/Marketplace";
 import SideNav from "./components/SideNav";
 import CreateProduct from "./components/CreateProduct";
+import UpdateProduct from "./components/UpdateProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +48,9 @@ function App() {
             </Route> 
             <Route exact path='/products/:product_id'>
               <SingleProduct />
+            </Route>
+            <Route exact path='/products/:product_id/edit'>
+              <UpdateProduct />
             </Route>
             <Route exact path='/marketplace'>
               <Marketplace />
