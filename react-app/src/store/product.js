@@ -45,6 +45,19 @@ export const retrieveProduct = (id) => async dispatch => {
 
 }
 
+export const createProduct = product => async dispatch => {
+    const response = await fetch('/api/products/new',{
+        method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(product)
+    })
+
+    const newProduct = await response.json()
+    return newProduct
+} 
+
 const initState = {products:[], product:{}}
 export default function reducer(state = initState, action){
     let newState

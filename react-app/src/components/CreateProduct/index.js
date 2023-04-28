@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { retrieveUserEvents } from "../../store/event"
 import { retrieveAllConditions } from "../../store/condition"
 import { retrieveAllCategories } from "../../store/category"
-
+import { createProduct } from "../../store/product"
+import { useHistory } from "react-router-dom"
 
 export default function CreateProduct() {
     const [name, setName] = useState('')
@@ -18,6 +19,7 @@ export default function CreateProduct() {
     const categories = useSelector(state => state.categories.categories)
     const conditions = useSelector(state => state.conditions.conditions)
     const dispatch = useDispatch()
+    const history = useHistory()
 
     useEffect(async () => {
         dispatch(retrieveUserEvents())
@@ -28,17 +30,26 @@ export default function CreateProduct() {
 
     const handleSubmit = e => {
         e.preventDefault()
-        const product = {
+        const newProduct = {
             name,
             price,
             description,
             event_id: event,
             condition_id: condition,
             category_id: category,
-            previewImage
+            preview_image: previewImage
         } 
 
-        console.log(product)
+        return dispatch(createProduct(newProduct))
+            .then(async product => {
+                console.log(product)
+                if (product.id) {
+                    history.push(`/products/${product.id}`)
+                }
+                if (product.errors) {
+                    setErrors(product.errors)
+                }
+            })
     }
 
     const labelTitle = 'label-title'
@@ -61,7 +72,7 @@ export default function CreateProduct() {
                 <label>
                     <div className={labelTitle}>
                         <div>Price:</div>
-                        {errors.price && <div className={errMessage}>{errors.name}</div>}
+                        {errors.price && <div className={errMessage}>{errors.price}</div>}
                     </div>
                     <input
                         type="text"
@@ -97,15 +108,15 @@ export default function CreateProduct() {
                     // required
                     >
                         <option value="" disabled>--- Please Select The Condition of Your Product ---</option>
-                        {conditions?.map(event => (
-                            <option key={event.id} value={event.id}>{event.condition}</option>
+                        {conditions?.map(condition => (
+                            <option key={condition.id} value={condition.id}>{condition.condition}</option>
                         ))}
                     </select>
                 </label>
                 <label>
                     <div className={labelTitle}>
                         <div>Event:</div>
-                        {errors.name && <div className={errMessage}>{errors.name}</div>}
+                        {/* {errors.name && <div className={errMessage}>{errors.name}</div>} */}
                     </div>
                     <select
                         value={event}
@@ -122,7 +133,7 @@ export default function CreateProduct() {
                 <label>
                     <div className={labelTitle}>
                         <div>Product Description:</div>
-                        {errors.description && <div className={errMessage}>{errors.name}</div>}
+                        {errors.description && <div className={errMessage}>{errors.description}</div>}
                     </div>
                     <textarea
                         value={description}
