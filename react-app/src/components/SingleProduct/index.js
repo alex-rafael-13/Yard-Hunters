@@ -35,7 +35,6 @@ export default function SingleProduct(){
             <div>{product.category?.category}</div>
             <div>$ {product.price}</div>
             <div>{product.description}</div>
-
         </div>
     )
 }

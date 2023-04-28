@@ -11,6 +11,7 @@ import CreateEvent from "./components/CreateEvent";
 import UpdateEvent from "./components/UpdateEvent";
 import SingleProduct from "./components/SingleProduct";
 import Marketplace from "./components/Marketplace";
+import SideNav from "./components/SideNav/SideNav";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,34 +23,39 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-        <Switch>
-          <Route exact path='/'>
-            <EventList />
-          </Route>
-          <Route exact path='/events/new'>
-            <CreateEvent />
-          </Route>
-          <Route exact path='/events/:event_id'>
-            <EventPage />
-          </Route>
-          <Route exact path='/events/:event_id/edit'>
-            <UpdateEvent />
-          </Route>
-          <Route exact path='/products/:product_id'>
-            <SingleProduct />
-          </Route>
-          <Route exact path='/marketplace'>
-            <Marketplace />
-          </Route>
-          <Route path="/login" >
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-        </Switch>
-      )}
+      <div className="body">
+        <div className="side-nav">
+          <SideNav />
+        </div>
+        {isLoaded && (
+          <Switch>
+            <Route exact path='/'>
+              <EventList />
+            </Route>
+            <Route exact path='/events/new'>
+              <CreateEvent />
+            </Route>
+            <Route exact path='/events/:event_id'>
+              <EventPage />
+            </Route>
+            <Route exact path='/events/:event_id/edit'>
+              <UpdateEvent />
+            </Route>
+            <Route exact path='/products/:product_id'>
+              <SingleProduct />
+            </Route>
+            <Route exact path='/marketplace'>
+              <Marketplace />
+            </Route>
+            <Route path="/login" >
+              <LoginFormPage />
+            </Route>
+            <Route path="/signup">
+              <SignupFormPage />
+            </Route>
+          </Switch>
+        )}
+      </div>
     </>
   );
 }
