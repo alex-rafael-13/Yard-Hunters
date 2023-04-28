@@ -39,14 +39,6 @@ export default function SideNav({ isLoaded }) {
         dispatch(logout());
     };
 
-    // const closeMenu = (e) => {
-    //     console.log(e)
-    //     if (!ulRef.current.contains(e.target)) {
-    //         setShowMenu(false);
-    //     }
-    // };
-
-    const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
     const closeMenu = () => setShowMenu(false);
 
     return (

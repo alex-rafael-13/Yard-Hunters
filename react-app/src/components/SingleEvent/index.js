@@ -33,7 +33,7 @@ export default function EventPage(){
 
     return(
         <div className="event-page">
-            {user?.id === event?.host?.id && 
+            {user && user?.id === event?.host?.id && 
                 <div className='buttons'>
                     <button className="update-event" onClick={updateButton}>Update</button>
                     <OpenModalButton
@@ -63,15 +63,19 @@ export default function EventPage(){
             <hr/>
             <div>
                 <h2>Products Being Sold:</h2>
-                {event.product_list?.map(product => (
-                    <NavLink key={product.id} to={`/products/${product.id}`}>
-                        <div>
-                            <div>{product.name}</div>
-                            <img src={product.preview_image}/>
-                            <div>$ {product.price}</div>
-                        </div>
-                    </NavLink>
-                ))}    
+                {event.product_list?.length ? (
+                    <>
+                    {event.product_list?.map(product => (
+                        <NavLink key={product.id} to={`/products/${product.id}`}>
+                            <div>
+                                <div>{product.name}</div>
+                                <img src={product.preview_image}/>
+                                <div>$ {product.price}</div>
+                            </div>
+                        </NavLink>
+                    ))}    
+                    </>
+                ):(<h3>No Products Have Yet Been Listed</h3>)}
             </div>       
         </div>
     )
