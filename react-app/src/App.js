@@ -23,11 +23,11 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      <div className="body">
-        <div className="side-nav">
-          <SideNav />
-        </div>
         {isLoaded && (
+        <div className="body">
+          <div className="side-nav">
+            <SideNav />
+          </div>
           <Switch>
             <Route exact path='/'>
               <EventList />
@@ -54,8 +54,8 @@ function App() {
               <SignupFormPage />
             </Route>
           </Switch>
+        </div>
         )}
-      </div>
     </>
   );
 }

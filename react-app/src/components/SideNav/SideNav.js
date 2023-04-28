@@ -14,7 +14,21 @@ export default function SideNav({ isLoaded }) {
     const history = useHistory()
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
-    const dispatch = useDispatch
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (!showMenu) return;
+    
+        const closeMenu = (e) => {
+          if (!ulRef.current.contains(e.target)) {
+            setShowMenu(false);
+          }
+        };
+    
+        document.addEventListener("click", closeMenu);
+    
+        return () => document.removeEventListener("click", closeMenu);
+      }, [showMenu]);
 
     const createEventButton = () => {
         history.push('/events/new')
@@ -25,13 +39,15 @@ export default function SideNav({ isLoaded }) {
         dispatch(logout());
     };
 
-    const closeMenu = (e) => {
-        if (!ulRef.current.contains(e.target)) {
-            setShowMenu(false);
-        }
-    };
+    // const closeMenu = (e) => {
+    //     console.log(e)
+    //     if (!ulRef.current.contains(e.target)) {
+    //         setShowMenu(false);
+    //     }
+    // };
 
     const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+    const closeMenu = () => setShowMenu(false);
 
     return (
         <ul ref={ulRef}>
@@ -53,13 +69,13 @@ export default function SideNav({ isLoaded }) {
             ) : (
                 <>
                     <OpenModalMenuItem
-                        buttonText="Log In"
+                        itemText="Log In"
                         onItemClick={closeMenu}
                         modalComponent={<LoginFormModal />}
                     />
 
                     <OpenModalMenuItem
-                        buttonText="Sign Up"
+                        itemText="Sign Up"
                         onItemClick={closeMenu}
                         modalComponent={<SignupFormModal />}
                     />
