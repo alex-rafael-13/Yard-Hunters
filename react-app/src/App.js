@@ -11,7 +11,8 @@ import CreateEvent from "./components/CreateEvent";
 import UpdateEvent from "./components/UpdateEvent";
 import SingleProduct from "./components/SingleProduct";
 import Marketplace from "./components/Marketplace";
-import SideNav from "./components/SideNav/SideNav";
+import SideNav from "./components/SideNav";
+import CreateProduct from "./components/CreateProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,6 +42,9 @@ function App() {
             <Route exact path='/events/:event_id/edit'>
               <UpdateEvent />
             </Route>
+            <Route exact path='/products/new'>
+              <CreateProduct />  
+            </Route> 
             <Route exact path='/products/:product_id'>
               <SingleProduct />
             </Route>

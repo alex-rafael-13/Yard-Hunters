@@ -34,6 +34,10 @@ export default function SideNav({ isLoaded }) {
         history.push('/events/new')
     }
 
+    const createProductButton = () => {
+        history.push('/products/new')
+    }
+
     const handleLogout = (e) => {
         e.preventDefault();
         dispatch(logout());
@@ -53,6 +57,9 @@ export default function SideNav({ isLoaded }) {
                 <>
                     <li>
                         <button onClick={createEventButton}>Post Event</button>
+                    </li>
+                    <li>
+                        <button onClick={createProductButton}>Post Product</button>
                     </li>
                     <li>
                         <button onClick={handleLogout}>Log Out</button>
