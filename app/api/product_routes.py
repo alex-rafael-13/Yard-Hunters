@@ -92,12 +92,11 @@ def new_product():
 @product_routes.route('/<int:product_id>/manage', methods=['PUT', 'DELETE'])
 @login_required
 def manage_product(product_id):
-    form = ProductForm()
+    print('in here')
+    print(current_user.id)
 
-    product = Product\
-        .query\
-        .filter(Product.id == product_id, Product.owner_id == current_user.id)\
-        .first()
+    product = Product.query.filter(Product.id == product_id, Product.owner_id == current_user.id).first()
+    print('past here')
     
     if not product:
        return {
@@ -108,6 +107,8 @@ def manage_product(product_id):
     EDITING PRODUCT
     '''
     if request.method == 'PUT':
+        form = ProductForm()
+
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
             product.name = form.data['name']
@@ -124,6 +125,7 @@ def manage_product(product_id):
     DELETING A PRODUCT
     '''
     if request.method == 'DELETE':
+        print('\n\n\n\n', product)
         db.session.delete(product)
         db.session.commit()
         return {

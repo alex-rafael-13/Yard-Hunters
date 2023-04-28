@@ -166,6 +166,7 @@ def edit_event(event_id):
     DELETING AN EVENT IF SIGNED IN USER IS THE HOST
     '''
     if request.method == 'DELETE':
+        print('\n\n\n\n',event)
         db.session.delete(event)
         db.session.commit()
         return {

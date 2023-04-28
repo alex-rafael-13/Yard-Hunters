@@ -56,7 +56,34 @@ export const createProduct = product => async dispatch => {
 
     const newProduct = await response.json()
     return newProduct
-} 
+}
+
+// export const deleteProduct = product_id => async dispatch => {
+//     console.log(product_id)
+//     const response = await fetch(`/api/products/${product_id}/manage`, {
+//         method: 'DELETE',
+//         headers: {
+//             'Content-Type':'application/json'
+//         }
+//     });
+
+//     const data = await response.json()
+
+//     return data
+// }
+export const deleteProduct = (id) => async dispatch =>  {
+    const response = await fetch(`/api/products/${id}/manage`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type':'application/json'
+        }
+    });
+    
+    const data = await response.json()
+    console.log(data)
+
+    return data
+}
 
 const initState = {products:[], product:{}}
 export default function reducer(state = initState, action){

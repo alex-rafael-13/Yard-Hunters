@@ -22,7 +22,7 @@ class Product(db.Model):
     seller = db.relationship('User', back_populates='products')
     condition = db.relationship('Product_Condition', back_populates='products')
     category = db.relationship('Category', back_populates='products')
-    images = db.relationship('Product_Image', backref='product')
+    images = db.relationship('Product_Image', backref='product', cascade='all, delete-orphan')
 
     '''Get preview image'''
     def preview_image(self):

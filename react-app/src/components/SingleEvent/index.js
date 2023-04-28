@@ -52,9 +52,9 @@ export default function EventPage(){
                     <div>
                         Hosted By {event.host?.username}
                     </div>
-                    <div>
+                    {/* <div>
                         User Profile IMG
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div className="description-cont">

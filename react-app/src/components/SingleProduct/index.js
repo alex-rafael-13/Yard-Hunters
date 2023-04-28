@@ -2,10 +2,13 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { retrieveProduct } from "../../store/product"
+import OpenModalButton from "../OpenModalButton"
+import DeleteProduct from "./DeleteProduct"
 
 export default function SingleProduct(){
     const {product_id} = useParams()
     const dispatch = useDispatch()
+    const user = useSelector(state => state.session.user)
     const product = useSelector(state => state.products.product)
 
     useEffect(() => {
@@ -22,6 +25,16 @@ export default function SingleProduct(){
     return(
         <div>
             <h1>{product.name}</h1>
+            {user && user?.id === product.seller?.id &&
+            <div>
+                <button>Edit Product</button>
+                <OpenModalButton
+                        buttonText='Cancel Event'
+                        modalComponent={<DeleteProduct />}
+                        product={product}
+                    /> 
+                <button>Mark as Sold</button>   
+            </div>}
             <div>
                 {product.images?.length ? (
                     <>
