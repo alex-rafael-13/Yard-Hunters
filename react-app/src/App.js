@@ -10,6 +10,7 @@ import EventPage from "./components/SingleEvent";
 import CreateEvent from "./components/CreateEvent";
 import UpdateEvent from "./components/UpdateEvent";
 import SingleProduct from "./components/SingleProduct";
+import Marketplace from "./components/Marketplace";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,9 @@ function App() {
           </Route>
           <Route exact path='/products/:product_id'>
             <SingleProduct />
+          </Route>
+          <Route exact path='/marketplace'>
+            <Marketplace />
           </Route>
           <Route path="/login" >
             <LoginFormPage />
