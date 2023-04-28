@@ -1,13 +1,13 @@
 const GET_ALL = "categories/GET_ALL"
 
-const setAllConditions = (categories) => {
+const setAllCategories = (categories) => {
     return {
         categories,
         type: GET_ALL
     }
 }
 
-export const retrieveAllConditions = () => async dispatch => {
+export const retrieveAllCategories = () => async dispatch => {
     const response = await fetch('/api/products/categories', {
         headers: {
             "Content-Type": "application/json"
@@ -15,7 +15,7 @@ export const retrieveAllConditions = () => async dispatch => {
     })
 
     const data = await response.json()
-    dispatch(setAllConditions(data))
+    dispatch(setAllCategories(data))
 }
 
 const initState = {categories: []}
@@ -24,7 +24,7 @@ export default function reducer(state=initState, action){
     switch(action.type){
         case GET_ALL:
             newState = {...state}
-            newState['conditions'] = action.conditions
+            newState['categories'] = action.categories
             return newState
         default:
             return state
