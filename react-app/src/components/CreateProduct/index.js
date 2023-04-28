@@ -9,7 +9,7 @@ export default function CreateProduct() {
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
     const [description, setDescription] = useState('')
-    const [event, setEvent] = useState('')
+    const [event, setEvent] = useState(0)
     const [condition, setCondition] = useState('')
     const [category, setCategory] = useState('')
     const [previewImage, setPreviewImage] = useState('')
@@ -32,9 +32,9 @@ export default function CreateProduct() {
             name,
             price,
             description,
-            event,
-            condition,
-            category,
+            event_id: event,
+            condition_id: condition,
+            category_id: category,
             previewImage
         } 
 
@@ -80,7 +80,7 @@ export default function CreateProduct() {
                         onChange={e => setCategory(e.target.value)}
                     // required
                     >
-                        <option value="">--- Please Select a Category ---</option>
+                        <option value="" disabled>--- Please Select a Category ---</option>
                         {categories?.map(category => (
                             <option key={category.id} value={category.id}>{category.category}</option>
                         ))}
@@ -96,7 +96,7 @@ export default function CreateProduct() {
                         onChange={e => setCondition(e.target.value)}
                     // required
                     >
-                        <option value="">--- Please Select The Condition of Your Product ---</option>
+                        <option value="" disabled>--- Please Select The Condition of Your Product ---</option>
                         {conditions?.map(event => (
                             <option key={event.id} value={event.id}>{event.condition}</option>
                         ))}
@@ -112,7 +112,8 @@ export default function CreateProduct() {
                         onChange={e => setEvent(e.target.value)}
                     // required
                     >
-                        <option value="">--- Please Select an Event If Applicable ---</option>
+                        <option value="" disabled>--- Please Select an Event If Applicable ---</option>
+                        <option value={0}>Online Only</option>
                         {userEvents?.map(event => (
                             <option key={event.id} value={event.id}>{event.name}</option>
                         ))}

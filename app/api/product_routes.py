@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from app.models import db, Product, Category, Product_Condition
+from app.models import db, Product, Category, Product_Condition, Product_Image
 from flask_login import login_required, current_user
 from app.forms import ProductForm
 
@@ -59,6 +59,9 @@ def user_products():
 @login_required
 def new_product():
     form = ProductForm()
+    data = request.get_json()
+    preview_image = data['preview_image']
+    print(preview_image)
 
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -74,6 +77,14 @@ def new_product():
 
         db.session.add(product)
         db.session.commit()
+        image = Product_Image(
+            product_id = product.id,
+            image_url = preview_image,
+            preview = True
+        )
+        db.session.add(image)
+        db.session.commit()
+
         return product.single_to_dict()
     
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
