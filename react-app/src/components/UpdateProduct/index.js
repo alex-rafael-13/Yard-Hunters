@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { retrieveUserEvents } from "../../store/event"
 import { retrieveAllConditions } from "../../store/condition"
+import { retrieveUserEvents } from "../../store/event"
 import { retrieveAllCategories } from "../../store/category"
-import { createProduct, retrieveProduct } from "../../store/product"
+import {retrieveProduct, updateSingleProduct } from "../../store/product"
 import { useHistory, useParams } from "react-router-dom"
 
 export default function UpdateProduct() {
@@ -28,33 +28,33 @@ export default function UpdateProduct() {
     const [event, setEvent] = useState(0)
     const [condition, setCondition] = useState('')
     const [category, setCategory] = useState('')
-    const [previewImage, setPreviewImage] = useState('')
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState({})
     const history = useHistory()
     const {product_id} = useParams()
 
-
-
     const handleSubmit = e => {
         e.preventDefault()
-        const newProduct = {
+        const updatedProduct = {
             name,
             price,
             description,
             event_id: event,
             condition_id: condition,
             category_id: category,
-            preview_image: previewImage
+            preview_image: 'none'
         } 
 
-        return dispatch(createProduct(newProduct))
+        console.log(updatedProduct)
+
+        return dispatch(updateSingleProduct(product_id, updatedProduct))
             .then(async product => {
-                console.log(product)
+                // console.log(product)
                 if (product.id) {
                     history.push(`/products/${product.id}`)
                 }
                 if (product.errors) {
                     setErrors(product.errors)
+                    console.log(errors)
                 }
             })
     }
@@ -66,7 +66,7 @@ export default function UpdateProduct() {
         {loaded && 
         
         <div>
-            <h1>Create New Product:</h1>
+            <h1>Update Product:</h1>
             <form className="product-form" onSubmit={handleSubmit}>
                 <label>
                     <div className={labelTitle}>
@@ -148,17 +148,6 @@ export default function UpdateProduct() {
                     <textarea
                         value={description}
                         onChange={e => setDescription(e.target.value)}
-                    />
-                </label>
-                <label>
-                    <div className={labelTitle}>
-                        <div>Preview Image:</div>
-                        {errors.name && <div className={errMessage}>{errors.name}</div>}
-                    </div>
-                    <input
-                        type="text"
-                        value={previewImage}
-                        onChange={e => setPreviewImage(e.target.value)}
                     />
                 </label>
                 <div>

@@ -58,19 +58,22 @@ export const createProduct = product => async dispatch => {
     return newProduct
 }
 
-// export const deleteProduct = product_id => async dispatch => {
-//     console.log(product_id)
-//     const response = await fetch(`/api/products/${product_id}/manage`, {
-//         method: 'DELETE',
-//         headers: {
-//             'Content-Type':'application/json'
-//         }
-//     });
+export const updateSingleProduct = (id, product) => async dispatch => {
+    const response = await fetch(`/api/products/${id}/manage`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify(product)
+    });
 
-//     const data = await response.json()
+    const data = await response.json()
+    console.log(data)
 
-//     return data
-// }
+    return data
+}
+
+
 export const deleteProduct = (id) => async dispatch =>  {
     const response = await fetch(`/api/products/${id}/manage`, {
         method: 'DELETE',
