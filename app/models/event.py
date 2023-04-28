@@ -63,6 +63,7 @@ class Event(db.Model):
             'date': self.check_date(),
             'start_time': self.start_time.strftime('%I:%M %p'),
             'end_time': self.end_time.strftime('%I:%M %p'),
+            'image_url': self.image_url,
             'product_list': self.check_products()
         }
     

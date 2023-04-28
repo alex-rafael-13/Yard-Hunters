@@ -15,11 +15,18 @@ export default function EventPage(){
 
     useEffect(() => {
         dispatch(retrieveEventById(event_id))
-        console.log(event)
     }, [dispatch])
 
     const updateButton = () => {
         history.push(`/events/${event_id}/edit`)
+    }
+
+    let imgUrl
+    if(event.image_url){
+        console.log('in here')
+        imgUrl = event.image_url
+    } else{
+        imgUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTqcztNP3vT5LmB5cYoi3SbUBcadk7vtkqPw&usqp=CAU'
     }
 
     if(!event) return
@@ -37,7 +44,7 @@ export default function EventPage(){
                 </div>
             }
             <div className="event-image">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTqcztNP3vT5LmB5cYoi3SbUBcadk7vtkqPw&usqp=CAU"/>
+                <img src={imgUrl} alt='Event Image'/>
             </div>
             <div className="title-user-cont">
                 <div>{event.name}</div>
