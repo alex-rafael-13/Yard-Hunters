@@ -1,3 +1,12 @@
+.nav{
+  background-color: #0092CA;
+}
+
+.logo{
+  width: 160px;
+  cursor: pointer;
+}
+
 .profile-dropdown {
   position: absolute;
 }
