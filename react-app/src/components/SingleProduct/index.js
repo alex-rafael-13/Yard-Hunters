@@ -34,7 +34,7 @@ export default function SingleProduct() {
                 <div>
                     <button onClick={updateButton}>Edit Product</button>
                     <OpenModalButton
-                        buttonText='Cancel Event'
+                        buttonText='Delete Product'
                         modalComponent={<DeleteProduct />}
                         product={product}
                     />

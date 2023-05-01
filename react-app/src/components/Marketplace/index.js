@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { retrieveAllProducts } from "../../store/product"
 import ProductCard from "./productCard"
+import './products.css'
 
 export default function Marketplace(){
     const products = useSelector(state => state.products.products)
@@ -13,7 +14,7 @@ export default function Marketplace(){
     }, [dispatch])
 
     return (
-        <div>
+        <div className="product-list">
             {loaded &&
             <>
             {products.map(product => (
