@@ -11,6 +11,8 @@ function SignupFormModal() {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errors, setErrors] = useState([]);
+	const [first_name, setFName] = useState('')
+	const [last_name, setLName] = useState('')
 	const { closeModal } = useModal();
 
 	const handleSubmit = async (e) => {
@@ -44,6 +46,24 @@ function SignupFormModal() {
 						type="text"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
+						required
+					/>
+				</label>
+				<label>
+					First Name
+					<input
+						type="text"
+						value={first_name}
+						onChange={(e) => setFName(e.target.value)}
+						required
+					/>
+				</label>
+				<label>
+					Last Name
+					<input
+						type="text"
+						value={last_name}
+						onChange={(e) => setLName(e.target.value)}
 						required
 					/>
 				</label>
