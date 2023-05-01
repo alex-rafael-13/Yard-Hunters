@@ -10,3 +10,8 @@ body{
     width: 30%;
     min-width: 280px;
 }
+
+a{
+    text-decoration: none;
+    color: black;
+}
