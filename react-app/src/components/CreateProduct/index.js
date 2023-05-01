@@ -60,7 +60,7 @@ export default function CreateProduct() {
             <form className="product-form" onSubmit={handleSubmit}>
                 <label>
                     <div className={labelTitle}>
-                        <div>Event Name:</div>
+                        <div>Product Name:</div>
                         {errors.name && <div className={errMessage}>{errors.name}</div>}
                     </div>
                     <input

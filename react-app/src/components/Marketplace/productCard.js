@@ -9,7 +9,7 @@ export default function ProductCard({ product }) {
     }
 
     return (
-        <NavLink exact to={`/products/${product.id}`}>
+        <NavLink className='product-a' exact to={`/products/${product.id}`}>
             <div className="product-card">
                 <div className="product-name">{product.name}</div>
                 <div className="product-img-cont">

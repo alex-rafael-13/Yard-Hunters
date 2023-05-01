@@ -7,6 +7,7 @@ import OpenModalButton from "../OpenModalButton";
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import './sideNav.css'
 
 
 export default function SideNav({ isLoaded }) {
@@ -46,40 +47,42 @@ export default function SideNav({ isLoaded }) {
     const closeMenu = () => setShowMenu(false);
 
     return (
-        <ul ref={ulRef}>
-            <li>
-                <NavLink exact to="/">Home</NavLink>
-            </li>
-            <li>
-                <NavLink exact to='/marketplace'>Marketplace</NavLink>
-            </li>
-            {user ? (
-                <>
-                    <li>
-                        <button onClick={createEventButton}>Post Event</button>
-                    </li>
-                    <li>
-                        <button onClick={createProductButton}>Post Product</button>
-                    </li>
-                    <li>
-                        <button onClick={handleLogout}>Log Out</button>
-                    </li>
-                </>
-            ) : (
-                <>
-                    <OpenModalMenuItem
-                        itemText="Log In"
-                        onItemClick={closeMenu}
-                        modalComponent={<LoginFormModal />}
-                    />
+        <div className='main-side-nav'>
+            <ul ref={ulRef} className='options-list'>
+                <li className='row' onClick={() => {history.push('/')}}>
+                    <div>Home</div>
+                </li>
+                <li className='row' onClick={() => {history.push('/marketplace')}}>
+                <div >Marketplace</div>
+                </li>
+                {user ? (
+                    <>
+                        <li onClick={createEventButton} className='row'>
+                            <div>Post Event</div>
+                        </li>
+                        <li onClick={createProductButton} className='row'>
+                            <div>Post Product</div>
+                        </li>
+                        <li  onClick={handleLogout} className='row'>
+                            <div>Log Out</div>
+                        </li>
+                    </>
+                ) : (
+                    <>
+                        <OpenModalMenuItem
+                            itemText="Log In"
+                            onItemClick={closeMenu}
+                            modalComponent={<LoginFormModal />}
+                        />
 
-                    <OpenModalMenuItem
-                        itemText="Sign Up"
-                        onItemClick={closeMenu}
-                        modalComponent={<SignupFormModal />}
-                    />
-                </>
-            )}
-        </ul>
+                        <OpenModalMenuItem
+                            itemText="Sign Up"
+                            onItemClick={closeMenu}
+                            modalComponent={<SignupFormModal />}
+                        />
+                    </>
+                )}
+            </ul>
+        </div>
     );
 }

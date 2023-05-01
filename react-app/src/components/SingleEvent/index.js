@@ -5,6 +5,7 @@ import { deleteEvent, retrieveEventById } from "../../store/event"
 import { authenticate } from "../../store/session"
 import OpenModalButton from "../OpenModalButton"
 import DeleteEvent from "./deleteEvent"
+import './singleEvent.css'
 
 export default function EventPage(){
     const dispatch = useDispatch()
@@ -47,7 +48,7 @@ export default function EventPage(){
                 <img src={imgUrl} alt='Event Image'/>
             </div>
             <div className="title-user-cont">
-                <div>{event.name}</div>
+                <div className="event-title">{event.name}</div>
                 <div className="user-cont">
                     <div>
                         Hosted By {event.host?.username}
@@ -63,19 +64,23 @@ export default function EventPage(){
             <hr/>
             <div>
                 <h2>Products Being Sold:</h2>
-                {event.product_list?.length ? (
-                    <>
-                    {event.product_list?.map(product => (
-                        <NavLink key={product.id} to={`/products/${product.id}`}>
-                            <div>
-                                <div>{product.name}</div>
-                                <img src={product.preview_image}/>
-                                <div>$ {product.price}</div>
-                            </div>
-                        </NavLink>
-                    ))}    
-                    </>
-                ):(<h3>No Products Have Yet Been Listed</h3>)}
+                <div className="product-list">
+                    {event.product_list?.length ? (
+                        <>
+                        {event.product_list?.map(product => (
+                            <NavLink className='product-a' key={product.id} to={`/products/${product.id}`}>
+                                <div className="product-card">
+                                    <div>{product.name}</div>
+                                    <div className="product-img-cont">
+                                        <img src={product.preview_image}/>
+                                    </div>
+                                    <div>$ {product.price}</div>
+                                </div>
+                            </NavLink>
+                        ))}    
+                        </>
+                    ):(<h3>No Products Have Yet Been Listed</h3>)}
+                </div>
             </div>       
         </div>
     )

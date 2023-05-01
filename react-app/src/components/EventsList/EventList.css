@@ -1,9 +1,35 @@
+.event-list{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 600px;
+}
 .event-post{
-    border: solid black 1px;
+    padding: 15px;
+    border: rgba(128, 128, 128, 0.248) solid;
+    border-radius: 50px;
 }
-.event-header{
-    border: dotted black 1px;
+
+
+.img-cont{
+    width: 100%;
 }
-.host-event-type-cont{
-    border: dotted black 1px;
+
+.event-name{
+    font-size: 30px;
+}
+
+a{
+    font-style: none;
+}
+
+.date-time-cont{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.img-cont img{
+    width: 100%;
+    object-fit: cover;
 }

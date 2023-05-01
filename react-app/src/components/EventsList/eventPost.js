@@ -14,11 +14,8 @@ export default function EventPost({ event }) {
         <NavLink to={`/events/${event.id}`}>
             <div className="event-post">
                 <div className="event-header">
-                    <div className="user-image">
-                        User Image
-                    </div>
-                    <div>{event.host.username}</div>
-                    <div> {event.name}</div>
+                    <div className="event-name"> {event.name}</div>
+                    <div>Hosted by {event.host.username}</div>
                 </div>
                 <div className="img-cont">
                     <img src={imgUrl} alt="event image" />
