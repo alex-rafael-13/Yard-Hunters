@@ -1,0 +1,4 @@
+.login-modal{
+    display: flex;
+    flex-direction: column;
+}

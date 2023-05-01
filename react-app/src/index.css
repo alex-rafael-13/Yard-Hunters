@@ -16,3 +16,19 @@ a{
     text-decoration: none;
     color: black;
 }
+
+button{
+    height: 25px;
+    background-color: #019ddb;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: white;
+    color: #019ddb;
+    border: 1px solid #019ddb;
+}
