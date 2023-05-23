@@ -76,7 +76,6 @@ def seed_events():
         name = 'App Academy Graduation!',
         description ="""
             I am thrilled to invite you to our graduation ceremony! We've worked incredibly hard over the past 6+ months, and we're excited to celebrate our achievements with our family, friends, and fellow coders.
-            We'll be honoring all of our graduates with speeches, awards, and certificates, as well as showcasing some of the amazing projects we've been working on during the program.
             It's not just an end, but also the beginning of an exciting new chapter in our lives as developers.
             Thank you for your continued support, and I hope to see you at the graduation!""",
         host_id = 3,
