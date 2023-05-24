@@ -32,3 +32,6 @@ button:hover{
     color: #019ddb;
     border: 1px solid #019ddb;
 }
+textarea{
+    resize: none;
+}
