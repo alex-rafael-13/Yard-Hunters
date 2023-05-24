@@ -11,11 +11,11 @@ export default function CreateProduct() {
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
     const [description, setDescription] = useState('')
-    const [event, setEvent] = useState('')
+    const [event, setEvent] = useState(0)
     const [condition, setCondition] = useState('')
     const [category, setCategory] = useState('')
     const [previewImage, setPreviewImage] = useState('')
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState({})
     const userEvents = useSelector(state => state.event.userEvents)
     const categories = useSelector(state => state.categories.categories)
     const conditions = useSelector(state => state.conditions.conditions)
@@ -55,6 +55,7 @@ export default function CreateProduct() {
 
     const labelTitle = 'label-title'
     const errMessage = 'error-message'
+    console.log(event)
     return (
         <div className="form-body">
             <h1>Create New Product</h1>
@@ -90,7 +91,7 @@ export default function CreateProduct() {
                 <label>
                     <div className={labelTitle}>
                         <div>Category:</div>
-                        {errors.name && <div className={errMessage}>{errors.name}</div>}
+                        {errors.category_id && <div className={errMessage}>{errors.category_id}</div>}
                     </div>
                     <select
                         value={category}
@@ -106,7 +107,7 @@ export default function CreateProduct() {
                 <label>
                     <div className={labelTitle}>
                         <div>Condition:</div>
-                        {errors.name && <div className={errMessage}>{errors.name}</div>}
+                        {errors.condition_id && <div className={errMessage}>{errors.condition_id}</div>}
                     </div>
                     <select
                         value={condition}
@@ -122,15 +123,15 @@ export default function CreateProduct() {
                 <label>
                     <div className={labelTitle}>
                         <div>Event:</div>
-                        {/* {errors.name && <div className={errMessage}>{errors.name}</div>} */}
+                        {errors.event_id && <div className={errMessage}>{errors.event_id}</div>}
                     </div>
                     <select
                         value={event}
                         onChange={e => setEvent(e.target.value)}
                     // required
                     >
-                        <option disabled value="">--- Please Select an Event If Applicable ---</option>
-                        <option value={0}>Online Only</option>
+                        <option disabled>--- Please Select an Event If Applicable ---</option>
+                        <option selected value={0}>Online Only</option>
                         {userEvents?.map(event => (
                             <option key={event.id} value={event.id}>{event.name}</option>
                         ))}
@@ -151,7 +152,7 @@ export default function CreateProduct() {
                 <label>
                     <div className={labelTitle}>
                         <div>Preview Image:</div>
-                        {errors.name && <div className={errMessage}>{errors.name}</div>}
+                        {errors.preview_image && <div className={errMessage}>{errors.preview_image}</div>}
                     </div>
                     <input
                         type="text"
