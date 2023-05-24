@@ -1,0 +1,11 @@
+.form-body{
+    width: 100%;
+    margin: 10px 35% 20px 10%;
+}
+.product-form{
+    display: flex;
+    flex-direction: column;
+}
+.product-input{
+    width: 100%;
+}

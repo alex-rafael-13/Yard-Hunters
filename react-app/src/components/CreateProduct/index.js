@@ -5,12 +5,13 @@ import { retrieveAllConditions } from "../../store/condition"
 import { retrieveAllCategories } from "../../store/category"
 import { createProduct } from "../../store/product"
 import { useHistory } from "react-router-dom"
+import './createProduct.css'
 
 export default function CreateProduct() {
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
     const [description, setDescription] = useState('')
-    const [event, setEvent] = useState(0)
+    const [event, setEvent] = useState('')
     const [condition, setCondition] = useState('')
     const [category, setCategory] = useState('')
     const [previewImage, setPreviewImage] = useState('')
@@ -55,8 +56,8 @@ export default function CreateProduct() {
     const labelTitle = 'label-title'
     const errMessage = 'error-message'
     return (
-        <div>
-            <h1>Create New Product:</h1>
+        <div className="form-body">
+            <h1>Create New Product</h1>
             <form className="product-form" onSubmit={handleSubmit}>
                 <label>
                     <div className={labelTitle}>
@@ -64,6 +65,7 @@ export default function CreateProduct() {
                         {errors.name && <div className={errMessage}>{errors.name}</div>}
                     </div>
                     <input
+                        className="product-input"
                         type="text"
                         value={name}
                         onChange={e => setName(e.target.value)}
@@ -74,12 +76,16 @@ export default function CreateProduct() {
                         <div>Price:</div>
                         {errors.price && <div className={errMessage}>{errors.price}</div>}
                     </div>
-                    <input
-                        type="text"
-                        value={price}
-                        onChange={e => setPrice(e.target.value)}
-                    // required
-                    />
+                    <div>
+                        $
+                        <input
+                            className="product-input"
+                            type="text"
+                            value={price}
+                            onChange={e => setPrice(e.target.value)}
+                        // required
+                        />
+                    </div>
                 </label>
                 <label>
                     <div className={labelTitle}>
@@ -123,7 +129,7 @@ export default function CreateProduct() {
                         onChange={e => setEvent(e.target.value)}
                     // required
                     >
-                        <option value="" disabled>--- Please Select an Event If Applicable ---</option>
+                        <option disabled value="">--- Please Select an Event If Applicable ---</option>
                         <option value={0}>Online Only</option>
                         {userEvents?.map(event => (
                             <option key={event.id} value={event.id}>{event.name}</option>
@@ -136,8 +142,10 @@ export default function CreateProduct() {
                         {errors.description && <div className={errMessage}>{errors.description}</div>}
                     </div>
                     <textarea
+                        className="product-input"
                         value={description}
                         onChange={e => setDescription(e.target.value)}
+                        rows='9'
                     />
                 </label>
                 <label>
