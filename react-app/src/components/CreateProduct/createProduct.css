@@ -9,3 +9,19 @@
 .product-input{
     width: 100%;
 }
+label{
+    width: 100%;
+}
+.price{
+    display: flex;
+    gap: 5px;
+    width: 100%;
+}
+.category-condition{
+    display: flex;
+    gap: 5px;
+    width: 100%;
+}
+.category-condition > label{
+    width: 50%;
+}

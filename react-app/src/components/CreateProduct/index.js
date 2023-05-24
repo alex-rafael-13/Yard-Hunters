@@ -53,6 +53,9 @@ export default function CreateProduct() {
             })
     }
 
+    const filloutSections = 'fillout-sections'
+    const sectionDetails = 'section-details'
+    const detailsTitle = 'details-title'
     const labelTitle = 'label-title'
     const errMessage = 'error-message'
     console.log(event)
@@ -60,26 +63,70 @@ export default function CreateProduct() {
         <div className="form-body">
             <h1>Create New Product</h1>
             <form className="product-form" onSubmit={handleSubmit}>
+                <div className={sectionDetails}>
+                    <div className={detailsTitle}>Product Details</div>
+                    <div>What are you selling? What category best describes the product? What is its condition?</div>
+                </div>
                 <label>
                     <div className={labelTitle}>
                         <div>Product Name:</div>
                         {errors.name && <div className={errMessage}>{errors.name}</div>}
                     </div>
                     <input
+                        placeholder="Name of your product"
                         className="product-input"
                         type="text"
                         value={name}
                         onChange={e => setName(e.target.value)}
                     />
                 </label>
+                <div className="category-condition">
+                    <label>
+                        <div className={labelTitle}>
+                            <div>Category:</div>
+                            {errors.category_id && <div className={errMessage}>{errors.category_id}</div>}
+                        </div>
+                        <select
+                            value={category}
+                            onChange={e => setCategory(e.target.value)}
+                        // required
+                        >
+                            <option value="" disabled>--- Please Select a Category ---</option>
+                            {categories?.map(category => (
+                                <option key={category.id} value={category.id}>{category.category}</option>
+                            ))}
+                        </select>
+                    </label>
+                    <label>
+                        <div className={labelTitle}>
+                            <div>Condition:</div>
+                            {errors.condition_id && <div className={errMessage}>{errors.condition_id}</div>}
+                        </div>
+                        <select
+                            value={condition}
+                            onChange={e => setCondition(e.target.value)}
+                        // required
+                        >
+                            <option value="" disabled>--- Please Select Condition ---</option>
+                            {conditions?.map(condition => (
+                                <option key={condition.id} value={condition.id}>{condition.condition}</option>
+                            ))}
+                        </select>
+                    </label>
+                </div>
+                <hr></hr>
+                <div className={sectionDetails}>
+                    <div className={detailsTitle}>Set a Price for Your Product</div>
+                    <div>Set a base price that best suites your product and its condition.</div>
+                </div>
                 <label>
                     <div className={labelTitle}>
-                        <div>Price:</div>
                         {errors.price && <div className={errMessage}>{errors.price}</div>}
                     </div>
-                    <div>
-                        $
+                    <div className="price">
+                        <div>$</div>
                         <input
+                            placeholder="Set price (USD)"
                             className="product-input"
                             type="text"
                             value={price}
@@ -88,41 +135,13 @@ export default function CreateProduct() {
                         />
                     </div>
                 </label>
+                <hr></hr>
+                <div className={sectionDetails}>
+                    <div className={detailsTitle}>Where is Your Product Available?</div>
+                    <div>Is this product available to a certain event you are hosting?</div>
+                </div>
                 <label>
                     <div className={labelTitle}>
-                        <div>Category:</div>
-                        {errors.category_id && <div className={errMessage}>{errors.category_id}</div>}
-                    </div>
-                    <select
-                        value={category}
-                        onChange={e => setCategory(e.target.value)}
-                    // required
-                    >
-                        <option value="" disabled>--- Please Select a Category ---</option>
-                        {categories?.map(category => (
-                            <option key={category.id} value={category.id}>{category.category}</option>
-                        ))}
-                    </select>
-                </label>
-                <label>
-                    <div className={labelTitle}>
-                        <div>Condition:</div>
-                        {errors.condition_id && <div className={errMessage}>{errors.condition_id}</div>}
-                    </div>
-                    <select
-                        value={condition}
-                        onChange={e => setCondition(e.target.value)}
-                    // required
-                    >
-                        <option value="" disabled>--- Please Select The Condition of Your Product ---</option>
-                        {conditions?.map(condition => (
-                            <option key={condition.id} value={condition.id}>{condition.condition}</option>
-                        ))}
-                    </select>
-                </label>
-                <label>
-                    <div className={labelTitle}>
-                        <div>Event:</div>
                         {errors.event_id && <div className={errMessage}>{errors.event_id}</div>}
                     </div>
                     <select
@@ -137,18 +156,28 @@ export default function CreateProduct() {
                         ))}
                     </select>
                 </label>
+                <hr></hr>
+                <div className={sectionDetails}>
+                    <div className={detailsTitle}>Describe Your Product</div>
+                    <div>Please add any extra information the buyer might need to know. If your open to negotiate the price of your item, this is a great place to announce it!</div>
+                </div>
                 <label>
                     <div className={labelTitle}>
-                        <div>Product Description:</div>
                         {errors.description && <div className={errMessage}>{errors.description}</div>}
                     </div>
                     <textarea
+                        placeholder="Description must be between 10 and 500 characters"
                         className="product-input"
                         value={description}
                         onChange={e => setDescription(e.target.value)}
                         rows='9'
                     />
                 </label>
+                <hr></hr>
+                <div className={sectionDetails}>
+                    <div className={detailsTitle}>Product Images</div>
+                    <div>Please include a preview image.</div>
+                </div>
                 <label>
                     <div className={labelTitle}>
                         <div>Preview Image:</div>
@@ -160,6 +189,7 @@ export default function CreateProduct() {
                         onChange={e => setPreviewImage(e.target.value)}
                     />
                 </label>
+                <hr></hr>
                 <div>
                     <button type="submit">Post Product</button>
                 </div>
