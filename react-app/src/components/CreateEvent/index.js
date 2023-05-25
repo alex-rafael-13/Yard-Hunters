@@ -249,7 +249,9 @@ export default function CreateEvent() {
 
                 </div>
                 <hr></hr>
-                <button type='submit'>Submit</button>
+                <div className='button-cont'>
+                    <button type='submit'>Submit</button>
+                </div>
             </form>
         </div>
     )

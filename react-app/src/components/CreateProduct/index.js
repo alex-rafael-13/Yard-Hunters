@@ -190,7 +190,7 @@ export default function CreateProduct() {
                     />
                 </label>
                 <hr></hr>
-                <div>
+                <div className="button-cont">
                     <button type="submit">Post Product</button>
                 </div>
             </form>

@@ -55,4 +55,11 @@ hr{
 .time-input{
     width: 100%
 }
+.button-cont{
+    display: flex;
+    justify-content: center;
+}
+.button-cont > button{
+    width: 100px;
+}
 
