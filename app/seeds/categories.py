@@ -20,8 +20,11 @@ def seed_categories():
     electronics = Category(
         category = 'Electronics'
     ) 
+    furniture = Category(
+        category = 'Furniture'
+    ) 
     
-    lst = [clothing, kitchenware, tools, toys, collectables, electronics]
+    lst = [clothing, kitchenware, tools, toys, collectables, electronics, furniture]
     for category in lst:
         db.session.add(category)
     db.session.commit()

@@ -1,7 +1,65 @@
+.form-body{
+    width: 100%;
+    margin: 10px 35% 20px 10%;
+}
 .event-form{
     display: flex;
     flex-direction: column;
 }
+.event-input{
+    width: 100%;
+}
+.type-image-section{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
 .error-message{
     color: red;
 }
+.section-details{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+}
+hr{
+    width: 100%;
+}
+.details-title{
+    font-size: 20px;
+    padding-bottom: 5px;
+    font-weight: 600;
+}
+.city-state{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+.city-state > div{
+    width: 50%;
+}
+.label-title{
+    display: flex;
+    gap: 5px;
+}
+.date-input{
+    width: 50%;
+}
+.time-cont{
+    display: flex;
+    gap: 20px;
+}
+.time-cont > label{
+    width: 50%;
+}
+.time-input{
+    width: 100%
+}
+.button-cont{
+    display: flex;
+    justify-content: center;
+}
+.button-cont > button{
+    width: 100px;
+}
+
