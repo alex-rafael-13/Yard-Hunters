@@ -16,8 +16,7 @@ def seed_events():
         country='United States',
         date= datetime.today() + timedelta(1),
         start_time= time(12,30),
-        end_time= time(14, 30),
-        image_url = 'https://www.gannett-cdn.com/presto/2022/08/12/NDRP/cf37518c-3889-4d53-abd8-2c26c8a447c4-US-12_Garage_sale_Coldwater_2.JPG'
+        end_time= time(14, 30)
     )
     fundraiser = Event(
         name = 'Summer Fun Fundraiser!',
@@ -33,8 +32,7 @@ def seed_events():
         country='United States',
         date= datetime.today(),
         start_time= time(12,30),
-        end_time= time(14, 30),
-        image_url = 'https://edit.org/img/blog/q8r-donation-flyer-template-editable-free.jpg'
+        end_time= time(14, 30)
     )
     food_stand = Event(
         name = 'Tacos Los Deliciosos',
@@ -51,8 +49,7 @@ def seed_events():
         country='United States',
         date= datetime.today(),
         start_time= time(12,30),
-        end_time= time(14, 30),
-        image_url = 'https://static.vecteezy.com/system/resources/previews/000/098/626/original/vector-taco-truck.jpg'
+        end_time= time(14, 30)
     )
     block_party = Event(
         name = 'Summer Bash Party!',
@@ -69,8 +66,7 @@ def seed_events():
         country='United States',
         date= datetime(2023, 6, 24),
         start_time= time(12,30),
-        end_time= time(14, 30),
-        image_url = 'https://exposureevents.com/assets/files/jpg/186417?v=26048791'
+        end_time= time(14, 30)
     )
     community_event = Event(
         name = 'App Academy Graduation!',
@@ -86,8 +82,7 @@ def seed_events():
         country='United States',
         date= datetime.today(),
         start_time= time(13,30),
-        end_time= time(15, 30),
-        image_url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD7LQN_IZBrdj0blkPd4bUbarpDHBfocEV8A&usqp=CAU'
+        end_time= time(15, 30)
     )
 
     db.session.add(yard_sale)

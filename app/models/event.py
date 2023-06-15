@@ -27,6 +27,7 @@ class Event(db.Model):
     host = db.relationship('User', back_populates='events')
     type = db.relationship('Event_Type', back_populates='events')
     products = db.relationship('Product', back_populates='event')
+    event_images = db.relationship('Event_Image', back_populates='events')
 
     def check_date(self):
         today = date.today()
@@ -62,7 +63,6 @@ class Event(db.Model):
             'date': self.check_date(),
             'start_time': self.start_time.strftime('%I:%M %p'),
             'end_time': self.end_time.strftime('%I:%M %p'),
-            'image_url': self.image_url,
             'product_list': self.check_products()
         }
     
