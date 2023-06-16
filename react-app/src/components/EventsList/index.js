@@ -18,8 +18,7 @@ export default function EventList(){
 
     if(!events) return
 
-    return(
-        
+    return(  
         <>
             {isLoaded && (
                 <div className="event-list">
