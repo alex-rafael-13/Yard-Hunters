@@ -64,6 +64,7 @@ def user_events():
 @event_routes.route('/new', methods=['POST'])
 @login_required
 def new_event():
+    print('------------request', dict(request.files))
     form = EventForm()
     # Get the csrf_token from the request cookie and put it into the
     # form manually to validate_on_submit can be used

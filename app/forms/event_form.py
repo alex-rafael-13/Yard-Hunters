@@ -30,7 +30,7 @@ def validateEndTime(form, field):
 class EventForm(FlaskForm):
     name = StringField('name', validators=[DataRequired(), Length(min=3, max=25)])
     description = StringField('description', validators=[DataRequired(), Length(min=10, max=100)])
-    preview_image = FileField('preview_image', validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
+    preview_image = FileField('preview_image', validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
     event_type_id = IntegerField('event_type_id', validators=[DataRequired()])
     address = StringField('address', validators=[DataRequired()])
     city = StringField('city', validators=[DataRequired()])
