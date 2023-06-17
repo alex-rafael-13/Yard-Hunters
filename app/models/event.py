@@ -29,7 +29,7 @@ class Event(db.Model):
     host = db.relationship('User', back_populates='events')
     type = db.relationship('Event_Type', back_populates='events')
     products = db.relationship('Product', back_populates='event')
-    event_images = db.relationship('Event_Image', back_populates='events')
+    event_images = db.relationship('Event_Image', back_populates='events', cascade='all, delete-orphan')
 
 
     #Instance Methods
