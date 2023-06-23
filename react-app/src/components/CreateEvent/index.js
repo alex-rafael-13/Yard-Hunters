@@ -43,7 +43,7 @@ export default function CreateEvent() {
             date,
             start_time: sTime,
             end_time: eTime,
-            image_url: image
+            preview_image: image
         }
 
         return dispatch(createEvent(event))
@@ -69,7 +69,7 @@ export default function CreateEvent() {
                 <div>{Object.values(error)}</div>
             ))} */}
             <h1>Create Event</h1>
-            <form className='event-form' onSubmit={onSubmit}>
+            <form className='event-form' onSubmit={onSubmit} enctype="multipart/form-data">
                 <div className={sectionDetails}>
                     <div className={detailsTitle}>Event Details</div>
                     <div>Name your event next to giving a short description of what your event is about. Don't forget to include what type of event you are hosting plus an image if you desire!</div>
@@ -114,7 +114,7 @@ export default function CreateEvent() {
                             onChange={e => setType(e.target.value)}
                         // required
                         >
-                            <option disabled selected value=''>--- Please Select an Event Type ---</option>
+                            <option disabled value=''>--- Please Select an Event Type ---</option>
                             {typesList?.map(type => (
                                 <option key={type.id} value={type.id}>{type.type}</option>
                             ))}
@@ -123,13 +123,13 @@ export default function CreateEvent() {
                     <label>
                         <div className={labelTitle}>
                             <div>Event Image:</div>
-                            {errors.image_url && <div className={errMessage}>{errors.image_url}</div>}
+                            {errors.preview_image && <div className={errMessage}>{errors.preview_image}</div>}
                         </div>
                         <input
                             placeholder='(Optional)'
-                            type='text'
-                            value={image}
-                            onChange={e => setImage(e.target.value)}
+                            type='file'
+                            accept='image/*'
+                            onChange={e => setImage(e.target.files[0])}
                         // required    
                         />
                     </label>

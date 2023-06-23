@@ -6,6 +6,7 @@ from .categories import seed_categories, undo_categories
 from .conditions import seed_conditions, undo_conditions
 from .products import seed_products, undo_products
 from .product_images import seed_product_images, undo_product_images
+from .event_images import seed_event_images, undo_event_images
 
 from app.models.db import db, environment, SCHEMA
 
@@ -23,6 +24,7 @@ def seed():
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
         undo_users()
+        undo_event_images()
         undo_events()
         undo_event_types()
         undo_product_images()
@@ -32,6 +34,7 @@ def seed():
     seed_users()
     seed_event_types()
     seed_events()
+    seed_event_images()
     seed_categories()
     seed_conditions()
     seed_products()
@@ -43,6 +46,7 @@ def seed():
 @seed_commands.command('undo')
 def undo():
     undo_users()
+    undo_event_images()
     undo_events()
     undo_event_types()
     undo_product_images()
