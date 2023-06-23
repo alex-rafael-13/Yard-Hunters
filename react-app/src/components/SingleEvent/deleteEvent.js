@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useModal } from "../../context/Modal"
+import { useModal, closeModal } from "../../context/Modal"
 import { useHistory, useParams } from "react-router-dom"
 import { deleteEvent } from "../../store/event"
 import { Modal } from "../../context/Modal"
@@ -29,7 +29,7 @@ export default function DeleteEvent(){
             <div>Are you sure you want to cancel event?</div>
             <div>
                 <button onClick={handleDelete}>Yes</button>
-                <button>No</button>
+                <button onClick={closeModal}>No</button>
             </div>
         </div>
     )

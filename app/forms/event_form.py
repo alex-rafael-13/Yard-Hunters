@@ -1,7 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TimeField, IntegerField, DateField 
+from wtforms import StringField, FileField,IntegerField
 from wtforms.validators import DataRequired, ValidationError, Length
+from flask_wtf.file import FileAllowed, FileRequired
 from datetime import date, time, timedelta, datetime
+from ..api.AWS_helpers import ALLOWED_EXTENSIONS
 
 
 #Validator that checks if date inputed is past today
@@ -28,7 +30,7 @@ def validateEndTime(form, field):
 class EventForm(FlaskForm):
     name = StringField('name', validators=[DataRequired(), Length(min=3, max=25)])
     description = StringField('description', validators=[DataRequired(), Length(min=10, max=100)])
-    image_url = StringField('image_url')
+    preview_image = FileField('preview_image', validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
     event_type_id = IntegerField('event_type_id', validators=[DataRequired()])
     address = StringField('address', validators=[DataRequired()])
     city = StringField('city', validators=[DataRequired()])

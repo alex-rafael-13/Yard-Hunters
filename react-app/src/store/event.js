@@ -89,13 +89,48 @@ export const retrieveUserEvents = () => async dispatch => {
     }
 }
 
-export const createEvent = event => async dispatch => {
+export const createEvent = (event) => async (dispatch) => {
+    console.log('---------------------------in here')
+    const {
+        name,
+        description,
+        event_type_id,
+        address,
+        city,
+        state,
+        country,
+        date,
+        start_time,
+        end_time,
+        preview_image } = event
+
+        //Creating form data
+        const formData = new FormData()
+        formData.append('name', name)
+        formData.append('description', description)
+        formData.append('event_type_id', event_type_id)
+        formData.append('address', address)
+        formData.append('city', city)
+        formData.append('state', state)
+        formData.append('country', country)
+        formData.append('date', date)
+        formData.append('start_time', start_time)
+        formData.append('end_time', end_time)
+        formData.append('preview_image', preview_image)
+
+
+        console.log(`preview_image: ${name}`)
+        console.log(`formData:`)
+        for (const value of formData.values()) {
+            console.log(value);
+          }
+
     const response = await fetch('/api/events/new',{
         method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(event)
+		// headers: {
+		// 	"Content-Type": "multipart/form-data",
+		// },
+		body: formData
     })
 
     const newEvent = await response.json()

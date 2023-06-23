@@ -1,6 +1,7 @@
 from .db import db
 from .user import User
 from .event import Event
+from .event_images import Event_Image 
 from .products import Product
 from .product_categories import Category
 from .product_images import Product_Image
