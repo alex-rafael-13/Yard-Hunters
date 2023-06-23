@@ -3,7 +3,7 @@ from app.models import db, Event, Event_Image
 from app.forms import EventForm
 from flask_login import login_required, current_user
 from datetime import time, date
-from .AWS_helpers import get_unique_filename, upload_file_to_s3
+from .AWS_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
 
 event_routes = Blueprint('events', __name__)
 
@@ -64,7 +64,6 @@ def user_events():
 @event_routes.route('/new', methods=['POST'])
 @login_required
 def new_event():
-    print('------------request', dict(request.files))
     form = EventForm()
     # Get the csrf_token from the request cookie and put it into the
     # form manually to validate_on_submit can be used
@@ -136,16 +135,16 @@ def edit_event(event_id):
 
     #Check if event is exists
     if not event:
-       return {
-           'err': 'Event not Found'
-       }, 404
+        return {
+            'err': 'Event not Found'
+        }, 404
     
     event_dict = event.to_dict()
     #Check if user is authorized to edit/delete event
     if event_dict['host']['id'] != current_user.id:
         return {
-           'err': 'Unautharized'
-       }, 401
+            'err': 'Unautharized'
+        }, 401
 
     '''
     EDITING AN EVENT IF SIGNED IN USER IS THE HOST
@@ -191,7 +190,10 @@ def edit_event(event_id):
     DELETING AN EVENT IF SIGNED IN USER IS THE HOST
     '''
     if request.method == 'DELETE':
-        print('\n\n\n\n',event)
+        #Get image url to delete from s3
+        image_url = event.to_dict( )['image_url'] 
+        remove_file_from_s3(image_url)
+        
         db.session.delete(event)
         db.session.commit()
         return {
