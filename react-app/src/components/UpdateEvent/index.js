@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { retrieveTypes } from '../../store/eventType'
 import { retrieveEventById, updateEvent } from '../../store/event'
 import { useHistory, useParams } from 'react-router-dom'
+import './updateEvent.css'
 
 export default function UpdateEvent() {
     const event = useSelector(state => state.event.event)
@@ -26,10 +27,13 @@ export default function UpdateEvent() {
     const [sTime, setSTime] = useState('')
     const [eTime, setETime] = useState('')
     const [errors, setErrors] = useState({})
-    const [image, setImage] = useState('')
+    const [image, setImage] = useState(event.image_url)
 
     const { event_id } = useParams()
     const history = useHistory()
+    console.log('\n\n\n\n\n', event.image_url)
+    console.log(typeof event.image_url)
+    console.log(typeof image)
 
 
     const onSubmit = e => {
@@ -79,6 +83,7 @@ export default function UpdateEvent() {
                                 </div>
                                 <input
                                     type="text"
+                                    className='event-input'
                                     value={name}
                                     onChange={e => setName(e.target.value)}
                                 // required
