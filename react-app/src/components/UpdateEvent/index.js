@@ -152,7 +152,7 @@ export default function UpdateEvent() {
                                         ))}
                                 </select>
                             </label>
-                            <label>
+                            {/* <label>
                                 <div className={labelTitle}>
                                     <div>Event Image:</div>
                                     {errors.preview_image && <div className={errMessage}>{errors.preview_image}</div>}
@@ -164,7 +164,7 @@ export default function UpdateEvent() {
                                     onChange={e => setImage(e.target.files[0])}
                                     // required    
                                     />
-                            </label>
+                            </label> */}
                         </div>
                         <hr />
                         <div className={sectionDetails}>
