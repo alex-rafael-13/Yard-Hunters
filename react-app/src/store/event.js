@@ -118,12 +118,12 @@ export const createEvent = (event) => async (dispatch) => {
         formData.append('end_time', end_time)
         formData.append('preview_image', preview_image)
 
-
-        console.log(`preview_image: ${name}`)
-        console.log(`formData:`)
-        for (const value of formData.values()) {
-            console.log(value);
-          }
+        //TESTING
+        // console.log(`preview_image: ${name}`)
+        // console.log(`formData:`)
+        // for (const value of formData.values()) {
+        //     console.log(value);
+        // }
 
     const response = await fetch('/api/events/new',{
         method: "POST",

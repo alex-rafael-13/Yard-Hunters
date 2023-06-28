@@ -6,6 +6,7 @@ import { authenticate } from "../../store/session"
 import OpenModalButton from "../OpenModalButton"
 import DeleteEvent from "./deleteEvent"
 import './singleEvent.css'
+import UpdatePreviewImage from "./updateImagePreview"
 
 export default function EventPage(){
     const [isLoaded, setIsLoaded] = useState(false)
@@ -48,6 +49,14 @@ export default function EventPage(){
                 }
                 <div className="event-image">
                     <img src={imgUrl} alt='Event Image'/>
+                    {user && user?.id === event?.host?.id &&
+                        <OpenModalButton
+                            buttonText='Update Preview Image'
+                            modalComponent={<UpdatePreviewImage />}
+                            event={event}
+                            className='update-image-but'
+                        />
+                    }
                 </div>
                 <div className="title-user-cont">
                     <div className="event-title">{event.name}</div>
