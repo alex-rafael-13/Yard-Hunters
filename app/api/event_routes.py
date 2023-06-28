@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from app.models import db, Event, Event_Image
-from app.forms import EventForm
+from app.forms import EventForm, EventImageForm
 from flask_login import login_required, current_user
 from datetime import time, date
 from .AWS_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
@@ -199,3 +199,77 @@ def edit_event(event_id):
         return {
             'message': 'Event Successfully Deleted'
         }, 200
+    
+@event_routes.route('/<int:event_id>/manage/preview', methods=['PUT'])
+@login_required
+def update_preview_image(event_id):
+    
+    #Get image and event(event to check that current user is the owner)
+    preview_image = Event_Image.query.filter(Event_Image.event_id==event_id, Event_Image.preview == True).first()
+    event = Event.query.filter(Event.id==event_id).first()
+
+    '''Error Handling'''
+    if not preview_image:
+        return {
+            'err': 'Event not Found'
+        }, 404
+    if not event:
+        return {
+            'err': 'Event not Found'
+        }, 404
+    
+    #Getting both event dict and prev image url
+    event_dict = event.to_dict()
+    prev_image_url = preview_image.to_dict()['image_url']
+    #Check if user is authorized to edit/delete event
+    if event_dict['host']['id'] != current_user.id:
+        return {
+            'err': 'Unautharized'
+        }, 401
+
+    #Init a form
+    form = EventImageForm()
+    # Get the csrf_token from the request cookie and put it into the
+    # form manually to validate_on_submit can be used
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        '''Uploading image to AWS'''
+
+        new_image = form.data['image_file']
+        
+        #Changing name of file
+        new_image.filename = get_unique_filename(new_image.filename)
+        
+        #uploading image to AWS
+        uploaded_preview = upload_file_to_s3(new_image)
+
+        #Checking for errors when uploading to AWS
+        if 'url' not in uploaded_preview:
+            return jsonify({"error": "Error uploading file to AWS"}, 401)
+        
+        #Remove current image from aws
+        remove_file_from_s3(prev_image_url)
+
+        '''Updating database'''
+
+        #Remove previous image
+        db.session.delete(preview_image)
+        db.session.commit()
+        
+        #Create new preview image and update the database
+        new_preview = Event_Image(
+            event_id = event_id,
+            image_url = uploaded_preview['url'],
+            preview = True
+        )
+        db.session.add(new_preview)
+        db.session.commit()
+
+        return new_preview.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+        
+
+
+    
