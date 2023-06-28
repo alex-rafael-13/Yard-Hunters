@@ -12,7 +12,7 @@ export default function UpdateEvent() {
     const [loaded, setLoaded] = useState(false)
     const { event_id } = useParams()
     
-    const [type, setType] = useState('')
+    const [type, setType] = useState(event.event_type_id)
     const [name, setName] = useState(event.name)
     const [description, setDescription] = useState(event.description)
     const [address, setAddress] = useState(event.address)
@@ -45,18 +45,7 @@ export default function UpdateEvent() {
         }
     }, [dispatch, event_id])
 
-
-
-    // useEffect(() => {
-    //     if(name){
-    //         setLoaded(true)
-    //     }
-    // }, [event])
-
     const history = useHistory()
-    console.log('\n\n\n\n\n Name:', event.name)
-    console.log(typeof event.image_url)
-    console.log(typeof image)
 
     const onSubmit = e => {
         e.preventDefault()
