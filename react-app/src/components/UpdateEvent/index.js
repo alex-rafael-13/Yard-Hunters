@@ -36,6 +36,7 @@ export default function UpdateEvent() {
             setCity(parsedEvent.city)
             setState(parsedEvent.state)
             setCountry(parsedEvent.country)
+            setType(parsedEvent.event_type_id)
             setLoaded(true);
         } else {
             dispatch(retrieveEventById(event_id)).then(() => {
@@ -82,6 +83,8 @@ export default function UpdateEvent() {
         const errMessage = 'error-message'
         const sectionDetails = 'section-details'
         const detailsTitle = 'details-title'
+
+        console.log(date)
 
         return (
             <>
