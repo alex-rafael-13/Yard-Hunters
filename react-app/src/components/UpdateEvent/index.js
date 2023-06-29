@@ -12,7 +12,7 @@ export default function UpdateEvent() {
     const [loaded, setLoaded] = useState(false)
     const { event_id } = useParams()
     
-    const [type, setType] = useState('')
+    const [type, setType] = useState(event.event_type_id)
     const [name, setName] = useState(event.name)
     const [description, setDescription] = useState(event.description)
     const [address, setAddress] = useState(event.address)
@@ -36,6 +36,7 @@ export default function UpdateEvent() {
             setCity(parsedEvent.city)
             setState(parsedEvent.state)
             setCountry(parsedEvent.country)
+            setType(parsedEvent.event_type_id)
             setLoaded(true);
         } else {
             dispatch(retrieveEventById(event_id)).then(() => {
@@ -45,18 +46,7 @@ export default function UpdateEvent() {
         }
     }, [dispatch, event_id])
 
-
-
-    // useEffect(() => {
-    //     if(name){
-    //         setLoaded(true)
-    //     }
-    // }, [event])
-
     const history = useHistory()
-    console.log('\n\n\n\n\n Name:', event.name)
-    console.log(typeof event.image_url)
-    console.log(typeof image)
 
     const onSubmit = e => {
         e.preventDefault()
@@ -93,6 +83,8 @@ export default function UpdateEvent() {
         const errMessage = 'error-message'
         const sectionDetails = 'section-details'
         const detailsTitle = 'details-title'
+
+        console.log(date)
 
         return (
             <>
@@ -152,7 +144,7 @@ export default function UpdateEvent() {
                                         ))}
                                 </select>
                             </label>
-                            <label>
+                            {/* <label>
                                 <div className={labelTitle}>
                                     <div>Event Image:</div>
                                     {errors.preview_image && <div className={errMessage}>{errors.preview_image}</div>}
@@ -164,7 +156,7 @@ export default function UpdateEvent() {
                                     onChange={e => setImage(e.target.files[0])}
                                     // required    
                                     />
-                            </label>
+                            </label> */}
                         </div>
                         <hr />
                         <div className={sectionDetails}>

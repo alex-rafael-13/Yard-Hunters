@@ -16,6 +16,11 @@ export default function EventPage(){
     const {event_id} = useParams()
     const history = useHistory()
 
+
+    useEffect(() => {
+        localStorage.removeItem('preFilledEvent')
+    }, []);
+
     useEffect(() => {
         dispatch(retrieveEventById(event_id)).then(() => setIsLoaded(true))
     }, [dispatch])

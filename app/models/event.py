@@ -77,6 +77,7 @@ class Event(db.Model):
             'country': self.country,
             'host': self.host.dict_for_event(),
             'event_type': self.type.type,
+            'event_type_id': self.type.id,
             'date': self.check_date(),
             'start_time': self.start_time.strftime('%I:%M %p'),
             'end_time': self.end_time.strftime('%I:%M %p'),
