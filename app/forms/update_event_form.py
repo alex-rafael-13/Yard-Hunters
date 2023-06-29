@@ -27,10 +27,10 @@ def validateEndTime(form, field):
         if (datetime.min + timedelta(hours=start.hour, minutes=start.minute + 30)).time() > end:
             raise ValidationError('Event must last at least 30 minutes')
 
-class EventForm(FlaskForm):
+class UpdateEventForm(FlaskForm):
     name = StringField('name', validators=[DataRequired(), Length(min=3, max=40)])
     description = StringField('description', validators=[DataRequired(), Length(min=10, max=1000)])
-    preview_image = FileField('preview_image', validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
+    # preview_image = FileField('preview_image', validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
     event_type_id = IntegerField('event_type_id', validators=[DataRequired()])
     address = StringField('address', validators=[DataRequired()])
     city = StringField('city', validators=[DataRequired()])

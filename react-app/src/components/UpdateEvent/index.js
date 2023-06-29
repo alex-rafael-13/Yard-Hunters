@@ -24,12 +24,14 @@ export default function UpdateEvent() {
     const [eTime, setETime] = useState('')
     const [errors, setErrors] = useState({})
     const [image, setImage] = useState(event.image_url)
+    console.log('\n', image)
 
     useEffect(() => {
         dispatch(retrieveTypes())
         const storedEvent = localStorage.getItem('preFilledEvent');
         if (storedEvent) {
             const parsedEvent = JSON.parse(storedEvent);
+            console.log(parsedEvent.date)
             setName(parsedEvent.name);
             setDescription(parsedEvent.description);
             setAddress(parsedEvent.address)
@@ -37,11 +39,14 @@ export default function UpdateEvent() {
             setState(parsedEvent.state)
             setCountry(parsedEvent.country)
             setType(parsedEvent.event_type_id)
+            setImage(parsedEvent.image)
+            // setSTime(parsedEvent.start_time)
+            // setETime(parsedEvent.end_time)
             setLoaded(true);
         } else {
-            dispatch(retrieveEventById(event_id)).then(() => {
+            dispatch(retrieveEventById(event_id, true)).then(() => {
             setLoaded(true);
-            localStorage.setItem('preFilledEvent', JSON.stringify(event));
+            localStorage.setItem('preFilledEvent', JSON.stringify({...event, date: event.date.toString()}));
         });
         }
     }, [dispatch, event_id])
@@ -59,13 +64,11 @@ export default function UpdateEvent() {
             city,
             state,
             country,
-            date,
+            date: date.toString(),
             start_time: sTime,
             end_time: eTime,
-            image_url: image
+            preview_image: image
         }
-
-        console.log(event)
 
         return dispatch(updateEvent(event_id, event))
             .then(async story => {
@@ -84,7 +87,14 @@ export default function UpdateEvent() {
         const sectionDetails = 'section-details'
         const detailsTitle = 'details-title'
 
-        console.log(date)
+        console.log(sTime)
+
+        // useEffect(() => {
+        //     // Format the date from 'yyyy-mm-dd' to 'yyyy-mm-dd' format
+        //     const formattedDate = new Date(date).toLocaleDateString('en-CA');
+        //     setDate(formattedDate);
+        // }, []);
+        // const formattedDate = new Date(date).toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' });
 
         return (
             <>
@@ -93,7 +103,7 @@ export default function UpdateEvent() {
                         <div>{Object.values(error)}</div>
                     ))} */}
                     <h1>Edit Event</h1>
-                    <form className='event-form' onSubmit={onSubmit} encType="multipart/form-data">
+                    <form className='event-form' onSubmit={onSubmit}>
                         <div className={sectionDetails}>
                             <div className={detailsTitle}>Event Details</div>
                             <div>Name your event next to giving a short description of what your event is about. Don't forget to include what type of event you are hosting plus an image if you desire!</div>

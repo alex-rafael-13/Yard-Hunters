@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from app.models import db, Event, Event_Image
-from app.forms import EventForm, EventImageForm
+from app.forms import EventForm, EventImageForm, UpdateEventForm
 from flask_login import login_required, current_user
 from datetime import time, date
 from .AWS_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
@@ -25,25 +25,37 @@ def event_list():
 
     #err handling
     if not events:
-       return {
-           'err': 'Events Cannot Be Reached at This Moment'
-       }, 404
+        return {
+            'err': 'Events Cannot Be Reached at This Moment'
+        }, 404
     
     return [event.to_dict() for event in events]
 
 #Get an event by event_id
 @event_routes.route('/<int:event_id>')
 def single_event(event_id):
-
     event = Event.query.filter(Event.id==event_id).first()
 
     #err handling
     if not event:
-       return {
-           'err': 'Event not Found'
-       }, 404
+        return {
+            'err': 'Event not Found'
+        }, 404
 
     return event.to_dict()
+
+#For updating the event
+@event_routes.route('/<int:event_id>/raw')
+def raw_event(event_id):
+    event = Event.query.filter(Event.id==event_id).first()
+
+    #err handling
+    if not event:
+        return {
+            'err': 'Event not Found'
+        }, 404
+
+    return event.raw_dict()
 
 #Get all events of the current user
 @event_routes.route('/current')
@@ -67,6 +79,7 @@ def new_event():
     form = EventForm()
     # Get the csrf_token from the request cookie and put it into the
     # form manually to validate_on_submit can be used
+    print('\n\n\n\n\n\n', form.description.data)
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
 
@@ -150,7 +163,7 @@ def edit_event(event_id):
     EDITING AN EVENT IF SIGNED IN USER IS THE HOST
     '''
     if request.method == 'PUT':
-        form = EventForm()
+        form = UpdateEventForm()
     # Get the csrf_token from the request cookie and put it into the
     # form manually to validate_on_submit can be used
         form['csrf_token'].data = request.cookies['csrf_token']
@@ -178,7 +191,6 @@ def edit_event(event_id):
             event.date = date_entered
             event.start_time = s_time
             event.end_time = e_time
-            event.image_url = form.data['image_url']
 
             db.session.commit()
 
