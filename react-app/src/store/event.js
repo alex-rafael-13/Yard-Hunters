@@ -54,12 +54,24 @@ export const retrieveEvents = () => async dispatch => {
 }
 
 //GET event by id
-export const retrieveEventById = (id) => async dispatch => {
-    const response = await fetch(`/api/events/${id}`, {
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
+export const retrieveEventById = (id, updating = false) => async dispatch => {
+    let response
+    
+    if(updating === true){
+        console.log('\n\n\n\n\n in here')
+        response = await fetch(`/api/events/${id}/raw`, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+    } else{
+        response = await fetch(`/api/events/${id}`, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+    }
+
 
     if(response.ok){
         const event = await response.json()

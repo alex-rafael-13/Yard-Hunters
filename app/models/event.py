@@ -85,6 +85,24 @@ class Event(db.Model):
             'image_url': self.preview_image()
         }
     
+    def raw_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'address': self.address,
+            'city': self.city,
+            'state': self.state,
+            'country': self.country,
+            'host': self.host.dict_for_event(),
+            'event_type': self.type.type,
+            'event_type_id': self.type.id,
+            'date': self.date.strftime("%Y-%m-%d"),
+            'start_time': self.start_time.strftime('%H:%M'),
+            'end_time': self.end_time.strftime('%H:%M'),
+            'image_url': self.preview_image()
+        }
+    
     def dict_for_products(self):
         return {
             'id': self.id,

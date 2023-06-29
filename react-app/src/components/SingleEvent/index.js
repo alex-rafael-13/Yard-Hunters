@@ -31,7 +31,6 @@ export default function EventPage(){
 
     let imgUrl
     if(event.image_url){
-        console.log('in here')
         imgUrl = event.image_url
     } else{
         imgUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTqcztNP3vT5LmB5cYoi3SbUBcadk7vtkqPw&usqp=CAU'

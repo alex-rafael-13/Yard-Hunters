@@ -63,6 +63,8 @@ export default function CreateEvent() {
     const sectionDetails = 'section-details'
     const detailsTitle = 'details-title'
 
+    console.log(description)
+
     return (
         <div className='form-body'>
             {/* {errors.map(error => (
