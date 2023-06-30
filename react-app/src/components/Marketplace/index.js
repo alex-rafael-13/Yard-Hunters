@@ -13,6 +13,8 @@ export default function Marketplace(){
         dispatch(retrieveAllProducts()).then(() => setLoaded(true))
     }, [dispatch])
 
+    localStorage.removeItem('preFilledProduct')
+
     return (
         <div className="product-list">
             {loaded &&

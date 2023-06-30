@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from app.models import db, Product, Category, Product_Condition, Product_Image
 from flask_login import login_required, current_user
-from app.forms import ProductForm, ProductImageForm
+from app.forms import ProductForm, ProductImageForm, UpdateProductForm
 from .AWS_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
 
 
@@ -118,9 +118,8 @@ def manage_product(product_id):
     EDITING PRODUCT
     '''
     if request.method == 'PUT':
-        form = ProductForm()
+        form = UpdateProductForm()
         form['csrf_token'].data = request.cookies['csrf_token']
-        print('\n\n\n','in here')
         if form.validate_on_submit():
             product.name = form.data['name']
             product.price = form.data['price']
