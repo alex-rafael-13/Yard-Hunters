@@ -14,7 +14,7 @@ export default function CreateProduct() {
     const [event, setEvent] = useState(0)
     const [condition, setCondition] = useState('')
     const [category, setCategory] = useState('')
-    const [previewImage, setPreviewImage] = useState('')
+    const [previewImage, setPreviewImage] = useState(null)
     const [errors, setErrors] = useState({})
     const userEvents = useSelector(state => state.event.userEvents)
     const categories = useSelector(state => state.categories.categories)
@@ -57,11 +57,11 @@ export default function CreateProduct() {
     const detailsTitle = 'details-title'
     const labelTitle = 'label-title'
     const errMessage = 'error-message'
-    console.log(event)
+    console.log(previewImage)
     return (
         <div className="form-body">
             <h1>Create New Product</h1>
-            <form className="product-form" onSubmit={handleSubmit}>
+            <form className="product-form" onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className={sectionDetails}>
                     <div className={detailsTitle}>Product Details</div>
                     <div>What are you selling? What category best describes the product? What is its condition?</div>
@@ -185,8 +185,7 @@ export default function CreateProduct() {
                     <input
                         type="file"
                         accept="image/*"
-                        value={previewImage}
-                        onChange={e => setPreviewImage(e.target.value)}
+                        onChange={e => setPreviewImage(e.target.files[0])}
                     />
                 </label>
                 <hr></hr>

@@ -63,7 +63,7 @@ export default function CreateEvent() {
     const sectionDetails = 'section-details'
     const detailsTitle = 'details-title'
 
-    console.log(description)
+    console.log(image)
 
     return (
         <div className='form-body'>
@@ -71,7 +71,7 @@ export default function CreateEvent() {
                 <div>{Object.values(error)}</div>
             ))} */}
             <h1>Create Event</h1>
-            <form className='event-form' onSubmit={onSubmit} enctype="multipart/form-data">
+            <form className='event-form' onSubmit={onSubmit} encType="multipart/form-data">
                 <div className={sectionDetails}>
                     <div className={detailsTitle}>Event Details</div>
                     <div>Name your event next to giving a short description of what your event is about. Don't forget to include what type of event you are hosting plus an image if you desire!</div>
@@ -128,7 +128,6 @@ export default function CreateEvent() {
                             {errors.preview_image && <div className={errMessage}>{errors.preview_image}</div>}
                         </div>
                         <input
-                            placeholder='(Optional)'
                             type='file'
                             accept='image/*'
                             onChange={e => setImage(e.target.files[0])}
