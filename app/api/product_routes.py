@@ -1,7 +1,9 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from app.models import db, Product, Category, Product_Condition, Product_Image
 from flask_login import login_required, current_user
 from app.forms import ProductForm
+from .AWS_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
+
 
 product_routes = Blueprint('products', __name__)
 
@@ -21,9 +23,9 @@ def products_list():
 
     #err handling
     if not products:
-       return {
-           'err': 'Marketplace Cannot Be Reached at This Moment'
-       }, 404
+        return {
+            'err': 'Marketplace Cannot Be Reached at This Moment'
+        }, 404
     
     return [product.list_to_dict() for product in products]
 
@@ -35,9 +37,9 @@ def single_product(product_id):
         .filter(Product.id == product_id).first()
     
     if not product:
-       return {
-           'err': 'Product Not Found'
-       }, 404
+        return {
+            'err': 'Product Not Found'
+        }, 404
     
     return product.single_to_dict()
 
@@ -59,12 +61,24 @@ def user_products():
 @login_required
 def new_product():
     form = ProductForm()
-    data = request.get_json()
-    preview_image = data['preview_image']
-    print(preview_image)
+
+
 
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        '''Uploading image to AWS'''
+        preview_image = form.data['preview_image']
+            
+        #Changing name of file
+        preview_image.filename = get_unique_filename(preview_image.filename)
+        
+        #uploading image to AWS
+        uploaded_preview = upload_file_to_s3(preview_image)
+
+        #Checking for errors when uploading to AWS
+        if 'url' not in uploaded_preview:
+            return jsonify({"error": "Error uploading file to AWS"}, 401)
+    
         product = Product(
             name = form.data['name'],
             owner_id = current_user.id,
@@ -79,7 +93,7 @@ def new_product():
         db.session.commit()
         image = Product_Image(
             product_id = product.id,
-            image_url = preview_image,
+            image_url = uploaded_preview['url'],
             preview = True
         )
         db.session.add(image)
@@ -98,9 +112,9 @@ def manage_product(product_id):
     print('past here')
     
     if not product:
-       return {
-           'err': 'Unauthorized'
-       }, 401
+        return {
+            'err': 'Unauthorized'
+        }, 401
     
     '''
     EDITING PRODUCT
