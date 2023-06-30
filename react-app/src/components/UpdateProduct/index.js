@@ -56,7 +56,6 @@ export default function UpdateProduct() {
             event_id: event,
             condition_id: condition,
             category_id: category,
-            preview_image: 'none'
         } 
 
         console.log(updatedProduct)
