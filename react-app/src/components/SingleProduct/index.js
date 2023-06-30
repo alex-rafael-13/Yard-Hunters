@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom"
 import { retrieveProduct } from "../../store/product"
 import OpenModalButton from "../OpenModalButton"
 import DeleteProduct from "./DeleteProduct"
+import UpdatePreviewImage from "./updatePreviewImage"
 
 export default function SingleProduct() {
     const { product_id } = useParams()
@@ -36,6 +37,11 @@ export default function SingleProduct() {
                     <OpenModalButton
                         buttonText='Delete Product'
                         modalComponent={<DeleteProduct />}
+                        product={product}
+                    />
+                    <OpenModalButton
+                        buttonText='Update Preview Image'
+                        modalComponent={<UpdatePreviewImage />}
                         product={product}
                     />
                     <button onClick={() => { alert('Feature Coming Soon!') }}>Mark as Sold</button>
