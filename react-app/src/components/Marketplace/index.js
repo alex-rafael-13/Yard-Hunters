@@ -16,14 +16,18 @@ export default function Marketplace(){
     localStorage.removeItem('preFilledProduct')
 
     return (
-        <div className="product-list">
-            {loaded &&
-            <>
-            {products.map(product => (
-                <ProductCard product={product} key={product.id}/>
-            ))}
-            </>
-            }
-        </div>
+        <>
+        {loaded && 
+            <div className="product-list">
+                {loaded &&
+                <>
+                {products.map(product => (
+                    <ProductCard product={product} key={product.id}/>
+                ))}
+                </>
+                }
+            </div>
+        }
+        </>
     )
 }
