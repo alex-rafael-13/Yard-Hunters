@@ -14,14 +14,6 @@ export default function UpdateProduct() {
     const [loaded, setLoaded] = useState(false)
     const dispatch = useDispatch()
 
-    useEffect(async () => {
-        dispatch(retrieveUserEvents())
-        dispatch(retrieveAllConditions())
-        dispatch(retrieveAllCategories())
-        dispatch(retrieveProduct(product_id))
-            .then(() => setLoaded(true))
-    }, [dispatch])
-
     const [name, setName] = useState(product.name)
     const [price, setPrice] = useState(product.price)
     const [description, setDescription] = useState(product.description)
@@ -32,6 +24,29 @@ export default function UpdateProduct() {
     const history = useHistory()
     const {product_id} = useParams()
 
+    useEffect(async () => {
+        dispatch(retrieveUserEvents())
+        dispatch(retrieveAllConditions())
+        dispatch(retrieveAllCategories())
+        const storedProduct = localStorage.getItem('preFilledProduct')
+        if(storedProduct){
+            const parsedProduct = JSON.parse(storedProduct)
+            setName(parsedProduct.name)
+            setPrice(parsedProduct.price)
+            setEvent(parsedProduct.event.id ? (parsedProduct.event.id): (0))
+            setCondition(parsedProduct.condition.id)
+            setCategory(parsedProduct.category.id)
+            setDescription(parsedProduct.description)
+            setLoaded(true)
+        }else{
+            dispatch(retrieveProduct(product_id))
+            setCondition(product.condition.id)
+            setCategory(product.category.id)
+            setLoaded(true)
+            localStorage.setItem('preFilledProduct', JSON.stringify(product))
+        }
+    }, [dispatch])
+
     const handleSubmit = e => {
         e.preventDefault()
         const updatedProduct = {
@@ -41,7 +56,6 @@ export default function UpdateProduct() {
             event_id: event,
             condition_id: condition,
             category_id: category,
-            preview_image: 'none'
         } 
 
         console.log(updatedProduct)
@@ -66,7 +80,7 @@ export default function UpdateProduct() {
         {loaded && 
         
         <div>
-            <h1>Update Product:</h1>
+            <h1>Updates Product:</h1>
             <form className="product-form" onSubmit={handleSubmit}>
                 <label>
                     <div className={labelTitle}>
