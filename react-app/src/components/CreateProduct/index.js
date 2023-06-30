@@ -14,7 +14,7 @@ export default function CreateProduct() {
     const [event, setEvent] = useState(0)
     const [condition, setCondition] = useState('')
     const [category, setCategory] = useState('')
-    const [previewImage, setPreviewImage] = useState('')
+    const [previewImage, setPreviewImage] = useState(null)
     const [errors, setErrors] = useState({})
     const userEvents = useSelector(state => state.event.userEvents)
     const categories = useSelector(state => state.categories.categories)
@@ -31,17 +31,16 @@ export default function CreateProduct() {
 
     const handleSubmit = e => {
         e.preventDefault()
-        const newProduct = {
-            name,
-            price,
-            description,
-            event_id: event,
-            condition_id: condition,
-            category_id: category,
-            preview_image: previewImage
-        } 
+        const formData = new FormData()
+        formData.append('name', name)
+        formData.append('price', price)
+        formData.append('description', description)
+        formData.append('event_id', event)
+        formData.append('condition_id', condition)
+        formData.append('category_id', category)
+        formData.append('preview_image', previewImage)
 
-        return dispatch(createProduct(newProduct))
+        return dispatch(createProduct(formData))
             .then(async product => {
                 console.log(product)
                 if (product.id) {
@@ -58,11 +57,11 @@ export default function CreateProduct() {
     const detailsTitle = 'details-title'
     const labelTitle = 'label-title'
     const errMessage = 'error-message'
-    console.log(event)
+    console.log(previewImage)
     return (
         <div className="form-body">
             <h1>Create New Product</h1>
-            <form className="product-form" onSubmit={handleSubmit}>
+            <form className="product-form" onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className={sectionDetails}>
                     <div className={detailsTitle}>Product Details</div>
                     <div>What are you selling? What category best describes the product? What is its condition?</div>
@@ -184,9 +183,9 @@ export default function CreateProduct() {
                         {errors.preview_image && <div className={errMessage}>{errors.preview_image}</div>}
                     </div>
                     <input
-                        type="text"
-                        value={previewImage}
-                        onChange={e => setPreviewImage(e.target.value)}
+                        type="file"
+                        accept="image/*"
+                        onChange={e => setPreviewImage(e.target.files[0])}
                     />
                 </label>
                 <hr></hr>
