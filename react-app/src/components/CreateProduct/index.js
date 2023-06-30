@@ -31,17 +31,16 @@ export default function CreateProduct() {
 
     const handleSubmit = e => {
         e.preventDefault()
-        const newProduct = {
-            name,
-            price,
-            description,
-            event_id: event,
-            condition_id: condition,
-            category_id: category,
-            preview_image: previewImage
-        } 
+        const formData = new FormData()
+        formData.append('name', name)
+        formData.append('price', price)
+        formData.append('description', description)
+        formData.append('event_id', event)
+        formData.append('condition_id', condition)
+        formData.append('category_id', category)
+        formData.append('preview_image', previewImage)
 
-        return dispatch(createProduct(newProduct))
+        return dispatch(createProduct(formData))
             .then(async product => {
                 console.log(product)
                 if (product.id) {
@@ -184,7 +183,8 @@ export default function CreateProduct() {
                         {errors.preview_image && <div className={errMessage}>{errors.preview_image}</div>}
                     </div>
                     <input
-                        type="text"
+                        type="file"
+                        accept="image/*"
                         value={previewImage}
                         onChange={e => setPreviewImage(e.target.value)}
                     />
