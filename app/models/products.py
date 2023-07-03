@@ -72,7 +72,7 @@ class Product(db.Model):
             'id': self.id,
             'name': self.name,
             'seller': self.seller.dict_for_event(),
-            'images': self.all_images(),
+            'image_url': self.preview_image(),
             'price': self.price,
             'event': self.check_event(),
             'description': self.description,
