@@ -7,6 +7,7 @@ from .conditions import seed_conditions, undo_conditions
 from .products import seed_products, undo_products
 from .product_images import seed_product_images, undo_product_images
 from .event_images import seed_event_images, undo_event_images
+from .event_comments import seed_event_comments, undo_event_comments
 
 from app.models.db import db, environment, SCHEMA
 
@@ -31,6 +32,7 @@ def seed():
         undo_products()
         undo_categories()
         undo_conditions()
+        undo_event_comments()
     seed_users()
     seed_event_types()
     seed_events()
@@ -39,6 +41,7 @@ def seed():
     seed_conditions()
     seed_products()
     seed_product_images()
+    seed_event_comments()
     # Add other seed functions here
 
 
@@ -53,4 +56,5 @@ def undo():
     undo_products()
     undo_categories()
     undo_conditions()
+    undo_event_comments()
     # Add other undo functions here

@@ -4,7 +4,7 @@ from sqlalchemy import Column, ForeignKey
 from sqlalchemy.types import String, Integer, Date, Time 
 from datetime import date, datetime
 
-class Event_Comments(db.Model):
+class Event_Comment(db.Model):
     __tablename__ = 'event_comments'
 
     if environment == "production":
