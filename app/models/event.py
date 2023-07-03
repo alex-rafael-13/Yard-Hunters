@@ -30,7 +30,7 @@ class Event(db.Model):
     type = db.relationship('Event_Type', back_populates='events')
     products = db.relationship('Product', back_populates='event')
     event_images = db.relationship('Event_Image', back_populates='events', cascade='all, delete-orphan')
-
+    comments = db.relationship('Event_Comment', back_populates='event', cascade='all, delete-orphan')
 
     #Instance Methods
     '''Check date of event'''
@@ -79,8 +79,8 @@ class Event(db.Model):
             'event_type': self.type.type,
             'event_type_id': self.type.id,
             'date': self.check_date(),
-            'start_time': self.start_time.strftime('%I:%M %p'),
-            'end_time': self.end_time.strftime('%I:%M %p'),
+            'start_time': self.start_time.strftime('%I:%M %p').lstrip('0'),
+            'end_time': self.end_time.strftime('%I:%M %p').lstrip('0'),
             'product_list': self.check_products(),
             'image_url': self.preview_image()
         }
