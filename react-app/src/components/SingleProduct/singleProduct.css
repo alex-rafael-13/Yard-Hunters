@@ -1,0 +1,14 @@
+.title-price{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-price > .user-cont{
+    font-size: 20px;
+}
+
+.description-title{
+    font-weight: bold;
+}
