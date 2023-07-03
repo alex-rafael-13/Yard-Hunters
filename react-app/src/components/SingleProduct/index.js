@@ -5,6 +5,7 @@ import { retrieveProduct } from "../../store/product"
 import OpenModalButton from "../OpenModalButton"
 import DeleteProduct from "./DeleteProduct"
 import UpdatePreviewImage from "./updatePreviewImage"
+import './singleProduct.css'
 
 export default function SingleProduct() {
     const { product_id } = useParams()
@@ -33,8 +34,7 @@ export default function SingleProduct() {
     return (
         <>
         {loaded && 
-        <div>
-            <h1>{product.name}</h1>
+        <div className="event-page">
             {user && user?.id === product.seller?.id &&
                 <div>
                     <button onClick={updateButton}>Edit Product</button>
@@ -50,19 +50,24 @@ export default function SingleProduct() {
                     />
                     <button onClick={() => { alert('Feature Coming Soon!') }}>Mark as Sold</button>
                 </div>}
-            <div>
-                {product.images?.length ? (
-                    <>
-                        {product.images?.map(image => (
-                            <img key={image.id} src={image.image_url} />
-                        ))}
-                    </>
+            <div className="event-image">
+                {product.image_url ? (
+                <img src={product.image_url} />
                 ) : (<img src={preview_image} />)}
             </div>
-            <div>{product.condition?.condition}</div>
-            <div>{product.category?.category}</div>
-            <div>$ {product.price}</div>
+            <div className="title-user-cont">
+                <div className="title-price">
+                    <div className="event-title">{product.name}</div>
+                    <div className="user-cont">${product.price}</div>
+                </div>
+                <div>{product.category?.category}</div>
+            </div>
+            <hr></hr>
+            <div className="description-title">Description:</div>
             <div>{product.description}</div>
+            <hr></hr>
+            <div className="description-title">Condition:</div> 
+            <div>{product.condition?.condition}</div>
         </div>
 
         }
