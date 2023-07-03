@@ -21,6 +21,7 @@ class User(db.Model, UserMixin):
     #Relationships
     events = db.relationship('Event', back_populates='host')
     products = db.relationship('Product', back_populates='seller')
+    event_comments = db.relationship('Event_Comment', back_populates='user', cascade='all, delete-orphan')
 
     @property
     def password(self):

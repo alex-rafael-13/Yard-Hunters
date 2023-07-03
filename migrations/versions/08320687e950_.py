@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: c39a20600ddf
+Revision ID: 08320687e950
 Revises: 
-Create Date: 2023-06-15 01:34:57.168858
+Create Date: 2023-07-03 15:59:29.069144
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'c39a20600ddf'
+revision = '08320687e950'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -67,6 +67,17 @@ def upgrade():
     sa.ForeignKeyConstraint(['host_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('event_comments',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('event_id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('comment_body', sa.String(length=100), nullable=False),
+    sa.Column('date_created', sa.Date(), nullable=True),
+    sa.Column('time_created', sa.Time(), nullable=True),
+    sa.ForeignKeyConstraint(['event_id'], ['events.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     op.create_table('event_images',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('event_id', sa.Integer(), nullable=False),
@@ -98,12 +109,10 @@ def upgrade():
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    # ### end Alembic commands ###
 
-    
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-
-    # ### end Alembic commands ###
 
 
 def downgrade():
@@ -111,6 +120,7 @@ def downgrade():
     op.drop_table('product_images')
     op.drop_table('products')
     op.drop_table('event_images')
+    op.drop_table('event_comments')
     op.drop_table('events')
     op.drop_table('users')
     op.drop_table('product_conditions')
