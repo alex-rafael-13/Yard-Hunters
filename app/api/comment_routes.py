@@ -67,4 +67,37 @@ def create_comment(event_id):
     
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
+@comment_routes.route('/<int:comment_id>/manage', methods=['PUT', 'DELETE'])
+@login_required
+def edit_comment(comment_id):
+
+    comment = Event_Comment.query.filter(Event_Comment.id==comment_id, Event_Comment.user_id==current_user.id).first()
+
+    if not comment:
+        return {
+            'err': 'Comment Cannot Be Reached at This Moment'
+        }, 404
+    
+    if request.method == 'PUT':
+        form = CommentForm()
+        # Get the csrf_token from the request cookie and put it into the
+        # form manually to validate_on_submit can be used
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            comment.comment_body = form.data['comment_body']
+
+            db.session.commit()
+
+            return comment.to_dict()
+        
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+    
+    if request.method == 'DELETE':
+        db.session.delete(comment)
+        db.session.commit()
+
+        return {
+            "message": 'Successfully Deleted'
+        }
+
 
