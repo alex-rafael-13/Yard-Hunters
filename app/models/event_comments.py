@@ -22,4 +22,14 @@ class Event_Comment(db.Model):
     user = db.relationship('User', back_populates='event_comments')
     event = db.relationship('Event', back_populates='comments')
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "event_id": self.event_id,
+            "user_id": self.user_id,
+            "comment_body": self.comment_body,
+            "date_created": self.date_created.strftime('%b %d, %Y'),
+            "time_created": self.time_created.strftime('%I:%M %p').lstrip('0')
+        }
+
 
