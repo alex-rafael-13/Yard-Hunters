@@ -29,3 +29,18 @@ def comment_list():
     
     return [comment.to_dict() for comment in comments]
 
+@comment_routes.route('/events/<int:event_id>')
+def single_event_comments(event_id):
+    comments = Event_Comment.query.filter(Event_Comment.event_id == event_id).all()
+
+    if not comments:
+        return
+    return [comment.to_dict() for comment in comments]
+
+@comment_routes.route('/user/<int:user_id>')
+def user_comments(user_id):
+    comments = Event_Comment.query.filter(Event_Comment.user_id == user_id).all()
+
+    if not comments:
+        return
+    return [comment.to_dict() for comment in comments]
