@@ -64,6 +64,20 @@ class Event(db.Model):
         if preview_image:
             return preview_image.to_dict()['image_url']
         return None
+    
+    '''Get the num of comments'''
+    def comment_num(self):
+        comments = self.comments
+        return len(comments)
+    
+    '''Get all comments'''
+    def get_comments(self):
+        if self.comments == None:
+            return None
+        else:
+            comments = self.comments
+            return [comment.to_dict() for comment in comments]
+
 
     '''turns it to a dict'''
     def to_dict(self):
@@ -82,7 +96,9 @@ class Event(db.Model):
             'start_time': self.start_time.strftime('%I:%M %p').lstrip('0'),
             'end_time': self.end_time.strftime('%I:%M %p').lstrip('0'),
             'product_list': self.check_products(),
-            'image_url': self.preview_image()
+            'image_url': self.preview_image(),
+            'comment_amount': self.comment_num(),
+            'comments': self.get_comments()
         }
     
     def raw_dict(self):

@@ -25,11 +25,13 @@ class Event_Comment(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "event_id": self.event_id,
-            "user_id": self.user_id,
+            # "event": self.event.dict_for_products(),
+            "user": self.user.dict_for_event(),
             "comment_body": self.comment_body,
             "date_created": self.date_created.strftime('%b %d, %Y'),
             "time_created": self.time_created.strftime('%I:%M %p').lstrip('0')
         }
+    
+
 
 
