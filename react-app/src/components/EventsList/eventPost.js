@@ -26,7 +26,10 @@ export default function EventPost({ event }) {
                             from {event.start_time} to {event.end_time}
                         </div>
                     </div>
-                    <div>{event.event_type}</div>
+                    <div className="type-comment-cont">
+                        <div>{event.event_type}</div>
+                        <div className="comment">{event.comment_amount > 0 ? (event.comment_amount === 1 ?(<>{event.comment_amount} Comment</>):(<>{event.comment_amount} Comments</>)):(<>Be the First to Comment!</>)}</div>
+                    </div>
                 </div>
             </div>
         </NavLink>
