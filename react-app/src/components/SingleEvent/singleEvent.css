@@ -5,7 +5,7 @@
 
 .event-image{
     width: 100%;
-    height: 400px;
+    height: 275px;
     position: relative;
 }
 
@@ -73,3 +73,39 @@
     height: 100%;
 }
 
+.comment-cont{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.comment-title{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.comment-card{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.comment-user-date{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.comment-buttons > button{
+    width: 65px;
+}
+
+.commentor{
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.comment-date{
+    color: grey;
+    font-size: 12px;
+}

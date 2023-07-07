@@ -7,6 +7,7 @@ import OpenModalButton from "../OpenModalButton"
 import DeleteEvent from "./deleteEvent"
 import './singleEvent.css'
 import UpdatePreviewImage from "./updateImagePreview"
+import CommentBody from "./commentBody"
 
 export default function EventPage() {
     const [isLoaded, setIsLoaded] = useState(false)
@@ -79,6 +80,11 @@ export default function EventPage() {
                             {event.description}
                         </div>
                         <hr />
+                        <div className="comment-cont">
+                            <div className="comment-title">Comments:</div>
+                            {event.comment_amount > 0 ? (<CommentBody comments={event.comments}/>
+                            ):('no comments')}
+                        </div>
                     </div>
                     <div className="side-info">
                         <h2>Products Being Sold:</h2>
