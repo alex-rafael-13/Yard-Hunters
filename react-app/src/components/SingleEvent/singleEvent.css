@@ -109,3 +109,11 @@
     color: grey;
     font-size: 12px;
 }
+
+.comment-form{
+    display: flex;
+    flex-direction: column;
+}
+.comment-form > button{
+    width: fit-content;
+}
