@@ -8,6 +8,7 @@ import DeleteEvent from "./deleteEvent"
 import './singleEvent.css'
 import UpdatePreviewImage from "./updateImagePreview"
 import CommentBody from "./commentBody"
+import AddComment from "./addComment"
 
 export default function EventPage() {
     const [isLoaded, setIsLoaded] = useState(false)
@@ -81,9 +82,16 @@ export default function EventPage() {
                         </div>
                         <hr />
                         <div className="comment-cont">
-                            <div className="comment-title">Comments:</div>
-                            {event.comment_amount > 0 ? (<CommentBody comments={event.comments}/>
-                            ):('no comments')}
+                            {event.comment_amount > 0 && (
+                            <>
+                                <div className="comment-title">Comments:</div>
+                                <CommentBody comments={event.comments}/>
+                                <hr></hr>
+                            </>
+                            )}
+                        <div className="add-comment">
+                            <AddComment eventId={event.id}/>
+                        </div>
                         </div>
                     </div>
                     <div className="side-info">
