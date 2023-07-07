@@ -7,13 +7,14 @@ import OpenModalButton from "../OpenModalButton"
 import DeleteEvent from "./deleteEvent"
 import './singleEvent.css'
 import UpdatePreviewImage from "./updateImagePreview"
+import CommentBody from "./commentBody"
 
-export default function EventPage(){
+export default function EventPage() {
     const [isLoaded, setIsLoaded] = useState(false)
     const dispatch = useDispatch()
     const event = useSelector(state => state.event.event)
     const user = useSelector(state => state.session.user)
-    const {event_id} = useParams()
+    const { event_id } = useParams()
     const history = useHistory()
 
 
@@ -30,74 +31,83 @@ export default function EventPage(){
     }
 
     let imgUrl
-    if(event.image_url){
+    if (event.image_url) {
         imgUrl = event.image_url
-    } else{
+    } else {
         imgUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTqcztNP3vT5LmB5cYoi3SbUBcadk7vtkqPw&usqp=CAU'
     }
 
-    if(!event) return
+    if (!event) return
 
-    return(
+    return (
         <>
-            {isLoaded && (<div className="event-page">
-                {user && user?.id === event?.host?.id && 
-                    <div className='buttons'>
-                        <button className="update-event" onClick={updateButton}>Update</button>
-                        <OpenModalButton
-                            buttonText='Cancel Event'
-                            modalComponent={<DeleteEvent />}
-                            event={event}
-                        />
-                    </div>
-                }
-                <div className="event-image">
-                    <img src={imgUrl} alt='Event Image'/>
-                    {user && user?.id === event?.host?.id &&
-                        <OpenModalButton
-                            buttonText='Update Preview Image'
-                            modalComponent={<UpdatePreviewImage />}
-                            event={event}
-                            className='update-image-but'
-                        />
-                    }
-                </div>
-                <div className="title-user-cont">
-                    <div className="event-title">{event.name}</div>
-                    <div className="user-cont">
-                        <div>
-                            Hosted By {event.host?.username}
+            {isLoaded && (
+                <>
+                    <div className="event-page">
+                        {user && user?.id === event?.host?.id &&
+                            <div className='buttons'>
+                                <button className="update-event" onClick={updateButton}>Update</button>
+                                <OpenModalButton
+                                    buttonText='Cancel Event'
+                                    modalComponent={<DeleteEvent />}
+                                    event={event}
+                                />
+                            </div>
+                        }
+                        <div className="event-image">
+                            <img src={imgUrl} alt='Event Image' />
+                            {user && user?.id === event?.host?.id &&
+                                <OpenModalButton
+                                    buttonText='Update Preview Image'
+                                    modalComponent={<UpdatePreviewImage />}
+                                    event={event}
+                                    className='update-image-but'
+                                />
+                            }
                         </div>
-                        {/* <div>
-                            User Profile IMG
-                        </div> */}
+                        <div className="title-user-cont">
+                            <div className="event-title">{event.name}</div>
+                            <div className="user-cont">
+                                <div>
+                                    Hosted By {event.host?.username}
+                                </div>
+                                {/* <div>
+                                User Profile IMG
+                            </div> */}
+                            </div>
+                        </div>
+                        <div className="description-cont">
+                            {event.description}
+                        </div>
+                        <hr />
+                        <div className="comment-cont">
+                            <div className="comment-title">Comments:</div>
+                            {event.comment_amount > 0 ? (<CommentBody comments={event.comments}/>
+                            ):('no comments')}
+                        </div>
                     </div>
-                </div>
-                <div className="description-cont">
-                    {event.description}
-                </div>
-                <hr/>
-                <div>
-                    <h2>Products Being Sold:</h2>
-                    <div className="product-list">
-                        {event.product_list?.length ? (
-                            <>
-                            {event.product_list?.map(product => (
-                                <NavLink className='product-a' key={product.id} to={`/products/${product.id}`}>
-                                    <div className="product-card">
-                                        <div>{product.name}</div>
-                                        <div className="product-img-cont">
-                                            <img src={product.preview_image}/>
-                                        </div>
-                                        <div>$ {product.price}</div>
-                                    </div>
-                                </NavLink>
-                            ))}    
-                            </>
-                        ):(<h3>No Products Have Yet Been Listed</h3>)}
+                    <div className="side-info">
+                        <h2>Products Being Sold:</h2>
+                        <div className="product-list">
+                            {event.product_list?.length ? (
+                                <>
+                                    {event.product_list?.map(product => (
+                                        <NavLink className='product-a' key={product.id} to={`/products/${product.id}`}>
+                                            <div className="product-card">
+                                                <div>{product.name}</div>
+                                                <div className="product-img-cont">
+                                                    <img src={product.preview_image} />
+                                                </div>
+                                                <div>$ {product.price}</div>
+                                            </div>
+                                        </NavLink>
+                                    ))}
+                                </>
+                            ) : (<h3>No Products Have Yet Been Listed</h3>)}
+                        </div>
                     </div>
-                </div>       
-            </div>)}
+                </>
+            )}
         </>
     )
 }

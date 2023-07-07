@@ -1,4 +1,4 @@
-.product-list{
+.market-list{
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -6,11 +6,11 @@
     gap: 10px;
 }
 
-.product-a{
+.market-a{
     width: 25%;
 }
 
-.product-card{
+.market-card{
     width: 100%;
     padding: 10px;
 }

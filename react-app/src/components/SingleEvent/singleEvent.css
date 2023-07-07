@@ -1,12 +1,11 @@
 .event-page{
-    flex: 75%;
+    flex: 70%;
     gap: 5px;
-    padding-right: 25%;
 }
 
 .event-image{
     width: 100%;
-    height: 400px;
+    height: 275px;
     position: relative;
 }
 
@@ -31,21 +30,36 @@
     padding-top: 20px;
 }
 
+.side-info{
+    flex: 30%;
+    display: flex;
+    flex-direction: column;
+    margin-right: 5px;
+}
+
+
 .product-list{
     width: 100%;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
     gap: 10px;
+    overflow: auto;
+    max-height: 700px;
 }
 
 .product-a{
-    width: 25%;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-a:hover{
+    transform: scale(1.009);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .product-card{
     width: 100%;
-    padding: 10px;
 }
 
 .product-img-cont{
@@ -59,4 +73,39 @@
     height: 100%;
 }
 
+.comment-cont{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
+.comment-title{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.comment-card{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.comment-user-date{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.comment-buttons > button{
+    width: 65px;
+}
+
+.commentor{
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.comment-date{
+    color: grey;
+    font-size: 12px;
+}

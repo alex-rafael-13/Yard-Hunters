@@ -39,3 +39,12 @@ a{
     flex-direction: column;
     gap: 7px;
 }
+
+.type-comment-cont {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.comment{
+    color: grey;
+}
