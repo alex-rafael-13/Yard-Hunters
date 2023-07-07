@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import DeleteComment from "./deleteComment"
 import OpenModalButton from "../OpenModalButton"
+import EditComment from "./editComment"
 
 
 export default function CommentBody({ comments }) {
@@ -26,7 +27,10 @@ export default function CommentBody({ comments }) {
                             <div>{comment.comment_body}</div>
                             {user.id === comment.user.id && !editing &&
                                 <div className="comment-buttons">
-                                    <button onClick={() => setEditing(true)}>Edit</button>
+                                    <OpenModalButton
+                                        buttonText='Edit'
+                                        modalComponent={<EditComment comment={comment}/>}
+                                    />
                                     <OpenModalButton
                                         buttonText='Delete'
                                         modalComponent={<DeleteComment commentId={comment.id}/>}

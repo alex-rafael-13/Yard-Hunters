@@ -194,6 +194,23 @@ export const createComment = (eventId, comment) => async dispatch => {
     return data
 }
 
+export const updateComment = (commentId, comment, eventId) => async dispatch => {
+    const response = await fetch(`/api/comments/${commentId}/manage`,{
+        method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(comment)
+    })
+
+    if(response.ok){
+        dispatch(retrieveEventById(eventId))
+    }
+    const data = await response.json()
+    
+    return data
+} 
+
 export const deleteComment = (commentId, eventId) => async dispatch => {
     const response = await fetch(`/api/comments/${commentId}/manage`, {
         method: 'DELETE',
