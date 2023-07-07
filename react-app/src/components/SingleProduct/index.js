@@ -34,42 +34,44 @@ export default function SingleProduct() {
     return (
         <>
         {loaded && 
-        <div className="event-page">
-            {user && user?.id === product.seller?.id &&
-                <div>
-                    <button onClick={updateButton}>Edit Product</button>
-                    <OpenModalButton
-                        buttonText='Delete Product'
-                        modalComponent={<DeleteProduct />}
-                        product={product}
-                    />
-                    <OpenModalButton
-                        buttonText='Update Preview Image'
-                        modalComponent={<UpdatePreviewImage />}
-                        product={product}
-                    />
-                    <button onClick={() => { alert('Feature Coming Soon!') }}>Mark as Sold</button>
-                </div>}
-            <div className="event-image">
-                {product.image_url ? (
-                <img src={product.image_url} />
-                ) : (<img src={preview_image} />)}
-            </div>
-            <div className="title-user-cont">
-                <div className="title-price">
-                    <div className="event-title">{product.name}</div>
-                    <div className="user-cont">${product.price}</div>
+        <>
+            <div className="event-page">
+                {user && user?.id === product.seller?.id &&
+                    <div>
+                        <button onClick={updateButton}>Edit Product</button>
+                        <OpenModalButton
+                            buttonText='Delete Product'
+                            modalComponent={<DeleteProduct />}
+                            product={product}
+                        />
+                        <OpenModalButton
+                            buttonText='Update Preview Image'
+                            modalComponent={<UpdatePreviewImage />}
+                            product={product}
+                        />
+                        <button onClick={() => { alert('Feature Coming Soon!') }}>Mark as Sold</button>
+                    </div>}
+                <div className="event-image">
+                    {product.image_url ? (
+                    <img src={product.image_url} />
+                    ) : (<img src={preview_image} />)}
                 </div>
-                <div>{product.category?.category}</div>
+                <div className="title-user-cont">
+                    <div className="title-price">
+                        <div className="event-title">{product.name}</div>
+                        <div className="user-cont">${product.price}</div>
+                    </div>
+                    <div>{product.category?.category}</div>
+                </div>
+                <hr></hr>
+                <div className="description-title">Description:</div>
+                <div>{product.description}</div>
+                <hr></hr>
+                <div className="description-title">Condition:</div> 
+                <div>{product.condition?.condition}</div>
             </div>
-            <hr></hr>
-            <div className="description-title">Description:</div>
-            <div>{product.description}</div>
-            <hr></hr>
-            <div className="description-title">Condition:</div> 
-            <div>{product.condition?.condition}</div>
-        </div>
-
+            <div className="side-info">{/* Might add comment section or event info on th side not sure yet*/}</div>
+        </>
         }
         </>
     )

@@ -18,7 +18,7 @@ export default function Marketplace(){
     return (
         <>
         {loaded && 
-            <div className="product-list">
+            <div className="market-list">
                 {loaded &&
                 <>
                 {products.map(product => (

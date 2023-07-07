@@ -6,9 +6,11 @@ body{
 .body{
     display: flex;
     width: 100%;
+    gap: 5px;
+    margin-top: 5px;
 }
 .side-nav{
-    width: 30%;
+    width: 25%;
     min-width: 280px;
 }
 
