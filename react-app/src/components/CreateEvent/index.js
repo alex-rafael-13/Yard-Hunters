@@ -31,7 +31,6 @@ export default function CreateEvent() {
     const onSubmit = e => {
         e.preventDefault()
 
-        console.log(typeof type)
         const event = {
             name,
             description,
@@ -99,7 +98,7 @@ export default function CreateEvent() {
                         placeholder='Must be between 10 and 1000 characters long'
                         value={description}
                         onChange={e => setDescription(e.target.value)}
-                        className='event-input' cols='5'
+                        className='event-input'
                         rows='9'
                         col='5'
                     // required
