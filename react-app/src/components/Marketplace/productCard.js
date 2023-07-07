@@ -9,8 +9,8 @@ export default function ProductCard({ product }) {
     }
 
     return (
-        <NavLink className='product-a' exact to={`/products/${product.id}`}>
-            <div className="product-card">
+        <NavLink className='market-a' exact to={`/products/${product.id}`}>
+            <div className="market-card">
                 <div className="product-name">{product.name}</div>
                 <div className="product-img-cont">
                     <img className='preview-img' src={preview_image}></img>
