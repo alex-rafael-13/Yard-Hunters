@@ -194,6 +194,22 @@ export const createComment = (eventId, comment) => async dispatch => {
     return data
 }
 
+export const deleteComment = (commentId, eventId) => async dispatch => {
+    const response = await fetch(`/api/comments/${commentId}/manage`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type':'application/json'
+        }
+    });
+
+    if(response.ok){
+        dispatch(retrieveEventById(eventId))
+    }
+
+    const data = await response.json()
+    return data
+}
+
 
 /*****                      REDUCER                             */
 const initialState = {events:[], event:{}, userEvents: []}
