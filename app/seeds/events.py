@@ -7,7 +7,7 @@ def seed_events():
         name = 'Spring Cleaning Yard Sale',
         description ="""Hey everyone! I'm excited to announce that I'm having a yard sale this weekend as part of my spring cleaning efforts. I've been going through my closets, basement, and garage, and I've found all sorts of items that I no longer need or use. From clothes and shoes to kitchen gadgets and home decor, there's a little bit of everything.
             I'm really looking forward to this yard sale because not only will it help me declutter my home and make some extra cash, but it's also a great way to connect with my community and promote sustainability. Instead of throwing these items away, I'd much rather see them go to someone who will use and appreciate them.
-            So if you're in the neighborhood, come by and say hi! You might just find something you can't live without. And if you're not able to make it, feel free to spread the word to friends and family who might be interested. Thanks, and hope to see you there!""",
+            So if you're in the neighborhood, come by and say hi! And if you're not able to make it, feel free to spread the word to friends and family who might be interested. Thanks, and hope to see you there!""",
         host_id = 1,
         event_type_id = 1,
         address = '123 Random Address',
@@ -22,8 +22,7 @@ def seed_events():
         name = 'Summer Fun Fundraiser!',
         description ="""Summer camps can be a life-changing experience for kids, but unfortunately, not all families can afford to send their children to these programs. That's why we're hosting a fundraiser to help make summer camp accessible to as many kids as possible!
             Our fundraiser involves selling delicious ice cream treats, with all proceeds going towards sponsoring kids to attend summer camps. We have a wide variety of flavors and toppings to choose from, so whether you're in the mood for something classic like chocolate or something more adventurous like lavender honey, we've got you covered.
-            Not only will you be satisfying your sweet tooth, but you'll also be helping to provide a fun and enriching experience for local kids. Summer camp is a great way for kids to make new friends, learn new skills, and build confidence and independence.
-            So come on out and support our fundraiser! We'll be set up at the park every Saturday from 1pm to 4pm, and we'd love to see you there. Let's work together to make sure every child has the opportunity to experience the joys of summer camp!""",
+            Not only will you be satisfying your sweet tooth, but you'll also be helping to provide a fun and enriching experience for local kids. So come on out and support our fundraiser! Let's work together to make sure every child has the opportunity to experience the joys of summer camp!""",
         host_id = 2,
         event_type_id = 3,
         address = '123 Random Address',
