@@ -14,7 +14,7 @@ def seed_event_images():
     )
     food_stand = Event_Image(
         event_id = 3,
-        image_url = 'https://edit.org/img/blog/q8r-donation-flyer-template-editable-free.jpg',
+        image_url = 'https://static.vecteezy.com/system/resources/previews/000/098/626/original/vector-taco-truck.jpg',
         preview = True
     )
     block_party = Event_Image(
