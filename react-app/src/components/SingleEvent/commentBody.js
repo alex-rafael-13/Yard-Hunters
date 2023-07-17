@@ -25,7 +25,7 @@ export default function CommentBody({ comments }) {
                                 <div className="comment-date">{comment.date_created}</div>
                             </div>
                             <div>{comment.comment_body}</div>
-                            {user.id === comment.user.id && !editing &&
+                            { user && user.id === comment.user.id && !editing &&
                                 <div className="comment-buttons">
                                     <OpenModalButton
                                         buttonText='Edit'
