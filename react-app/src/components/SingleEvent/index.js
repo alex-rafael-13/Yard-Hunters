@@ -90,7 +90,7 @@ export default function EventPage() {
                             </>
                             )}
                         <div className="add-comment">
-                            <AddComment eventId={event.id}/>
+                            {user && <AddComment eventId={event.id}/>}
                         </div>
                         </div>
                     </div>
