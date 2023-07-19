@@ -90,6 +90,32 @@ def seed_product_images():
     ) 
     db.session.add(burritos)
 
+    mulitas = Product_Image(
+        product_id = 10,
+        image_url = 'http://yard-hunters.s3.amazonaws.com/9525f894c07f433aaf3a192f4f082fd4.jpeg',
+        preview = True
+    )
+    db.session.add(mulitas)
+    quesadillas = Product_Image(
+        product_id = 11,
+        image_url = 'http://yard-hunters.s3.amazonaws.com/bf4415a234f442128a34df739d198070.jpeg',
+        preview = True
+    )
+    db.session.add(quesadillas)
+    tortas = Product_Image(
+        product_id = 12,
+        image_url = 'http://yard-hunters.s3.amazonaws.com/08d4b01885c24580a14fc3603f60dcb0.jpeg',
+        preview = True
+    )
+    db.session.add(tortas)
+    aguas = Product_Image(
+        product_id = 13,
+        image_url = 'http://yard-hunters.s3.amazonaws.com/5ac374eb6c4c46f893785270186810b7.jpeg',
+        preview = True
+    )
+    db.session.add(aguas)
+
+
     db.session.commit()
 
 def undo_product_images():
