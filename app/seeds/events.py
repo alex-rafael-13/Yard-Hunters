@@ -12,7 +12,7 @@ def seed_events():
         city='Seattle',
         state='Washington',
         country='United States',
-        date= datetime.today() + timedelta(1),
+        date= datetime(2026, 5, 1),
         start_time= time(12,30),
         end_time= time(14, 30)
     )
@@ -25,7 +25,7 @@ def seed_events():
         city='San Francisco',
         state='California',
         country='United States',
-        date= datetime.today(),
+        date= datetime(2030, 1, 24),
         start_time= time(12,30),
         end_time= time(14, 30)
     )
@@ -38,7 +38,7 @@ def seed_events():
         city='New York',
         state='New York',
         country='United States',
-        date= datetime.today(),
+        date= datetime(2030, 7, 24),
         start_time= time(12,30),
         end_time= time(14, 30)
     )
@@ -51,7 +51,7 @@ def seed_events():
         city='New York',
         state='New York',
         country='United States',
-        date= datetime(2023, 6, 24),
+        date= datetime(2029, 6, 24),
         start_time= time(12,30),
         end_time= time(14, 30)
     )
@@ -64,14 +64,14 @@ def seed_events():
         city='New York',
         state='New York',
         country='United States',
-        date= datetime.today(),
+        date= datetime(2025, 3, 28),
         start_time= time(13,30),
         end_time= time(15, 30)
     )
 
     db.session.add(yard_sale)
-    db.session.add(food_stand)
     db.session.add(fundraiser)
+    db.session.add(food_stand)
     db.session.add(block_party)
     db.session.add(community_event)
     db.session.commit()

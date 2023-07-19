@@ -4,27 +4,27 @@ from sqlalchemy import text
 def seed_event_images():
     yard_sale = Event_Image(
         event_id = 1,
-        image_url = 'https://www.gannett-cdn.com/presto/2022/08/12/NDRP/cf37518c-3889-4d53-abd8-2c26c8a447c4-US-12_Garage_sale_Coldwater_2.JPG',
+        image_url = 'http://yard-hunters.s3.amazonaws.com/f4ca42338fde4018b126976a97d915e6.jpg',
         preview = True
     )
     fundraiser = Event_Image(
         event_id = 2,
-        image_url = 'https://edit.org/img/blog/q8r-donation-flyer-template-editable-free.jpg',
+        image_url = 'http://yard-hunters.s3.amazonaws.com/347122eb4bcd4ad8a77e5d09132e0844.jpg',
         preview = True
     )
     food_stand = Event_Image(
         event_id = 3,
-        image_url = 'https://static.vecteezy.com/system/resources/previews/000/098/626/original/vector-taco-truck.jpg',
+        image_url = 'http://yard-hunters.s3.amazonaws.com/14f380d95a024b179a27f853c2a2745d.jpg',
         preview = True
     )
     block_party = Event_Image(
         event_id = 4,
-        image_url = 'https://exposureevents.com/assets/files/jpg/186417?v=26048791',
+        image_url = 'http://yard-hunters.s3.amazonaws.com/b15f2b34eb2a456ab618a7a9592d100b.jpeg',
         preview = True
     )
     community_event = Event_Image(
         event_id = 5,
-        image_url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD7LQN_IZBrdj0blkPd4bUbarpDHBfocEV8A&usqp=CAU',
+        image_url = 'http://yard-hunters.s3.amazonaws.com/db7862f7e87c46509aac7abd9f3259f8.png',
         preview = True
     )
 
