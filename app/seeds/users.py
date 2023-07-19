@@ -9,7 +9,7 @@ def seed_users():
         first_name= 'Demo',
         last_name='User',
         email='demo@aa.io',
-        bio='Just a demo user testing if this works',
+        bio='Just a demo user enjoying the creation of this site',
         password='password'
     )
     marnie = User(
