@@ -26,7 +26,7 @@ def seed_products():
         condition_id = 2,
         owner_id = 1,
         event_id = 1,
-        category_id = 7,
+        category_id = 1,
         description = 'Used a couple of times, no creases and well kept'
     )
     chair = Product(
@@ -42,19 +42,55 @@ def seed_products():
         name = 'Tacos',
         price = 2.50,
         condition_id = 1,
-        owner_id = 2,
-        event_id = 2,
-        category_id = 7,
+        owner_id = 3,
+        event_id = 3,
+        category_id = 8,
         description = 'Tacos: Asada, Chicken, Barbacoa, Birria, Al Pastor, Vej. Fajitas'
     )
     burritos = Product(
         name = 'Burritos',
         price = 10,
         condition_id = 1,
-        owner_id = 2,
-        event_id = 2,
-        category_id = 7,
+        owner_id = 3,
+        event_id = 3,
+        category_id = 8,
         description = 'Burritos: Asada, Chicken, Barbacoa, Birria, Al Pastor, Vej. Fajitas'
+    )
+    mulitas = Product(
+        name = 'Mulitas',
+        price = 5,
+        condition_id = 1,
+        owner_id = 3,
+        event_id = 3,
+        category_id = 8,
+        description = 'Mulitas: Asada, Chicken, Barbacoa, Birria, Al Pastor, Vej. Fajitas'
+    )
+    quesadillas = Product(
+        name = 'Quesadillas',
+        price = 5,
+        condition_id = 1,
+        owner_id = 3,
+        event_id = 3,
+        category_id = 8,
+        description = 'Quesadillas: Asada, Chicken, Barbacoa, Birria, Al Pastor, Vej. Fajitas'
+    )
+    tortas = Product(
+        name = 'Tortas',
+        price = 5,
+        condition_id = 1,
+        owner_id = 3,
+        event_id = 3,
+        category_id = 8,
+        description = 'Tortas: Asada, Chicken, Barbacoa, Birria, Al Pastor, Vej. Fajitas'
+    )
+    aguas = Product(
+        name = 'Aguas Frescas',
+        price = 12,
+        condition_id = 1,
+        owner_id = 3,
+        event_id = 3,
+        category_id = 8,
+        description = 'Flavors: Horchata, Jamaica, Sandia, Pepino'
     )
 
     ps = Product(
@@ -78,13 +114,13 @@ def seed_products():
         name = 'First Gen Pikachu Card',
         price = 450,
         condition_id = 2,
-        owner_id = 3,
-        event_id = 3,
+        owner_id = 1,
+        event_id = 1,
         category_id = 5,
         description = 'Well kept and PSA graded 9.5 card, looking to sell at set price or trade for something else'
     )
     
-    lst = [drill, ps, lego, pokemon_card, chair, lightsaber, shoes, tacos, burritos]
+    lst = [drill, ps, lego, pokemon_card, chair, lightsaber, shoes, tacos, burritos, mulitas, quesadillas, tortas, aguas]
     for product in lst:
         db.session.add(product)
     db.session.commit()
