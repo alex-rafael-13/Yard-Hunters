@@ -25,9 +25,12 @@ def seed_categories():
     )
     food = Category(
         category = 'Food'
+    )
+    service = Category(
+        category = 'Services'
     ) 
     
-    lst = [clothing, kitchenware, tools, toys, collectables, electronics, furniture, food]
+    lst = [clothing, kitchenware, tools, toys, collectables, electronics, furniture, food, service]
     for category in lst:
         db.session.add(category)
     db.session.commit()
