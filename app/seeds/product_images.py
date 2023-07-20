@@ -114,6 +114,84 @@ def seed_product_images():
         preview = True
     )
     db.session.add(aguas)
+    ice_cream = Product_Image(
+        product_id = 14,
+        image_url = 'http://yard-hunters.s3.amazonaws.com/74e04d63966f4d27b044573d076761bc.jpeg',
+        preview = True
+    )
+    db.session.add(ice_cream)
+    paletas = Product_Image(
+        product_id = 15,
+        image_url = 'http://yard-hunters.s3.amazonaws.com/d9b616f3f0f54da599e694d8becd6619.jpeg',
+        preview = True
+    )
+    db.session.add(paletas)
+    banana = Product_Image(
+        product_id = 16,
+        image_url = 'http://yard-hunters.s3.amazonaws.com/9a0e7053634c45759a94c149a1fe5a00.jpeg',
+        preview = True
+    )
+    db.session.add(banana)
+    sundae = Product_Image(
+        product_id = 17,
+        image_url = 'http://yard-hunters.s3.amazonaws.com/04191378a9ed48608423a82c199f71ef.jpeg',
+        preview = True
+    )
+    db.session.add(sundae)
+    electrical = Product_Image(
+        product_id = 18,
+        image_url = 'http://yard-hunters.s3.amazonaws.com/e480ed8029df4353a8f5590086bdc99b.png',
+        preview = True
+    )
+    db.session.add(electrical)
+    pots = Product_Image(
+        product_id = 19,
+        image_url = 'http://yard-hunters.s3.amazonaws.com/f5146f8e55864f588c67acf63028a9bb.jpeg',
+        preview = True
+    )
+    db.session.add(pots)
+    art = Product_Image(
+        product_id = 20,
+        image_url = 'http://yard-hunters.s3.amazonaws.com/5fe5da8a365c45ed9e12e008c7edcf26.jpeg',
+        preview = True
+    )
+    db.session.add(art)
+    skate = Product_Image(
+        product_id = 21,
+        image_url = 'http://yard-hunters.s3.amazonaws.com/1bf4cf6eea9044fdae385abb10396dea.jpeg',
+        preview = True
+    )
+    db.session.add(skate)
+    katana = Product_Image(
+        product_id = 22,
+        image_url = 'http://yard-hunters.s3.amazonaws.com/93dec8b63dce418b9de83a443a90d3b0.jpeg',
+        preview = True
+    )
+    db.session.add(katana)
+    jersey = Product_Image(
+        product_id = 23,
+        image_url = 'http://yard-hunters.s3.amazonaws.com/2f19b4d339304bf08d71b1dc6559fcb5.jpeg',
+        preview = True
+    )
+    db.session.add(jersey)
+    couch = Product_Image(
+        product_id = 24,
+        image_url = 'http://yard-hunters.s3.amazonaws.com/34dc4c3c6f53420f9d76a83de5e8fcd2.jpeg',
+        preview = True
+    )
+    db.session.add(couch)
+    ladder = Product_Image(
+        product_id = 25,
+        image_url = 'http://yard-hunters.s3.amazonaws.com/495acc6eba154580948436b4f01130e4.jpeg',
+        preview = True
+    )
+    db.session.add(ladder)
+    shuffle = Product_Image(
+        product_id = 26,
+        image_url = 'http://yard-hunters.s3.amazonaws.com/889729935a5c492d9c0e8da93484f0b6.jpeg',
+        preview = True
+    )
+    db.session.add(shuffle)
 
 
     db.session.commit()

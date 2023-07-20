@@ -67,7 +67,7 @@ def seed_products():
     )
     quesadillas = Product(
         name = 'Quesadillas',
-        price = 5,
+        price = 7,
         condition_id = 1,
         owner_id = 3,
         event_id = 3,
@@ -76,7 +76,7 @@ def seed_products():
     )
     tortas = Product(
         name = 'Tortas',
-        price = 5,
+        price = 10,
         condition_id = 1,
         owner_id = 3,
         event_id = 3,
@@ -85,7 +85,7 @@ def seed_products():
     )
     aguas = Product(
         name = 'Aguas Frescas',
-        price = 12,
+        price = 2,
         condition_id = 1,
         owner_id = 3,
         event_id = 3,
@@ -119,8 +119,118 @@ def seed_products():
         category_id = 5,
         description = 'Well kept and PSA graded 9.5 card, looking to sell at set price or trade for something else'
     )
+    ice_cream = Product(
+        name='Ice Cream',
+        price=3,
+        condition_id=1,
+        owner_id=2,
+        event_id=2,
+        category_id = 8,
+        description = 'Vanilla, chocolate, cookies and cream, strawberry swirl, etc.'
+    )
+    paletas = Product(
+        name='Paletas',
+        price=1.50,
+        condition_id=1,
+        owner_id=2,
+        event_id=2,
+        category_id = 8,
+        description = 'Variety of Mexican paletas will be available!'
+    )
+    banana_split = Product(
+        name='Banana Split',
+        price=5,
+        condition_id=1,
+        owner_id=2,
+        event_id=2,
+        category_id = 8,
+        description = 'Your classic banana split!'
+    )
+    sundae = Product(
+        name='Ice Cream Sundae',
+        price=4,
+        condition_id=1,
+        owner_id=2,
+        event_id=2,
+        category_id = 8,
+        description = 'Your classic ice cream sundae!'
+    )
+    electrician = Product(
+        name = 'Walter\'s  Electrics',
+        price = 1,
+        condition_id = 1,
+        owner_id = 1,
+        category_id = 9,
+        description = 'Need electrical work done? Call us at (888)888-8888'
+    )
+    pans = Product(
+        name = 'Brand New Pots',
+        price = 150,
+        condition_id = 2,
+        owner_id = 3,
+        category_id = 2,
+        description = 'Used some but most of the set was kept in the box'
+    )
+    art = Product(
+        name = 'Custom Art!',
+        price = 35,
+        condition_id = 1,
+        owner_id = 2,
+        category_id = 9,
+        description = 'Need a special gift for a special someone? Send me email an to art@aa.io to connect about ideas!'
+    )
+    skateboard = Product(
+        name = 'Skateboard!',
+        price = 70,
+        condition_id = 1,
+        owner_id = 3,
+        category_id = 3,
+        description = 'Also willing to trade for another skateboard/ anything else that you have to offer!'
+    )
+    katana = Product(
+        name = 'Katanas',
+        price = 120,
+        condition_id = 1,
+        owner_id = 1,
+        category_id = 5,
+        description = 'Imported from Japan. Great condition they\'ve been a decoration piece for my room but I am moving and don\t have the space for them anymore'
+    )
+    jersey = Product(
+        name = 'Real Madrid Jersey 03/04',
+        price = 150,
+        condition_id = 2,
+        owner_id = 3,
+        category_id = 1,
+        description = 'Vintage Beckham jersey from his time in Los Blancos'
+    )
+    couch = Product(
+        name = 'Leather Couch',
+        price = 45,
+        condition_id = 3,
+        owner_id = 1,
+        category_id = 7,
+        description = 'Getting a new couch, it has been used for a couple of years but still very sturdy and clean'
+    )
+    ladder = Product(
+        name = 'Ladder',
+        price = 55,
+        condition_id = 4,
+        owner_id = 2,
+        category_id = 3,
+        description = 'Used it at my old job but changed careers so I won\'t be needing it anymore'
+    )
+    shuffle = Product(
+        name = 'Ipod Shuffle',
+        price = 75,
+        condition_id = 3,
+        owner_id = 3,
+        category_id = 6,
+        description = 'Used it everyday as a teenager, still very clean plus factory resetted'
+    )
+
+
     
-    lst = [drill, ps, lego, pokemon_card, chair, lightsaber, shoes, tacos, burritos, mulitas, quesadillas, tortas, aguas]
+    lst = [drill, ps, lego, pokemon_card, chair, lightsaber, shoes, tacos, burritos, mulitas, quesadillas, tortas, aguas, ice_cream, paletas, banana_split, sundae, electrician, pans, art, skateboard, katana, jersey, couch, ladder, shuffle]
     for product in lst:
         db.session.add(product)
     db.session.commit()
