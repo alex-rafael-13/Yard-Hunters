@@ -135,7 +135,7 @@ def new_event():
 
         return event.to_dict()
     
-    print(form.errors)
+    # print(form.errors)
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 

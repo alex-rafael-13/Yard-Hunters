@@ -46,13 +46,13 @@ export default function CreateEvent() {
         }
 
         return dispatch(createEvent(event))
-            .then(async story => {
+            .then(async event => {
                 // console.log(story)
-                if (story.id) {
-                    history.push(`/events/${story.id}`)
+                if (event.id) {
+                    history.push(`/events/${event.id}`)
                 }
-                if (story.errors) {
-                    setErrors(story.errors)
+                if (event.errors) {
+                    setErrors(event.errors)
                 }
             })
     }

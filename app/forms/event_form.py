@@ -17,10 +17,10 @@ def validateDate(form, field):
 def validateEndTime(form, field):
     if form.start_time.data and field.data:
         start = time.fromisoformat(form.start_time.data)
-        print(start)
+        # print(start)
 
         end = time.fromisoformat(field.data)
-        print(end)
+        # print(end)
 
         if start > end:
             raise ValidationError('End time cannot be before start time.')
