@@ -65,7 +65,7 @@ export const updateSingleProduct = (id, product) => async dispatch => {
     });
 
     const data = await response.json()
-    console.log(data)
+    // console.log(data)
 
     return data
 }
@@ -80,7 +80,7 @@ export const deleteProduct = (id) => async dispatch =>  {
     });
     
     const data = await response.json()
-    console.log(data)
+    // console.log(data)
 
     return data
 }

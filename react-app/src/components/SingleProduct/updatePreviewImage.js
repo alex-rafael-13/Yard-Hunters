@@ -9,7 +9,7 @@ export default function UpdatePreviewImage(){
     const dispatch = useDispatch()
     const history = useHistory()
     const product = useSelector(state => state.products.product)
-    console.log(product)
+    // console.log(product)
 
     const [image, setImage] = useState(null)
     const [errors, setErrors] = useState({})

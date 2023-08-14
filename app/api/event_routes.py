@@ -79,7 +79,7 @@ def new_event():
     form = EventForm()
     # Get the csrf_token from the request cookie and put it into the
     # form manually to validate_on_submit can be used
-    print('\n\n\n\n\n\n', form.description.data)
+    # print('\n\n\n\n\n\n', form.description.data)
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
 
@@ -135,7 +135,7 @@ def new_event():
 
         return event.to_dict()
     
-    print(form.errors)
+    # print(form.errors)
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 

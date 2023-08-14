@@ -30,6 +30,6 @@ def current_user():
     """
     
     """
-    print(f'\n\n\n\n\n\n{current_user}')
+    # print(f'\n\n\n\n\n\n{current_user}')
     user = User.query.get(current_user.id)
     return user.to_dict()
