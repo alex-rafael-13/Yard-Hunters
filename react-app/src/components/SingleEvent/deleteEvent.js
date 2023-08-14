@@ -13,7 +13,7 @@ export default function DeleteEvent(){
 
     const handleDelete = async () => {
         const response = await dispatch(deleteEvent(event?.id))
-        console.log(response)
+        // console.log(response)
 
         if(response.errors){
             alert(response.err)

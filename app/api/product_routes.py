@@ -104,10 +104,10 @@ def new_product():
 @product_routes.route('/<int:product_id>/manage', methods=['PUT', 'DELETE'])
 @login_required
 def manage_product(product_id):
-    print(current_user.id)
+    # print(current_user.id)
 
     product = Product.query.filter(Product.id == product_id, Product.owner_id == current_user.id).first()
-    print('past here')
+    # print('past here')
     
     if not product:
         return {
@@ -136,7 +136,7 @@ def manage_product(product_id):
     DELETING A PRODUCT
     '''
     if request.method == 'DELETE':
-        print('\n\n\n\n', product)
+        # print('\n\n\n\n', product)
         db.session.delete(product)
         db.session.commit()
         return {
@@ -170,7 +170,7 @@ def update_preview_image(product_id):
         return {
             'err': 'Unautharized'
         }, 401
-    print('\n\n\n\n', product_dict)
+    # print('\n\n\n\n', product_dict)
 
     #Init a form
     form = ProductImageForm()
@@ -193,7 +193,7 @@ def update_preview_image(product_id):
         if 'url' not in uploaded_preview:
             return jsonify({"error": "Error uploading file to AWS"}, 401)
         
-        print('\n\n\n\n',product_dict)
+        # print('\n\n\n\n',product_dict)
         #Remove current image from aws
         remove_file_from_s3(prev_image_url)
 

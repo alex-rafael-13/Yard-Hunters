@@ -59,7 +59,7 @@ export default function UpdateProduct() {
             category_id: category,
         } 
 
-        console.log(updatedProduct)
+        // console.log(updatedProduct)
 
         return dispatch(updateSingleProduct(product_id, updatedProduct))
             .then(async product => {
@@ -69,7 +69,7 @@ export default function UpdateProduct() {
                 }
                 if (product.errors) {
                     setErrors(product.errors)
-                    console.log(errors)
+                    // console.log(errors)
                 }
             })
     }

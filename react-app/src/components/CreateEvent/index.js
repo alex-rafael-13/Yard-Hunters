@@ -46,13 +46,13 @@ export default function CreateEvent() {
         }
 
         return dispatch(createEvent(event))
-            .then(async story => {
-                console.log(story)
-                if (story.id) {
-                    history.push(`/events/${story.id}`)
+            .then(async event => {
+                // console.log(story)
+                if (event.id) {
+                    history.push(`/events/${event.id}`)
                 }
-                if (story.errors) {
-                    setErrors(story.errors)
+                if (event.errors) {
+                    setErrors(event.errors)
                 }
             })
     }
@@ -62,7 +62,7 @@ export default function CreateEvent() {
     const sectionDetails = 'section-details'
     const detailsTitle = 'details-title'
 
-    console.log(image)
+    // console.log(image)
 
     return (
         <div className='form-body'>
