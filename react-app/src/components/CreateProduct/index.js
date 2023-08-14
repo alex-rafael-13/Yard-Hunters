@@ -45,7 +45,7 @@ export default function CreateProduct() {
 
         return dispatch(createProduct(formData))
             .then( product => {
-                console.log(product)
+                // console.log(product)
                 if (product.id) {
                     history.push(`/products/${product.id}`)
                 }
@@ -60,7 +60,7 @@ export default function CreateProduct() {
     const detailsTitle = 'details-title'
     const labelTitle = 'label-title'
     const errMessage = 'error-message'
-    console.log(previewImage)
+    // console.log(previewImage)
     return (
         <div className="form-body">
             <h1>Create New Product</h1>

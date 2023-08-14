@@ -24,14 +24,14 @@ export default function UpdateEvent() {
     const [eTime, setETime] = useState('')
     const [errors, setErrors] = useState({})
     const [image, setImage] = useState(event.image_url)
-    console.log('\n', image)
+    // console.log('\n', image)
 
     useEffect(() => {
         dispatch(retrieveTypes())
         const storedEvent = localStorage.getItem('preFilledEvent');
         if (storedEvent) {
             const parsedEvent = JSON.parse(storedEvent);
-            console.log(parsedEvent.date)
+            // console.log(parsedEvent.date)
             setName(parsedEvent.name);
             setDescription(parsedEvent.description);
             setAddress(parsedEvent.address)
@@ -71,13 +71,13 @@ export default function UpdateEvent() {
         }
 
         return dispatch(updateEvent(event_id, event))
-            .then(async story => {
-                console.log(story)
-                if (story.errors) {
-                    setErrors(story.errors) 
+            .then(async event => {
+                // console.log(story)
+                if (event.errors) {
+                    setErrors(event.errors) 
                 }
                 else{
-                    history.push(`/events/${story.id}`)
+                    history.push(`/events/${event.id}`)
                 }
             })
     }
@@ -87,7 +87,7 @@ export default function UpdateEvent() {
         const sectionDetails = 'section-details'
         const detailsTitle = 'details-title'
 
-        console.log(sTime)
+        // console.log(sTime)
 
         // useEffect(() => {
         //     // Format the date from 'yyyy-mm-dd' to 'yyyy-mm-dd' format

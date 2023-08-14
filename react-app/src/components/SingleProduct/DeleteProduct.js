@@ -18,7 +18,7 @@ export default function DeleteProduct(){
         if(response.err){
             alert(response.err)
         }
-        console.log(response)
+        // console.log(response)
 
         closeModal()
         history.push('/marketplace')

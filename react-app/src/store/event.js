@@ -58,7 +58,7 @@ export const retrieveEventById = (id, updating = false) => async dispatch => {
     let response
     
     if(updating === true){
-        console.log('\n\n\n\n\n in here')
+        // console.log('\n\n\n\n\n in here')
         response = await fetch(`/api/events/${id}/raw`, {
             headers: {
                 "Content-Type": "application/json"
@@ -102,7 +102,7 @@ export const retrieveUserEvents = () => async dispatch => {
 }
 
 export const createEvent = (event) => async (dispatch) => {
-    console.log('---------------------------in here')
+    // console.log('---------------------------in here')
     const {
         name,
         description,
@@ -157,9 +157,9 @@ export const updateEvent = (id, event) => async dispatch => {
 		},
 		body: JSON.stringify(event)
     })
-    console.log(response)
+    // console.log(response)
     const newEvent = await response.json()
-    console.log(newEvent)
+    // console.log(newEvent)
     return newEvent
 } 
 

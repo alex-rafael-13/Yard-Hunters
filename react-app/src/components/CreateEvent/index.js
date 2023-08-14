@@ -47,7 +47,7 @@ export default function CreateEvent() {
 
         return dispatch(createEvent(event))
             .then(async story => {
-                console.log(story)
+                // console.log(story)
                 if (story.id) {
                     history.push(`/events/${story.id}`)
                 }
@@ -62,7 +62,7 @@ export default function CreateEvent() {
     const sectionDetails = 'section-details'
     const detailsTitle = 'details-title'
 
-    console.log(image)
+    // console.log(image)
 
     return (
         <div className='form-body'>
