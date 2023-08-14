@@ -11,7 +11,7 @@ export default function CreateProduct() {
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
     const [description, setDescription] = useState('')
-    const [event, setEvent] = useState(0)
+    const [event, setEvent] = useState(null)
     const [condition, setCondition] = useState('')
     const [category, setCategory] = useState('')
     const [previewImage, setPreviewImage] = useState(null)
@@ -35,13 +35,16 @@ export default function CreateProduct() {
         formData.append('name', name)
         formData.append('price', price)
         formData.append('description', description)
-        formData.append('event_id', event)
+
+        if(event){
+            formData.append('event_id', event)
+        }
         formData.append('condition_id', condition)
         formData.append('category_id', category)
         formData.append('preview_image', previewImage)
 
         return dispatch(createProduct(formData))
-            .then(async product => {
+            .then( product => {
                 console.log(product)
                 if (product.id) {
                     history.push(`/products/${product.id}`)
