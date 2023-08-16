@@ -1,4 +1,25 @@
 .login-modal{
     display: flex;
     flex-direction: column;
+    padding: 10px;
+}
+
+.errors{
+    color: red;
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.login-label{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.login-input{
+    width: 95%;
 }
