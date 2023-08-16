@@ -14,6 +14,7 @@ import Marketplace from "./components/Marketplace";
 import SideNav from "./components/SideNav";
 import CreateProduct from "./components/CreateProduct";
 import UpdateProduct from "./components/UpdateProduct";
+import SocialsCard from "./components/SocialsCard";
 
 function App() {
   const dispatch = useDispatch();
@@ -62,6 +63,7 @@ function App() {
               <SignupFormPage />
             </Route>
           </Switch>
+          <SocialsCard />
         </div>
         )}
     </>
