@@ -10,7 +10,7 @@ function SignupFormModal() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-	const [errors, setErrors] = useState([]);
+	const [errors, setErrors] = useState({});
 	const [first_name, setFName] = useState('')
 	const [last_name, setLName] = useState('')
 	const { closeModal } = useModal();
@@ -25,23 +25,25 @@ function SignupFormModal() {
 				closeModal();
 			}
 		} else {
-			setErrors([
-				"Confirm Password field must be the same as the Password field",
-			]);
+			setErrors({
+				confirmPassword:"Confirm Password field must be the same as the Password field",
+			});
 		}
 	};
 
+	console.log(errors)
+
 	return (
-		<>
+		<div className="login-modal">
 			<h1>Sign Up</h1>
-			<form onSubmit={handleSubmit}>
-				<ul>
+			<form onSubmit={handleSubmit} className="signup-form">
+				{/* <ul>
 					{errors.map((error, idx) => (
 						<li key={idx}>{error}</li>
 					))}
-				</ul>
-				<label>
-					Email
+				</ul> */}
+				<label className="signup-label">
+					<div>Email:</div>
 					<input
 						type="text"
 						value={email}
@@ -50,7 +52,7 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					First Name
+					<div>First Name:</div>
 					<input
 						type="text"
 						value={first_name}
@@ -59,7 +61,7 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					Last Name
+					<div>Last Name:</div>
 					<input
 						type="text"
 						value={last_name}
@@ -68,7 +70,7 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					Username
+					<div>Username:</div>
 					<input
 						type="text"
 						value={username}
@@ -77,7 +79,7 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					Password
+					<div>Password:</div>
 					<input
 						type="password"
 						value={password}
@@ -86,7 +88,10 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					Confirm Password
+					<div className="form-text">
+						<div>Confirm Password:</div>
+						{errors.confirmPassword && <div className="errors">{errors.confirmPassword}</div>}
+					</div>
 					<input
 						type="password"
 						value={confirmPassword}
@@ -96,7 +101,7 @@ function SignupFormModal() {
 				</label>
 				<button type="submit">Sign Up</button>
 			</form>
-		</>
+		</div>
 	);
 }
 
