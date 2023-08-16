@@ -1,0 +1,31 @@
+.signup-form{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.signup-form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.signup-form input{
+    width: 95%;
+}
+
+.form-text{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.form-text .errors{
+    font-size: 15px;
+}
+
+#small-text{
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+}

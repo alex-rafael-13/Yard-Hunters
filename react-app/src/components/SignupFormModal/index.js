@@ -10,38 +10,36 @@ function SignupFormModal() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-	const [errors, setErrors] = useState([]);
+	const [errors, setErrors] = useState({});
 	const [first_name, setFName] = useState('')
 	const [last_name, setLName] = useState('')
 	const { closeModal } = useModal();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (password === confirmPassword) {
-			const data = await dispatch(signUp(username, email, first_name, last_name, password));
-			if (data) {
-				setErrors(data);
-			} else {
-				closeModal();
-			}
+
+		const data = await dispatch(signUp(username, email, first_name, last_name, password, confirmPassword));
+		if (data) {
+			setErrors(data);
 		} else {
-			setErrors([
-				"Confirm Password field must be the same as the Password field",
-			]);
+			closeModal();
 		}
 	};
 
 	return (
-		<>
+		<div className="login-modal">
 			<h1>Sign Up</h1>
-			<form onSubmit={handleSubmit}>
-				<ul>
+			<form onSubmit={handleSubmit} className="signup-form">
+				{/* <ul>
 					{errors.map((error, idx) => (
 						<li key={idx}>{error}</li>
 					))}
-				</ul>
-				<label>
-					Email
+				</ul> */}
+				<label className="signup-label">
+					<div className="form-text">
+						<div>Email:</div>
+						{errors.email && <div className="errors">{errors.email}</div>}
+					</div>
 					<input
 						type="text"
 						value={email}
@@ -50,7 +48,10 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					First Name
+					<div className="form-text">
+						<div>First Name:</div>
+						{errors.first_name && <div className="errors">{errors.first_name}</div>}
+					</div>
 					<input
 						type="text"
 						value={first_name}
@@ -59,7 +60,10 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					Last Name
+					<div className="form-text">
+						<div>Last Name:</div>
+						{errors.last_name && <div className="errors">{errors.last_name}</div>}
+					</div>
 					<input
 						type="text"
 						value={last_name}
@@ -68,7 +72,10 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					Username
+					<div className="form-text">
+						<div>Username:</div>
+						{errors.username && <div className="errors">{errors.username}</div>}
+					</div>
 					<input
 						type="text"
 						value={username}
@@ -77,7 +84,10 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					Password
+					<div className="form-text">
+						<div>Password:</div>
+						{errors.password && <div className="errors">{errors.password}</div>}
+					</div>
 					<input
 						type="password"
 						value={password}
@@ -86,7 +96,10 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					Confirm Password
+					<div className="form-text">
+						<div>Confirm Password:</div>
+						{errors.confirm_password && <div className="errors" id="small-text">{errors.confirm_password}</div>}
+					</div>
 					<input
 						type="password"
 						value={confirmPassword}
@@ -96,7 +109,7 @@ function SignupFormModal() {
 				</label>
 				<button type="submit">Sign Up</button>
 			</form>
-		</>
+		</div>
 	);
 }
 
