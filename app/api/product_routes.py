@@ -19,8 +19,8 @@ def validation_errors_to_error_messages(validation_errors):
 
 @product_routes.route('/')
 def products_list():
-    # print('\n\n\n\n\n\n no errors')
-    # products = Product.query.filter(Product.category['category'] != "Food").all()
+    
+    # --------> Need to see if can be used: products = Product.query.filter(Product.category['category'] != "Food").all()
     products = Product.query.all()
 
     product_list = []
@@ -31,8 +31,8 @@ def products_list():
         if(product_dict['category']['category'] != 'Food'):
             product_list.append(product_dict)
 
+    # print(f'\n\n\n\n\n\n {product_list}\n\n')
 
-    print(f'\n\n\n\n\n\n {product_list}\n\n')
     #err handling
     if not products:
         return {
