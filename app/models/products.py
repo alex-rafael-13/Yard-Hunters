@@ -56,7 +56,8 @@ class Product(db.Model):
             'name': self.name,
             'preview_image': self.preview_image(),
             'price': self.price,
-            'event': self.check_event()
+            'event': self.check_event(),
+            "category": self.category.to_dict()
         }
     
     def dict_for_event(self):

@@ -19,15 +19,27 @@ def validation_errors_to_error_messages(validation_errors):
 
 @product_routes.route('/')
 def products_list():
+    # print('\n\n\n\n\n\n no errors')
+    # products = Product.query.filter(Product.category['category'] != "Food").all()
     products = Product.query.all()
 
+    product_list = []
+
+    for product in products:
+        product_dict = product.list_to_dict()
+
+        if(product_dict['category']['category'] != 'Food'):
+            product_list.append(product_dict)
+
+
+    print(f'\n\n\n\n\n\n {product_list}\n\n')
     #err handling
     if not products:
         return {
             'err': 'Marketplace Cannot Be Reached at This Moment'
         }, 404
     
-    return [product.list_to_dict() for product in products]
+    return product_list
 
 
 @product_routes.route('/<int:product_id>')
