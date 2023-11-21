@@ -14,9 +14,12 @@ function Navigation({ isLoaded }){
 	}
 
 	return (
-		<div className='nav'>
-			<img className='logo' onClick={toHome} src={logo}></img>
-		</div>
+			<div className='nav'>
+				<img className='logo' onClick={toHome} src={logo}></img>
+				<div className='search-bar-cont'>
+					<input type='text'></input>
+				</div>
+			</div>
 	);
 }
 

@@ -1,5 +1,13 @@
 .nav{
   background-color: #019edb;
+  display: flex;
+  flex-direction: row;
+}
+
+.search-bar-cont{
+  display: flex;
+  align-items: center;
+  align-content: center;
 }
 
 .logo{
